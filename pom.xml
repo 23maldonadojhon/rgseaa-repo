@@ -1,0 +1,266 @@
+<project
+        xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.7.17-SNAPSHOT</version>
+    <relativePath/>
+  </parent>
+
+  <groupId>es.aesan</groupId>
+  <artifactId>rgseaa</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+  <url>http://maven.apache.org</url>
+
+  <modules>
+    <module>rgseaaSLibraryDomain</module>
+    <module>rgseaaSLibraryService</module>
+    <module>rgseaaSLibraryUtil</module>
+    <module>rgseaaSLibraryJwt</module>
+    <module>rgseaaAppSearch</module>
+    <module>rgseaaAppSoap</module>
+    <module>rgseaaAppLn</module>
+    <module>rgseaaApp</module>
+  </modules>
+
+  <name>RGSEAA</name>
+  <description>Proyecto RGSEAA</description>
+
+  <organization>
+    <name>SERIKAT</name>
+  </organization>
+
+
+  <properties>
+
+    <context.path.security>/jwtrest</context.path.security>
+    <context.path.private>/rest</context.path.private>
+    <context.path.public>/rest-search</context.path.public>
+    <context.path.external>/rest-external</context.path.external>
+
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <ver.lombok>1.18.32</ver.lombok>
+
+    <security.web>securityWEB</security.web>
+    <private.web>privateWEB</private.web>
+    <public.web>publicWEB</public.web>
+    <external.web>externalWS</external.web>
+
+  </properties>
+
+
+  <profiles>
+
+    <profile>
+
+      <id>local</id>
+
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+
+      <properties>
+
+        <profile.active>local</profile.active>
+
+        <activated.properties>local</activated.properties>
+
+        <env.path>C:/repo/wld-des-206/apps/</env.path>
+        <env.domain>rgseaa-web-jee-r01a-id</env.domain>
+        <base.url>https://${env.domain}-vs-1.msc.es</base.url>
+        <path.repo>${env.path}${env.domain}</path.repo>
+
+        <path.repo.file>${path.repo}/ficheros/</path.repo.file>
+
+        <jndi.db.refName>${env.domain}-jeec-jds-u0</jndi.db.refName>
+        <path.log>${path.repo}/logs</path.log>
+        <jndi.db.name>${env.domain}-jeec/jds/u0</jndi.db.name>
+        <jndi.db.schemaName>WEB_BD_A_O</jndi.db.schemaName>
+        <jndi.mail.refName>${env.domain}-jeec-jms-u0</jndi.mail.refName>
+        <jndi.mail.name>${env.domain}-jeec/jms/u0</jndi.mail.name>
+        <jndi.mail.fromAddress>APP.RGSEAA.PPROD@sanidad.gob.es</jndi.mail.fromAddress>
+        <ear.name>rgseaa-web-jee-r01a-local-jear-app</ear.name>
+        <ear.name.version>${ear.name}-${project.version}</ear.name.version>
+        <binary-sources>${path.repo}/binary-sources</binary-sources>
+
+        <appDesplegada>${ear.name}</appDesplegada>
+        <verDesplegada>${project.version}</verDesplegada>
+
+        <file.path>C:/</file.path>
+
+      </properties>
+
+    </profile>
+
+
+
+    <profile>
+
+      <id>dev</id>
+
+      <properties>
+
+        <profile.active>dev</profile.active>
+
+        <activated.properties>dev</activated.properties>
+
+        <env.domain>rgseaa-web-jee-r01a-id</env.domain>
+        <base.url>https://${env.domain}-vs-1.msc.es</base.url>
+        <path.repo>/repo/wld-des-206/apps/${env.domain}</path.repo>
+        <path.repo.file>${path.repo}/ficheros/</path.repo.file>
+        <jndi.db.refName>${env.domain}-jeec-jds-u0</jndi.db.refName>
+        <path.log>${path.repo}/logs</path.log>
+        <jndi.db.name>${env.domain}-jeec/jds/u0</jndi.db.name>
+        <jndi.db.schemaName>WEB_BD_A_O</jndi.db.schemaName>
+        <jndi.mail.refName>${env.domain}-jeec-jms-u0</jndi.mail.refName>
+        <jndi.mail.name>${env.domain}-jeec/jms/u0</jndi.mail.name>
+        <jndi.mail.fromAddress>APP.RGSEAA.PPROD@sanidad.gob.es</jndi.mail.fromAddress>
+        <ear.name>rgseaa-web-jee-r01a-id-jear-app</ear.name>
+        <ear.name.version>${ear.name}-${project.version}</ear.name.version>
+        <binary-sources>${path.repo}/binary-sources</binary-sources>
+
+        <appDesplegada>${ear.name}</appDesplegada>
+        <verDesplegada>${project.version}</verDesplegada>
+
+      </properties>
+
+    </profile>
+
+
+    <profile>
+
+      <id>pre</id>
+
+      <properties>
+
+        <profile.active>pre</profile.active>
+
+        <activated.properties>pre</activated.properties>
+
+        <env.domain>rgseaa-web-jee-r01a-iq</env.domain>
+        <base.url>https://${env.domain}-vs-1.msc.es</base.url>
+        <path.repo>/repo/wld-pre-206/apps/${env.domain}</path.repo>
+        <path.repo.file>${path.repo}/ficheros/</path.repo.file>
+        <jndi.db.refName>${env.domain}-jeec-jds-u0</jndi.db.refName>
+        <path.log>${path.repo}/logs</path.log>
+        <jndi.db.name>${env.domain}-jeec/jds/u0</jndi.db.name>
+        <jndi.db.schemaName>WEB_BD_A_O</jndi.db.schemaName>
+        <jndi.mail.refName>${env.domain}-jeec-jms-u0</jndi.mail.refName>
+        <jndi.mail.name>${env.domain}-jeec/jms/u0</jndi.mail.name>
+        <jndi.mail.fromAddress>APP.RGSEAA.PPROD@sanidad.gob.es</jndi.mail.fromAddress>
+        <ear.name>${env.domain}-jear-app</ear.name>
+        <ear.name.version>${ear.name}-${project.version}</ear.name.version>
+        <binary-sources>${path.repo}/binary-sources</binary-sources>
+
+        <appDesplegada>${ear.name}</appDesplegada>
+        <verDesplegada>${project.version}</verDesplegada>
+
+      </properties>
+    </profile>
+
+
+  </profiles>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>${ver.lombok}</version>
+    </dependency>
+
+
+    <!-- PRUEBAS UNITARIAS -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.8.1</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.8.1</version>
+      <scope>test</scope>
+    </dependency>
+
+
+    <!-- PRUEBAS DE INTEGRACION -->
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-suite-api</artifactId>
+      <version>1.8.2</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-suite-engine</artifactId>
+      <version>1.8.2</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+  </dependencies>
+
+
+  <repositories>
+
+    <repository>
+      <id>spring-milestones</id>
+      <name>Spring Milestones</name>
+      <url>https://repo.spring.io/milestone</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+
+    <repository>
+      <id>spring-snapshots</id>
+      <name>Spring Snapshots</name>
+      <url>https://repo.spring.io/snapshot</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+    </repository>
+
+  </repositories>
+
+
+
+  <pluginRepositories>
+
+    <pluginRepository>
+      <id>spring-milestones</id>
+      <name>Spring Milestones</name>
+      <url>https://repo.spring.io/milestone</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </pluginRepository>
+
+    <pluginRepository>
+      <id>spring-snapshots</id>
+      <name>Spring Snapshots</name>
+      <url>https://repo.spring.io/snapshot</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+    </pluginRepository>
+
+  </pluginRepositories>
+
+</project>

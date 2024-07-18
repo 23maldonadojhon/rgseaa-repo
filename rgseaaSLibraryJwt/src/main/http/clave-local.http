@@ -1,0 +1,47 @@
+
+#### Paso 1 => LOCAL => Solicitud de autenticación
+# curl -X 'POST'
+#  'http://localhost:8085/jwtrest/api/auth/user/request'
+#  -H 'accept: */*'
+#  -H 'Content-Type: application/json'
+#  -d '{
+#  "docNum": "string",
+#  "processReturnUrl": "string"
+#}'
+POST http://localhost:8085/jwtrest/api/auth/user/request
+accept: */*
+Content-Type: application/json
+
+{
+  "docNum": "string",
+  "processReturnUrl": "string"
+}
+
+
+#### Paso 2 => LOCAL =>POST
+# curl -X POST http://tu-servicio.com/endpoint
+#     -H "Content-Type: application/x-www-form-urlencoded"
+#     -d "RelayState=http%3A%2F%2Ftu-url.com%2Festado-relay&SAMLResponse=PD94bWwgdmVyc2lvbj0iMS4wIj8+CjxTQU1MU..."
+POST http://localhost:8085/jwtrest/api/auth/hooks/login_response
+Content-Type: application/x-www-form-urlencoded
+
+RelayState = _x7OMr3w &
+SAMLResponse = PD94bWwgdmVyc2lvbj0iMS4wIj8+CjxTQU1MU
+
+
+
+#### Paso 2 =>GET
+# curl "http://tu-servicio.com/endpoint?RelayState=valorRelayState&SAMLResponse=valorSAMLResponseCodificado"
+GET http://localhost:8085/jwtrest/api/auth/clave/login_response?RelayState=valorRelayState&SAMLResponse=valorSAMLResponseCodificado
+
+
+
+#### LOGOUT
+# curl -X POST http://tu-servicio.com/endpoint
+#     -H "Content-Type: application/x-www-form-urlencoded"
+#     -d "RelayState=http%3A%2F%2Ftu-url.com%2Festado-relay&SAMLResponse=PD94bWwgdmVyc2lvbj0iMS4wIj8+CjxTQU1MU..."
+POST http://localhost:8085/jwtrest/api/auth/clave/logout_response
+Content-Type: application/x-www-form-urlencoded
+
+RelayState = _x7OMr3w &
+SAMLResponse = PD94bWwgdmVyc2lvbj0iMS4wIj8+CjxTQU1MU

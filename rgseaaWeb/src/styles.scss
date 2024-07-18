@@ -1,0 +1,42 @@
+@import 'sass/material';
+@import 'sass/variables';
+
+@import 'sass/fonts_material';
+@import 'sass/icons_material';
+@import 'sass/icons_icomoon';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import 'animate.css/animate.min.css';
+@import 'sass/animations';
+@import 'sass/cursors';
+@import 'sass/scroll';
+
+html, body {
+  height: 100%;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+
+  background-color: var(--bg-color);
+  font-family: $font-family-base;
+}
+
+input[type=number] {
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+.tooltip__enlarged {
+  zoom: 1.65;
+}

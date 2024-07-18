@@ -1,0 +1,37 @@
+package es.aesan.rgseaa.service.facade;
+
+import es.aesan.rgseaa.model.converter.PermissionConverter;
+import es.aesan.rgseaa.model.criteria.PermissionCriteria;
+import es.aesan.rgseaa.model.dto.PermissionDto;
+import es.aesan.rgseaa.model.entity.Permission;
+import es.aesan.rgseaa.service.service.PermissionService;
+import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Component;
+
+@Component
+@RequiredArgsConstructor
+public class PermissionFacade {
+
+    @Autowired
+    final private PermissionService permissionService;
+
+    @Autowired
+    final private PermissionConverter permissionConverter;
+
+
+    private static final Logger logger = LoggerFactory.getLogger(PermissionFacade.class);
+
+
+    public Page<PermissionDto> permissionAll(PermissionCriteria criteria){
+
+        Page<Permission> page = permissionService.page(criteria);
+
+        Page<PermissionDto> dtoPage = permissionConverter.mapEntityToDtoPage(page);
+
+        return dtoPage;
+    }
+}

@@ -1,0 +1,448 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>es.aesan</groupId>
+        <artifactId>rgseaa</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <groupId>es.aesan.rgseaa</groupId>
+    <artifactId>security</artifactId>
+    <packaging>war</packaging>
+
+    <name>rgseaaSLibraryJwt</name>
+    <description>Server autentication Security</description>
+
+
+
+    <properties>
+        <java.version>1.8</java.version>
+        <lombok.version>1.18.24</lombok.version>
+        <jwt.version>0.11.5</jwt.version>
+        <expiringmap.version>0.5.9</expiringmap.version>
+        <maven.test.skip>true</maven.test.skip>
+    </properties>
+
+
+
+    <profiles>
+
+        <profile>
+
+            <id>local</id>
+
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+
+            <properties>
+
+                <profile.active>local</profile.active>
+
+                <baseURL>http://localhost:8085</baseURL>
+                <clave.provider>s2827001e_e04921901</clave.provider>
+                <clave.user>usuario</clave.user>
+                <clave.serviceUrl>https://se-pasarela.clave.gob.es/Proxy2/ServiceProvider</clave.serviceUrl>
+
+                <jwt.issuer>RGSEAA Local</jwt.issuer>
+                <jwt.authorizationHeader>Authorization</jwt.authorizationHeader>
+                <jwt.secret>oU7nzvi5HVkkSQKbVWnN2o934nEW3fzMbV2Y2bPYkM9bgW7WnYMZKEJFhrStuM29</jwt.secret>
+                <jwt.tokenPrefix>Bearer</jwt.tokenPrefix>
+
+                <shared.security.lib>rgseaa-security-dep</shared.security.lib>
+                <shared.security.lib.ver>0.0.2</shared.security.lib.ver>
+
+            </properties>
+
+        </profile>
+
+
+
+        <profile>
+
+            <id>dev</id>
+
+            <properties>
+
+                <profile.active>dev</profile.active>
+
+                <baseURL>https://rgseaa-web-jee-r01a-iq-vs-1.msc.es</baseURL>
+                <clave.provider>s2827001e_e04921901</clave.provider>
+                <clave.user>usuario</clave.user>
+                <clave.serviceUrl>https://se-pasarela.clave.gob.es/Proxy2/ServiceProvider</clave.serviceUrl>
+
+
+                <jwt.issuer>RGSEAA DESARROLLO</jwt.issuer>
+                <jwt.authorizationHeader>Authorization</jwt.authorizationHeader>
+                <jwt.secret>oU7nzvi5HVkkSQKbVWnN2o934nEW3fzMbV2Y2bPYkM9bgW7WnYMZKEJFhrStuM29</jwt.secret>
+                <jwt.tokenPrefix>Bearer</jwt.tokenPrefix>
+
+                <shared.security.lib>rgseaa-security-dep</shared.security.lib>
+                <shared.security.lib.ver>0.0.2</shared.security.lib.ver>
+
+            </properties>
+
+        </profile>
+
+
+        <profile>
+
+            <id>pre</id>
+
+            <properties>
+
+                <profile.active>pre</profile.active>
+
+                <baseURL>https://rgseaa-web-jee-r01a-iq-vs-1.msc.es</baseURL>
+                <clave.provider>s2827001e_e04921901</clave.provider>
+                <clave.user>usuario</clave.user>
+                <clave.serviceUrl>https://se-pasarela.clave.gob.es/Proxy2/ServiceProvider</clave.serviceUrl>
+
+
+                <jwt.issuer>RGSEAA PREPRODUCCION</jwt.issuer>
+                <jwt.authorizationHeader>Authorization</jwt.authorizationHeader>
+                <jwt.secret>oU7nzvi5HVkkSQKbVWnN2o934nEW3fzMbV2Y2bPYkM9bgW7WnYMZKEJFhrStuM29</jwt.secret>
+                <jwt.tokenPrefix>Bearer</jwt.tokenPrefix>
+
+                <shared.security.lib>rgseaa-security-dep</shared.security.lib>
+                <shared.security.lib.ver>0.0.2</shared.security.lib.ver>
+
+            </properties>
+
+        </profile>
+
+    </profiles>
+
+
+
+    <build>
+
+        <finalName>${security.web}</finalName>
+
+        <resources>
+
+            <resource>
+                <directory>src/main/security</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/EncryptModule_SP.xml</include>
+                    <include>**/SignModule_SP.xml</include>
+                </includes>
+            </resource>
+
+            <resource>
+                <directory>src/main/security</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>**/clave.ks</include>
+                </includes>
+            </resource>
+
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+
+            <resource>
+                <directory>src/main/webapp</directory>
+                <targetPath>${project.build.directory}/${project.build.finalName}</targetPath>
+                <filtering>true</filtering>
+            </resource>
+
+        </resources>
+
+
+        <plugins>
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>es.aesan.rgseaa.security.AppJWT</mainClass>
+                    <classifier>exec</classifier>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.6.0</version>
+                <executions>
+                    <execution>
+                        <id>SHARED-LIB</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <finalName>${shared.security.lib}</finalName>
+                            <descriptors>
+                                <descriptor>src/main/assembly/shared-libs.xml</descriptor>
+                            </descriptors>
+                            <attach>false</attach>
+                            <archive>
+                                <manifestEntries>
+                                    <Implementation-Title>${shared.security.lib}</Implementation-Title>
+                                    <Implementation-Version>${shared.security.lib.ver}</Implementation-Version>
+                                    <Specification-Title>${shared.security.lib}</Specification-Title>
+                                    <Specification-Version>${shared.security.lib.ver}</Specification-Version>
+                                    <Extension-Name>${shared.security.lib}</Extension-Name>
+                                </manifestEntries>
+                            </archive>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+
+                <configuration>
+                    <packagingExcludes>
+                        WEB-INF/lib/,
+                        styles/,
+                        images/,
+                        js/,
+                        META-INF/maven,
+                        *.html,
+                        angular/,
+                        videos/,
+                        WEB-INF/classes/clave.ks,
+                        WEB-INF/classes/sp-msssi.properties
+                    </packagingExcludes>
+                    <warName>${security.web}</warName>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>war</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+            </plugin>
+
+        </plugins>
+
+
+
+    </build>
+
+
+    <dependencies>
+
+        <dependency>
+            <groupId>es.aesan.rgseaa</groupId>
+            <artifactId>service</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>es.aesan.rgseaa</groupId>
+            <artifactId>util</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.tomcat.embed</groupId>
+                    <artifactId>tomcat-embed-el</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+
+
+        <!--Gestión JWT -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>${jwt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>${jwt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>${jwt.version}</version>
+        </dependency>
+
+        <!--Expiring Map -->
+        <dependency>
+            <groupId>net.jodah</groupId>
+            <artifactId>expiringmap</artifactId>
+            <version>${expiringmap.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Clave2 -->
+        <dependency>
+            <groupId>es.mscbs.claveclient</groupId>
+            <artifactId>clave2-client</artifactId>
+            <version>1.0.0</version>
+            <!-- Dependencia duplicada -->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-reload4j</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>152</version>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.9.4</version>
+        </dependency>
+
+        <!-- Eidas -->
+        <dependency>
+            <groupId>es.mspsi.ovfrw</groupId>
+            <artifactId>core.base</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>eu.stork.msssi</groupId>
+            <artifactId>Commons</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>eu.eidas</groupId>
+            <artifactId>eidas-encryption</artifactId>
+            <version>1.4.3-clave</version>
+        </dependency>
+        <dependency>
+            <groupId>eu.eidas</groupId>
+            <artifactId>eidas-commons</artifactId>
+            <version>1.4.3-clave</version>
+        </dependency>
+        <dependency>
+            <groupId>eu.eidas</groupId>
+            <artifactId>eidas-configmodule</artifactId>
+            <version>1.4.3-clave</version>
+        </dependency>
+        <dependency>
+            <groupId>eu.eidas</groupId>
+            <artifactId>eidas-light-commons</artifactId>
+            <version>1.4.3-clave</version>
+        </dependency>
+        <dependency>
+            <groupId>eu.eidas</groupId>
+            <artifactId>eidas-saml-engine</artifactId>
+            <version>1.4.3-clave</version>
+        </dependency>
+        <!-- ORG -->
+        <dependency>
+            <groupId>org.opensaml</groupId>
+            <artifactId>opensaml</artifactId>
+            <version>2.6.5-eidas_1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+            <version>1.7-eidas_1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.opensaml</groupId>
+            <artifactId>openws</artifactId>
+            <version>1.5.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.opensaml</groupId>
+            <artifactId>xmltooling</artifactId>
+            <version>1.4.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.santuario</groupId>
+            <artifactId>xmlsec</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.3.4</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.owasp.esapi</groupId>
+            <artifactId>esapi</artifactId>
+            <version>2.5.0.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>ca.juliusdavies</groupId>
+            <artifactId>not-yet-commons-ssl</artifactId>
+            <version>0.3.9</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ibm.icu</groupId>
+            <artifactId>icu4j</artifactId>
+            <version>54.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>31.1-jre</version>
+        </dependency>
+
+    </dependencies>
+
+</project>

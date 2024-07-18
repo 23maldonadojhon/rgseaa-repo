@@ -1,0 +1,37 @@
+###  denominacion de venta
+GET http://localhost:8082/rest/api/products/denomination_sales/?name=value1&description=value2
+Content-Type: application/json
+
+###  denominacion de venta ? idkey=26
+GET http://localhost:8082/rest/api/products/denomination_sales/?idkey=26
+Content-Type: application/json
+
+
+
+###  obtiene las claves
+GET http://localhost:8082/rest/api/products/keys
+Content-Type: application/json
+
+###  obtiene las claves ? id=26
+GET http://localhost:8082/rest/api/products/keys?id=26
+Content-Type: application/json
+
+
+
+###  obtiene las Country
+GET http://localhost:8082/rest/api/products/countries
+Content-Type: application/json
+
+
+
+
+###  obtiene las situaciones
+GET http://localhost:8082/rest/api/products/situation
+Content-Type: application/json
+
+
+
+###  obtiene las Forma de presentacion
+GET http://localhost:8082/rest/api/products/form_presentation
+Content-Type: application/json
+

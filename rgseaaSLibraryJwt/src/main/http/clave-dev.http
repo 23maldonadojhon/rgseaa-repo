@@ -1,0 +1,28 @@
+#### Paso 1 => DEV => Solicitud de autenticación
+POST https://rgseaa-web-jee-r01a-id-vs-1.msc.es/jwtrest/api/auth/user/request
+accept: */*
+Content-Type: application/json
+
+{
+  "docNum": "12345A",
+  "processReturnUrl": "string"
+}
+
+
+
+#### Paso 2 => DEV => POST
+#POST https://rgseaa-web-jee-r01a-id-vs-1.msc.es/jwtrest/api/hooks/clave/auth/login_response
+POST https://rgseaa-web-jee-r01a-id-vs-1.msc.es/jwtrest/api/auth/hooks/login_response
+
+Content-Type: application/x-www-form-urlencoded
+
+RelayState = _x7OMr3w &
+SAMLResponse = PD94bWwgdmVyc2lvbj0iMS4wIj8+CjxTQU1MU
+
+
+#### LOGOUT
+# curl -X POST http://tu-servicio.com/endpoint
+#     -H "Content-Type: application/x-www-form-urlencoded"
+#     -d "RelayState=http%3A%2F%2Ftu-url.com%2Festado-relay&SAMLResponse=PD94bWwgdmVyc2lvbj0iMS4wIj8+CjxTQU1MU..."
+POST https://rgseaa-web-jee-r01a-id-vs-1.msc.es/jwtrest/api/hooks/clave/auth/logout_response
+Content-Type: application/x-www-form-urlencoded

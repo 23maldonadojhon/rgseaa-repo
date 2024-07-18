@@ -1,0 +1,59 @@
+<wls:weblogic-web-app
+        xmlns:wls="http://xmlns.oracle.com/weblogic/weblogic-web-app"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://xmlns.oracle.com/weblogic/weblogic-web-app
+            http://xmlns.oracle.com/weblogic/weblogic-web-app/1.4/weblogic-web-app.xsd">
+
+    <wls:context-root>/jwtrest</wls:context-root>
+
+    <wls:session-descriptor>
+        <wls:persistent-store-type>replicated_if_clustered</wls:persistent-store-type>
+        <wls:timeout-secs>3600</wls:timeout-secs>
+        <wls:sharing-enabled>true</wls:sharing-enabled>
+    </wls:session-descriptor>
+
+    <wls:container-descriptor>
+        <wls:prefer-application-packages>
+            <wls:package-name>org.springframework.*</wls:package-name>
+            <wls:package-name>com.google.*</wls:package-name>
+            <wls:package-name>antlr.*</wls:package-name>
+            <wls:package-name>org.dom4j.*</wls:package-name>
+            <wls:package-name>org.hibernate.annotations.common.*</wls:package-name>
+            <wls:package-name>org.hibernate.*</wls:package-name>
+            <wls:package-name>com.fasterxml.*</wls:package-name>
+            <wls:package-name>com.fasterxml.classmate.*</wls:package-name>
+            <wls:package-name>com.fasterxml.jackson.core.*</wls:package-name>
+            <wls:package-name>com.fasterxml.jackson.dataformat.*</wls:package-name>
+            <wls:package-name>javax.validation.*</wls:package-name>
+            <wls:package-name>javax.persistence.*</wls:package-name>
+            <wls:package-name>org.slf4j.*</wls:package-name>
+            <wls:package-name>javassist.*</wls:package-name>
+        </wls:prefer-application-packages>
+
+        <wls:prefer-application-resources>
+            <wls:resource-name>META-INF/services/javax.persistence.spi.PersistenceProvider</wls:resource-name>
+            <wls:resource-name>META-INF/services/javax.validation.spi.ValidationProvider</wls:resource-name>
+            <wls:resource-name>META-INF/services/javax.annotation.processing.Processor</wls:resource-name>
+        </wls:prefer-application-resources>
+    </wls:container-descriptor>
+
+    <!-- Shared libraries -->
+    <wls:library-ref>
+        <wls:library-name>@shared.security.lib@</wls:library-name>
+        <wls:specification-version>@shared.security.lib.ver@</wls:specification-version>
+        <wls:implementation-version>@shared.security.lib.ver@</wls:implementation-version>
+        <wls:exact-match>true</wls:exact-match>
+    </wls:library-ref>
+    <!-- / Shared libraries -->
+
+
+    <!-- Logging resource -->
+    <wls:logging>
+        <wls:log-filename>@path.log@/security_server.log</wls:log-filename>
+        <wls:file-size-limit>50</wls:file-size-limit>
+    </wls:logging>
+    <!-- / Logging resource -->
+
+
+
+</wls:weblogic-web-app>

@@ -1,0 +1,143 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>es.aesan</groupId>
+        <artifactId>rgseaa</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <groupId>com.rgseaa</groupId>
+    <artifactId>ear</artifactId>
+    <packaging>ear</packaging>
+
+    <name>rgseaaApp</name>
+
+
+    <description>
+        Ear para la aplicación rgseaa.
+    </description>
+
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.version>0.0.1</project.version>
+        <weblogicVersion>12.2.1-3-0</weblogicVersion>
+    </properties>
+
+
+
+    <build>
+
+        <finalName>${ear.name}</finalName>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+        <!-- PLUGINS -->
+        <plugins>
+
+
+            <!-- CONSTRUCCION DEL EAR -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ear-plugin</artifactId>
+                <version>2.10.1</version>
+
+                <configuration>
+
+                    <earSourceDirectory>${basedir}/extra</earSourceDirectory>
+                    <defaultLibBundleDir>lib</defaultLibBundleDir>
+                    <version>5</version>
+
+                    <modules>
+
+                        <webModule>
+                            <groupId>es.aesan.rgseaa</groupId>
+                            <artifactId>security</artifactId>
+                            <contextRoot>${context.path.security}</contextRoot>
+                            <bundleFileName>${security.web}.war</bundleFileName>
+                        </webModule>
+
+                        <webModule>
+                            <groupId>es.aesan.rgseaa</groupId>
+                            <artifactId>rest</artifactId>
+                            <contextRoot>${context.path.private}</contextRoot>
+                            <bundleFileName>${private.web}.war</bundleFileName>
+                        </webModule>
+
+                        <!--
+                        <webModule>
+                            <groupId>es.aesan.rgseaa</groupId>
+                            <artifactId>rest-search</artifactId>
+                            <contextRoot>${context.path.public}</contextRoot>
+                            <bundleFileName>${public.web}.war</bundleFileName>
+                        </webModule>
+
+                        <webModule>
+                            <groupId>es.aesan.rgseaa</groupId>
+                            <artifactId>rest-external</artifactId>
+                            <contextRoot>${context.path.external}</contextRoot>
+                            <bundleFileName>${external.web}.war</bundleFileName>
+                        </webModule>
+                        -->
+
+                    </modules>
+
+                    <archive>
+                        <manifestEntries>
+                            <Built-By>${user.name}</Built-By>
+                            <WebLogic-Application-Version>${project.version}</WebLogic-Application-Version>
+                        </manifestEntries>
+                    </archive>
+
+                    <generateApplicationXml>true</generateApplicationXml>
+
+                </configuration>
+
+            </plugin>
+
+        </plugins>
+
+    </build>
+
+
+    <dependencies>
+
+        <dependency>
+            <groupId>es.aesan.rgseaa</groupId>
+            <artifactId>rest</artifactId>
+            <version>${project.version}</version>
+            <type>war</type>
+        </dependency>
+
+        <dependency>
+            <groupId>es.aesan.rgseaa</groupId>
+            <artifactId>security</artifactId>
+            <version>${project.version}</version>
+            <type>war</type>
+        </dependency>
+
+        <!--
+        <dependency>
+            <groupId>es.aesan.rgseaa</groupId>
+            <artifactId>rest-external</artifactId>
+            <version>${project.version}</version>
+            <type>war</type>
+        </dependency>
+
+        <dependency>
+            <groupId>es.aesan.rgseaa</groupId>
+            <artifactId>rest-search</artifactId>
+            <version>${project.version}</version>
+            <type>war</type>
+        </dependency>
+-->
+    </dependencies>
+
+</project>

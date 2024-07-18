@@ -1,0 +1,23 @@
+package es.aesan.rgseaa.model.dto;
+
+import lombok.Data;
+
+import java.io.Serializable;
+
+@Data
+public class TypeDocumentDto implements Serializable {
+
+    private Long id;
+
+    private String type;
+
+    private String name;
+
+    private String description;
+
+    private Long typeCompanyProduct;
+
+    private Integer visible;
+
+    private Integer noDelete;
+}

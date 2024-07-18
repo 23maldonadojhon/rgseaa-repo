@@ -1,0 +1,80 @@
+{
+    "aplicacion": "@ear.name@.ear",
+    "version": "@project.version@",
+    "variables": {
+        "PATH_REPO": "@path.repo@",
+
+        "DB_JNDI_NAME" : "/weblogic-web-app/resource-description/[res-ref-name=@jndi.db.refName@]/jndi-name",
+        "ACTIVE_PROFILE": "@activated.properties@",
+        "CONTEXT_PATH_PRIVATE": "@context.path.private@",
+        "CONTEXT_PATH_PUBLIC": "@context.path.public@",
+        "CONTEXT_PATH_EXTERNAL": "@context.path.external@"
+    },
+
+    "modulos": {
+
+        "@private.web@.war": {
+            "tipo": "war",
+            "weblogic-web-app": {
+                "uri": "WEB-INF/weblogic.xml",
+                "variables": {
+                    "resources": {
+                        "jdbc/reces": "@jndi.db.name@"
+                    }
+                }
+            },
+            "web-app": {
+                "uri": "WEB-INF/web.xml",
+                "variables": {
+                    "PATH_REPO": "PATH_REPO",
+                    "ACTIVE_PROFILE": "ACTIVE_PROFILE",
+                    "CONTEXT_PATH": "CONTEXT_PATH_PRIVATE",
+                    "DB_JNDI_NAME": "DB_JNDI_NAME"
+                }
+            }
+        },
+
+        "@public.web@.war": {
+            "tipo": "war",
+            "weblogic-web-app": {
+                "uri": "WEB-INF/weblogic.xml",
+                "variables": {
+                    "resources": {
+                        "jdbc/reces": "@jndi.db.name@"
+                    }
+                }
+            },
+            "web-app": {
+                "uri": "WEB-INF/web.xml",
+                "variables": {
+                    "PATH_REPO": "PATH_REPO",
+                    "ACTIVE_PROFILE": "ACTIVE_PROFILE",
+                    "CONTEXT_PATH": "CONTEXT_PATH_PUBLIC",
+                    "DB_JNDI_NAME": "DB_JNDI_NAME"
+                }
+            }
+        },
+
+        "@external.web@.war": {
+            "tipo": "war",
+            "weblogic-web-app": {
+                "uri": "WEB-INF/weblogic.xml",
+                "variables": {
+                    "resources": {
+                        "jdbc/reces": "@jndi.db.name@"
+                    }
+                }
+            }, "web-app": {
+                "uri": "WEB-INF/web.xml",
+                "variables": {
+                    "PATH_REPO": "PATH_REPO",
+                    "ACTIVE_PROFILE": "ACTIVE_PROFILE",
+                    "CONTEXT_PATH": "CONTEXT_PATH_EXTERNAL",
+                    "DB_JNDI_NAME": "DB_JNDI_NAME"
+                }
+            }
+        }
+
+    }
+
+}

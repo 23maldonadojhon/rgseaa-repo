@@ -1,0 +1,4 @@
+### Page
+GET http://localhost:8082/rest/api/entities?size=25&sort=id,asc
+accept: */*
+Content-Type: application/json

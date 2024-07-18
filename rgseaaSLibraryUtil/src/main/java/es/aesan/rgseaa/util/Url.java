@@ -1,0 +1,46 @@
+package es.aesan.rgseaa.util;
+
+public class Url {
+
+    public static final String DENOMINATION_SALES ="/denomination_sales";
+    public static final String ACTIVITIES_KEYS ="/activities_keys";
+    public static final String KEYS ="/keys";
+    public static final String COMPANIES ="/companies";
+    public static final String ESTABLISHMENTS ="/establishments";
+    public static final String FIND ="/find";
+    public static final String PRODUCTS ="/products";
+    public static final String DOCUMENTS ="/documents";
+    public static final String ACTIONS ="/actions";
+    public static final String ACTIVITIES ="/activities";
+    public static final String SUBACTIVITIES ="/subactivities";
+    public static final String CATEGORIES ="/categories";
+    public static final String TYPE_ACTIONS ="/types_actions";
+    public static final String USERS ="/users";
+    public static final String AUTH_INDUSTRY ="/auth-industry";
+    public static final String AUTHORIZATIONS ="/authorizations";
+    public static final String ENTITIES ="/entities";
+    public static final String TYPE_DOCUMENT ="/type_document";
+    public static final String USERS_ENTITIES ="/user_scopes";
+    public static final String PERMISSIONS ="/permissions";
+    public static final String ENTITIES_TYPE ="/entity_types";
+    public static final String PROFILES ="/profiles";
+    public static final String MODULES ="/modules";
+    public static final String ALL ="/all";
+    public static final String API ="/api";
+    public static final String NIF ="/nif";
+    public static final String PAGE ="/page";
+    public static final String LOGIN ="/login";
+    public static final String CREATE = "/create";
+    public static final String UPDATE = "/update";
+    public static final String TYPES = "/types";
+    public static final String PATCH = "/patch";
+    public static final String LIST = "/list";
+    public static final String DELETE = "/delete";
+    public static final String HOOKS = "/hooks";
+    public static final String AUTH = "/auth";
+    public static final String SITUATIONS = "/situations";
+    public static final String COUNTRIES = "/countries";
+    public static final String PROVINCES = "/provinces";
+    public static final String LOCATIONS = "/locations";
+    public static final String FORM_PRESENTATIONS = "/form_presentation";
+}

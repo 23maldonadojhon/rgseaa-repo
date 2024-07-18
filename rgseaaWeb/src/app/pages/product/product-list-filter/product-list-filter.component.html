@@ -1,0 +1,48 @@
+<form [formGroup]="form" (ngSubmit)="search()">
+
+    <div class="grid grid-cols-3 grid-rows-2 gap-1.5">
+
+        <mat-form-field>
+            <mat-label>Nombre Comercial</mat-label>
+            <tsw-search-input formControlName="brand"></tsw-search-input>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Numero de Producto</mat-label>
+            <tsw-search-input formControlName="numProduct"></tsw-search-input>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Numero de Registro CCAAA</mat-label>
+            <tsw-search-input formControlName="numRegister"></tsw-search-input>
+        </mat-form-field>
+
+
+        <mat-form-field>
+            <mat-label>Situacion</mat-label>
+            <tsw-search-select
+                resourceName="productsSituations"
+                formControlName="situation"
+            ></tsw-search-select>
+        </mat-form-field>
+
+
+        <mat-form-field>
+            <mat-label>Autoridad Competente</mat-label>
+            <tsw-search-select
+                resourceName="productsEntities"
+                formControlName="competentAuthority"
+            ></tsw-search-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Ingredientes</mat-label>
+            <tsw-search-input formControlName="ingredientKey26"></tsw-search-input>
+        </mat-form-field>
+
+    </div>
+
+    <tsw-filters-container-actions (resetEv)="clear()">
+        <tsw-filter-hidden formControlName="state"></tsw-filter-hidden>
+    </tsw-filters-container-actions>
+</form>

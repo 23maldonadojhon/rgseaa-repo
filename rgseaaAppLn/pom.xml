@@ -1,0 +1,255 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <parent>
+        <groupId>es.aesan</groupId>
+        <artifactId>rgseaa</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <groupId>es.aesan.rgseaa</groupId>
+	<artifactId>rest</artifactId>
+	<packaging>war</packaging>
+
+	<name>rgseaaAppLn</name>
+	<description>servicios rest para la aplicacion principal</description>
+
+	<properties>
+		<contextPath>/rest</contextPath>
+		<java.version>1.8</java.version>
+	</properties>
+
+
+
+
+
+
+
+	<profiles>
+
+		<profile>
+
+			<id>local</id>
+
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+
+			<properties>
+
+				<activatedProperties>local</activatedProperties>
+				<baseURL>http://localhost:9090</baseURL>
+				<pathRepo>./</pathRepo>
+				<pathLogs>./</pathLogs>
+				<jndi.db.refName>not-used</jndi.db.refName>
+				<jndi.db.name>not-used</jndi.db.name>
+				<jndi.db.schemaName>WEB_BD_A_O</jndi.db.schemaName>
+				<jndi.mail.refName>not-used</jndi.mail.refName>
+				<jndi.mail.name>not-used</jndi.mail.name>
+				<jndi.mail.fromAddress>rgsavv@local</jndi.mail.fromAddress>
+
+				<jwt.issuer>rgseaa local</jwt.issuer>
+				<jwt.secret>oU7nzvi5HVkkSQKbVWnN2o934nEW3fzMbV2Y2bPYkM9bgW7WnYMZKEJFhrStuM29</jwt.secret>
+				<jwt.authTokenTTL>480</jwt.authTokenTTL>
+				<jwt.tempTokenTTL>40</jwt.tempTokenTTL>
+				<shared.rest.lib>rgseaa-rest-dep</shared.rest.lib>
+				<shared.rest.lib.ver>0.0.2</shared.rest.lib.ver>
+			</properties>
+
+		</profile>
+
+
+		<profile>
+
+			<id>dev</id>
+
+			<properties>
+				<activatedProperties>local</activatedProperties>
+				<baseURL>http://localhost:9090</baseURL>
+				<pathRepo>./</pathRepo>
+				<pathLogs>./</pathLogs>
+				<jndi.db.refName>not-used</jndi.db.refName>
+				<jndi.db.name>not-used</jndi.db.name>
+				<jndi.db.schemaName>WEB_BD_A_O</jndi.db.schemaName>
+				<jndi.mail.refName>not-used</jndi.mail.refName>
+				<jndi.mail.name>not-used</jndi.mail.name>
+				<jndi.mail.fromAddress>rgsavv@local</jndi.mail.fromAddress>
+
+				<jwt.issuer>rgseaa local</jwt.issuer>
+				<jwt.secret>oU7nzvi5HVkkSQKbVWnN2o934nEW3fzMbV2Y2bPYkM9bgW7WnYMZKEJFhrStuM29</jwt.secret>
+				<jwt.authTokenTTL>480</jwt.authTokenTTL>
+				<jwt.tempTokenTTL>40</jwt.tempTokenTTL>
+				<shared.rest.lib>rgseaa-rest-dep</shared.rest.lib>
+				<shared.rest.lib.ver>0.0.2</shared.rest.lib.ver>
+			</properties>
+
+		</profile>
+
+
+
+		<profile>
+
+			<id>pre</id>
+
+			<properties>
+				<activatedProperties>local</activatedProperties>
+				<baseURL>http://localhost:9090</baseURL>
+				<pathRepo>./</pathRepo>
+				<pathLogs>./</pathLogs>
+				<jndi.db.refName>not-used</jndi.db.refName>
+				<jndi.db.name>not-used</jndi.db.name>
+				<jndi.db.schemaName>WEB_BD_A_O</jndi.db.schemaName>
+				<jndi.mail.refName>not-used</jndi.mail.refName>
+				<jndi.mail.name>not-used</jndi.mail.name>
+				<jndi.mail.fromAddress>rgsavv@local</jndi.mail.fromAddress>
+				<jwt.issuer>rgseaa local</jwt.issuer>
+				<jwt.secret>oU7nzvi5HVkkSQKbVWnN2o934nEW3fzMbV2Y2bPYkM9bgW7WnYMZKEJFhrStuM29</jwt.secret>
+				<jwt.authTokenTTL>480</jwt.authTokenTTL>
+				<jwt.tempTokenTTL>40</jwt.tempTokenTTL>
+				<shared.rest.lib>rgseaa-rest-dep</shared.rest.lib>
+				<shared.rest.lib.ver>0.0.2</shared.rest.lib.ver>
+			</properties>
+
+		</profile>
+
+	</profiles>
+
+
+
+	<build>
+
+		<finalName>${private.web}</finalName>
+
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+
+			<resource>
+				<directory>src/main/webapp</directory>
+				<targetPath>${project.build.directory}/${project.build.finalName}</targetPath>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+
+
+		<plugins>
+
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>es.aesan.rgseaa.rest.AppRest</mainClass>
+					<classifier>exec</classifier>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>3.6.0</version>
+				<executions>
+					<execution>
+						<id>SHARED-LIB</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<appendAssemblyId>false</appendAssemblyId>
+							<finalName>${shared.rest.lib}</finalName>
+							<descriptors>
+								<descriptor>src/main/assembly/shared-libs.xml</descriptor>
+							</descriptors>
+							<attach>false</attach>
+							<archive>
+								<manifestEntries>
+									<Implementation-Title>${shared.rest.lib}</Implementation-Title>
+									<Implementation-Version>${shared.rest.lib.ver}</Implementation-Version>
+									<Specification-Title>${shared.rest.lib}</Specification-Title>
+									<Specification-Version>${shared.rest.lib.ver}</Specification-Version>
+									<Extension-Name>${shared.rest.lib}</Extension-Name>
+								</manifestEntries>
+							</archive>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+
+				<configuration>
+					<packagingExcludes>WEB-INF/lib/,styles/,images/,js/,META-INF/maven,*.html,angular/,videos/</packagingExcludes>
+					<warName>${private.web}</warName>
+				</configuration>
+
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>war</goal>
+						</goals>
+					</execution>
+				</executions>
+
+			</plugin>
+
+		</plugins>
+
+	</build>
+
+
+
+
+	<dependencies>
+
+		<dependency>
+			<groupId>es.aesan.rgseaa</groupId>
+			<artifactId>service</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>es.aesan.rgseaa</groupId>
+			<artifactId>util</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.tomcat.embed</groupId>
+					<artifactId>tomcat-embed-el</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+
+	</dependencies>
+
+
+
+</project>

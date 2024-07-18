@@ -1,0 +1,53 @@
+<tsw-breadcrumbs></tsw-breadcrumbs>
+
+<form [formGroup]="form">
+    <tsw-form-container>
+        <tsw-section-wrapper
+            class="mb-5"
+            [headerLabel]="headerTitle"
+            icon="edit_note"
+        >
+            <div section-content>
+                <div class="grid grid-cols-1 gap-1.5">
+                    <mat-form-field>
+                        <mat-label>{{ 'fields.name' | translate }}</mat-label>
+                        <input matInput formControlName="name">
+                    </mat-form-field>
+                </div>
+
+                <div class="flex flex-row gap-1.5">
+                    <mat-form-field class="basis-2/4">
+                        <mat-label>Producto</mat-label>
+                        <mat-select formControlName="allowProduct" id="allowProduct">
+                            <mat-option *ngFor="let option of allowProduct" [value]="option.id">
+                                {{ option.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="basis-2/4">
+                        <mat-label>Publico</mat-label>
+                        <mat-select formControlName="isPublic" id="isPublic">
+                            <mat-option *ngFor="let option of public" [value]="option.id">
+                                {{ option.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                </div>
+
+                <div class="flex flex-row gap-1.5">
+
+                </div>
+            </div>
+
+
+        </tsw-section-wrapper>
+
+        <tsw-form-actions
+            [saveBtnSkipConfirmation]="skipSaveConfirmation"
+            (reset)="resetForm()"
+            (save)="submitForm()"
+        ></tsw-form-actions>
+    </tsw-form-container>
+</form>

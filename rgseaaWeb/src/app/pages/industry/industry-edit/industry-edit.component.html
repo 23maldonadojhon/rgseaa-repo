@@ -1,0 +1,508 @@
+<form [formGroup]="form" xmlns="http://www.w3.org/1999/html">
+
+<tsw-form-container>
+
+    <tsw-section-wrapper class="mb-5" icon="edit_note">
+
+        <div section-content>
+
+            <div section-content>
+                <div class="flex justify-end">
+                    <h1 class="text-3xl">EMPRESA</h1>
+                    <br/>
+                </div>
+            </div>
+
+            <div class="flex justify-end">
+
+                <div matTooltip="Agregar nuevo producto">
+                    <a
+                        mat-icon-button color="primary" [disabled]="isNew===true || this._action==='copy'"
+                        [routerLink]="'productManagementAction' | namedRoute: { idIndustry: this.resourceId, action : 'p_industry'}">
+                        <mat-icon>add_box</mat-icon>
+                    </a>
+                </div>
+
+                <div matTooltip="Lista de productos">
+                    <a
+                        mat-icon-button color="primary" [disabled]="isNew===true || this._action==='copy'"
+                        [routerLink]="'productIndustryManagementList' | namedRoute: { idIndustry: this.resourceId}">
+                        <mat-icon>list</mat-icon>
+                    </a>
+                </div>
+
+                <div>
+                   <span class="material-symbols-outlined">
+                        <mat-icon>align_justify_center</mat-icon>
+                   </span>
+                </div>
+
+                <div matTooltip="Copiar Empresa">
+                    <a
+                        mat-icon-button color="primary" [disabled]="isNew===true || this._action==='copy'"
+                        [routerLink]="'industryManagementCopy' | namedRoute: { id: this.resourceId, action:'copy'}">
+                        <mat-icon>file_copy</mat-icon>
+                    </a>
+                </div>
+
+                <div>
+                   <span class="material-symbols-outlined">
+                        <mat-icon>align_justify_center</mat-icon>
+                   </span>
+                </div>
+                <!--
+                <div matTooltip="Agregar Expediente">
+                    <a
+                        mat-icon-button color="primary" [disabled]="isNew===true || this._action==='copy'"
+                        [routerLink]="'expedientManagementCreate' | namedRoute: { idIndustry : this.resourceId}">
+                        <mat-icon>create_new_folder</mat-icon>
+                    </a>
+                </div>
+
+                <div matTooltip="Lista de Expediente">
+                    <a
+                        mat-icon-button color="primary" [disabled]="isNew===true || this._action==='copy'"
+                        [routerLink]="'expedientIndustryManagementList' | namedRoute: { idIndustry : this.resourceId}">
+                        <mat-icon>list_alt</mat-icon>
+                    </a>
+                </div>
+                -->
+            </div>
+
+        </div>
+
+        <div section-content>
+
+            <h1 class="text-3xl">Datos Generales</h1>
+            <br/>
+            <div class="flex flex-row gap-1.5">
+
+                <mat-form-field class="w-30">
+                    <mat-label>RGSA-NUE</mat-label>
+                    <input matInput formControlName="numBusiness">
+                </mat-form-field>
+
+                <mat-form-field class="w-14">
+                    <mat-label>CLAVE</mat-label>
+                    <mat-select formControlName="key" (selectionChange)="changeKey()">
+                        <mat-option *ngFor="let key of keyIndustry" [value]="key">
+                            {{key.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="w-30">
+                    <mat-label></mat-label>
+                    <input matInput formControlName="numberIndustry">
+                </mat-form-field>
+
+                <mat-form-field class="w-12">
+                    <mat-label></mat-label>
+                    <input matInput formControlName="enrollment">
+                </mat-form-field>
+
+
+                <div class="w-20">
+
+                </div>
+                <mat-form-field class="1/10">
+                    <mat-label>Nº Registro CCAA</mat-label>
+                    <input matInput formControlName="numRegCcaa">
+                </mat-form-field>
+
+                <mat-form-field class="1/10">
+                    <mat-label>Situación</mat-label>
+                    <tsw-custom-select
+                        resourceName="productsSituations"
+                        formControlName="situation"
+                    ></tsw-custom-select>
+                </mat-form-field>
+
+            </div>
+
+            <div class="grid grid-cols-2 gap-1.5">
+
+                <mat-form-field>
+                    <mat-label>Razón Social</mat-label>
+                    <input matInput (blur)="lostFocus()" formControlName="nameBusiness">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>NIF o equivalente</mat-label>
+                    <input matInput formControlName="cif">
+                </mat-form-field>
+
+            </div>
+
+        </div>
+
+        <div section-content>
+
+            <h1 class="text-3xl">Datos Empresa (Domicilio social)</h1>
+            <br/>
+            <div class="flex flex-row gap-1.5">
+
+                <mat-form-field class="basis-1/4">
+                    <mat-label>Pais</mat-label>
+                    <mat-select  formControlName="countryBusiness"  (selectionChange)="changeCountry()">
+                        <mat-option *ngFor="let country of countryBusiness" [value]="country">
+                            {{country.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+
+                <mat-form-field class="basis-1/4">
+                    <mat-label>Provincia</mat-label>
+                    <mat-select formControlName="provinceBusiness" (selectionChange)="changeProvince()">
+                        <mat-option *ngFor="let province of provinceBusiness" [value]="province">
+                            {{province.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="basis-1/4">
+                    <mat-label>Localidad</mat-label>
+                    <mat-select formControlName="locationBusiness">
+                        <mat-option *ngFor="let location of locationBusiness" [value]="location">
+                            {{location.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="basis-1/4">
+                    <mat-label>Código Postal</mat-label>
+                    <input matInput formControlName="postalCodeBusiness">
+                </mat-form-field>
+
+            </div>
+
+            <div class="flex flex-row gap-1.5">
+                <mat-form-field class="basis-full">
+                    <mat-label>Domicilio</mat-label>
+                    <input matInput formControlName="addressBusiness">
+                </mat-form-field>
+            </div>
+
+        </div>
+
+
+        <div section-content>
+
+            <h1 class="text-3xl">Datos Establecimiento (Domicilio instalaciones)</h1>
+            <br/>
+
+            <div class="flex flex-row gap-1.5">
+
+                <mat-form-field class="basis-1/4">
+                    <mat-label>Pais</mat-label>
+                    <mat-select formControlName="countryIndustry" (selectionChange)="changeCountryIndustry()">
+                        <mat-option *ngFor="let country of countryIndustry" [value]="country">
+                            {{country.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="basis-1/4">
+                    <mat-label>Provincia</mat-label>
+                    <mat-select formControlName="provinceIndustry" (selectionChange)="changeProvinceIndustr()">
+                        <mat-option *ngFor="let province of provinceIndustry" [value]="province">
+                            {{province.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="basis-1/4">
+                    <mat-label>Localidad</mat-label>
+                    <mat-select formControlName="locationIndustry">
+                        <mat-option *ngFor="let location of locationIndustry" [value]="location">
+                            {{location.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="basis-1/4">
+                    <mat-label>Código Postal</mat-label>
+                    <input matInput formControlName="postalCodeIndustry">
+                </mat-form-field>
+
+            </div>
+
+            <div class="flex flex-row gap-1.5">
+                <mat-form-field class="basis-full">
+                    <mat-label>Domicilio</mat-label>
+                    <input matInput formControlName="addressIndustry">
+                </mat-form-field>
+            </div>
+
+            <div class="flex flex-row gap-1.5">
+                <mat-form-field class="basis-full">
+                    <mat-label>Domicilio de Instalaciones Almacen Independiente</mat-label>
+                    <input matInput formControlName="addressInstallation">
+                </mat-form-field>
+            </div>
+
+        </div>
+
+        <div section-content>
+            <h1 class="text-3xl">Fechas / Observaciones</h1>
+            <br/>
+            <div class="flex flex-row gap-1.5">
+
+                <mat-form-field class="basis-1/4">
+                    <mat-label>Fecha Anotación</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="dateRequest" >
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field class="basis-1/4">
+                    <mat-label>Fecha Inscripción</mat-label>
+                    <input matInput  [matDatepicker]="picker1" formControlName="dateInscription">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field class="basis-1/4">
+                    <mat-label>Correo Electrónico</mat-label>
+                    <input matInput formControlName="email">
+                </mat-form-field>
+
+                <mat-form-field class="basis-1/4">
+                    <mat-label> Página Web</mat-label>
+                    <input matInput formControlName="pageWeb">
+                </mat-form-field>
+
+            </div>
+
+            <div class="flex flex-row gap-1.5">
+
+                <mat-form-field class="basis-full">
+                    <mat-label>Observaciones</mat-label>
+                    <textarea  matInput rows="5" formControlName="observation"></textarea>
+                </mat-form-field>
+
+            </div>
+
+        </div>
+
+
+        <div section-content>
+            <h1 class="text-3xl">Actividades / Categorías</h1>
+            <br/>
+            <div class="flex flex-row gap-1.5">
+
+                <mat-form-field class="basis-1/3">
+                    <mat-label>Actividad</mat-label>
+                    <mat-select formControlName="activity" (selectionChange)="changeActivity()">
+                        <mat-option *ngFor="let item of activityIndustry" [value]="item">
+                            {{item.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="basis-1/3">
+                    <mat-label>Categoria</mat-label>
+                    <mat-select formControlName="category" (selectionChange)="changeCategory()">
+                        <mat-option *ngFor="let item of categoryIndustry" [value]="item">
+                            {{item.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+
+                <mat-form-field class="basis-1/3">
+                    <mat-label>Subactividad</mat-label>
+                    <mat-select formControlName="subactivity">
+                        <mat-option *ngFor="let item of subactivityIndustry" [value]="item">
+                            {{item.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+            </div>
+
+
+            <div class="flex flex-row gap-1.5">
+                <button mat-raised-button (click)="addActivity()" [disabled]="!disabledButonAddActity" >Introducir</button>
+            </div>
+
+            <br>
+
+            <div class="grid grid-cols-1 gap-1.5">
+
+                <table #tableActivity mat-table [dataSource]="dataSourceACS" class="mat-elevation-z8 demo-table">
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="activity">
+                        <th mat-header-cell *matHeaderCellDef> Actividades </th>
+                        <td mat-cell *matCellDef="let element"> {{element.activity.name}} </td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="category">
+                        <th mat-header-cell *matHeaderCellDef> Categorias </th>
+                        <td mat-cell *matCellDef="let element"> {{element.category.name}} </td>
+                    </ng-container>
+
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="subactivity">
+                        <th mat-header-cell *matHeaderCellDef> Subactividades </th>
+                        <td mat-cell *matCellDef="let element"> {{element.subActivity.name}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="delete">
+                        <th mat-header-cell *matHeaderCellDef> Eliminar </th>
+                        <td mat-cell *matCellDef="let element">
+                            <button mat-mini-fab color="warn" (click)="deleteActivityRow(element.count)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </div>
+
+        </div>
+
+        <div section-content>
+            <br/><br/>
+            <h1 class="text-3xl">Autorizaciones</h1>
+            <br/>
+            <div class="grid grid-cols-1 gap-1.5">
+
+                <table mat-table [dataSource]="authorizationData" class="mat-elevation-z8 demo-table">
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef> Descripción </th>
+                        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    </ng-container>
+
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="select">
+                        <th mat-header-cell *matHeaderCellDef> Seleccionar </th>
+
+                        <td mat-cell *matCellDef="let element">
+                            <mat-checkbox
+                                (click)="$event.stopPropagation()"
+                                (change)="$event ? selection.toggle(element) : null"
+                                [checked]="isChecked(element)"
+                                [aria-label]="checkboxLabel(element)">
+                            </mat-checkbox>
+                        </td>
+
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumnsAuthorization"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumnsAuthorization;"></tr>
+                </table>
+            </div>
+        </div>
+
+    </tsw-section-wrapper>
+
+    </tsw-form-container>
+
+
+    <tsw-form-container>
+        <tsw-section-wrapper class="mb-5" icon="edit_note">
+            <div section-content>
+                <h1 class="text-3xl">Actuaciones/ Documentos</h1>
+                <br/>
+
+                <div class="flex flex-row gap-1.5" *ngIf="!isNew">
+
+                    <mat-form-field class="basis-2/4">
+                        <mat-label>Tipo Actuación</mat-label>
+                        <tsw-custom-select
+                            resourceName="productTypeAction"
+                            formControlName="typeAction"
+                        ></tsw-custom-select>
+                    </mat-form-field>
+
+                    <div class="basis-1/4">
+                        <button mat-raised-button color="primary" (click)="addRow()">Añadir</button>
+                    </div>
+
+                </div>
+
+                <div class="grid grid-cols-1 gap-1.5">
+
+                    <table mat-table #table1 [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+
+                        <!-- Position Column -->
+                        <ng-container matColumnDef="date">
+                            <th mat-header-cell *matHeaderCellDef> Fecha </th>
+                            <td mat-cell *matCellDef="let element">{{element.id}}</td>
+                        </ng-container>
+
+
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="type-name">
+                            <th mat-header-cell *matHeaderCellDef> Tipo </th>
+                            <td mat-cell *matCellDef="let element">{{element.typeAction.name}}</td>
+                        </ng-container>
+
+
+                        <!-- Weight Column -->
+                        <ng-container matColumnDef="description">
+                            <th mat-header-cell *matHeaderCellDef> Descripción </th>
+                            <td mat-cell *matCellDef="let element">  </td>
+                        </ng-container>
+
+
+                        <!-- Symbol Column -->
+                        <ng-container matColumnDef="files">
+                            <th mat-header-cell *matHeaderCellDef> Fichero </th>
+                            <td mat-cell *matCellDef="let element">  </td>
+                        </ng-container>
+
+
+                        <ng-container matColumnDef="actions">
+                            <th mat-header-cell *matHeaderCellDef> Acciones </th>
+
+                            <td mat-cell *matCellDef="let element">
+
+                                <div *ngIf="element.typeAction.id==21">
+                                    <button mat-mini-fab color="primary" (click)="openDialog(element.id)">
+                                        <mat-icon>attach_file</mat-icon>
+                                    </button>
+                                </div>
+
+                                <div *ngIf="element.typeAction.id!=21">
+                                    <button mat-mini-fab color="primary" (click)="openDialog(element.id)">
+                                        <mat-icon>attach_file</mat-icon>
+                                    </button>
+                                    <button mat-mini-fab color="warn" (click)="deleteRow(element.id)">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </div>
+
+                            </td>
+
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumnsActuation"></tr>
+
+                        <tr mat-row *matRowDef="let row; columns: displayedColumnsActuation;" [hidden]="row.update === 1"></tr>
+
+                    </table>
+
+                </div>
+
+
+            </div>
+        </tsw-section-wrapper>
+
+        <tsw-form-actions
+            [saveBtnSkipConfirmation]="skipSaveConfirmation"
+            (reset)="resetForm()"
+            (save)="submitForm()"
+        ></tsw-form-actions>
+
+    </tsw-form-container>
+</form>

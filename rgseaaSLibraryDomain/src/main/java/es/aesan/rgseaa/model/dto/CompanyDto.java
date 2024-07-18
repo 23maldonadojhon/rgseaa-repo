@@ -1,0 +1,27 @@
+package es.aesan.rgseaa.model.dto;
+
+import es.aesan.rgseaa.model.entity.*;
+import lombok.Data;
+
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.List;
+
+@Data
+public class CompanyDto implements Serializable {
+
+    private Long id;
+    private String nif;
+    private String name;
+    private String email;
+    private String pageWeb;
+    private String observation;
+    private String address;
+    private String postalCode;
+    private Long countryId;
+    private Long provinceId;
+    private Long locationId;
+    private Long situationId;
+}
+
+

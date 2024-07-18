@@ -1,0 +1,364 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<deployment-plan
+        xmlns="http://xmlns.oracle.com/weblogic/deployment-plan"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://xmlns.oracle.com/weblogic/deployment-plan
+        http://xmlns.oracle.com/weblogic/deployment-plan/1.0/deployment-plan.xsd"
+        global-variables="false"
+>
+    <application-name>tulsa-web-jee-r01a-iq-jear-tulsa-app-[version].ear</application-name>
+
+    <variable-definition>
+        <!-- Common -->
+        <variable>
+            <name>TULSA_ACTIVE_PROFILE</name>
+            <value>weblogic</value>
+        </variable>
+
+        <variable>
+            <name>PATH_REPO</name>
+            <value>/repo/wld-pre-206/apps/tulsa-web-jee-r01a-iq</value>
+        </variable>
+        <variable>
+            <name>PROXY_HOST</name>
+            <value xsi:nil="true"></value>
+        </variable>
+        <variable>
+            <name>PROXY_PORT</name>
+            <value xsi:nil="true"></value>
+        </variable>
+        <variable>
+            <name>PROXY_USERNAME</name>
+            <value xsi:nil="true"></value>
+        </variable>
+        <variable>
+            <name>PROXY_PASSWORD</name>
+            <value xsi:nil="true"></value>
+        </variable>
+        <variable>
+            <name>PATH_KEYSTORE</name>
+            <value xsi:nil="true"></value>
+        </variable>
+        <variable>
+            <name>STOREPASS</name>
+            <value xsi:nil="true"></value>
+        </variable>
+        <variable>
+            <name>KEYPASS</name>
+            <value xsi:nil="true"></value>
+        </variable>
+        <!-- / Common -->
+
+        <!-- Database -->
+        <variable>
+            <name>TULSA_DB_JNDI_NAME</name>
+            <value>tulsa-web-jee-r01a-iq-jeec/jds/u0</value>
+        </variable>
+        <variable>
+            <name>TULSA_DB_SCHEMA_NAME</name>
+            <value>TULSA_WEB_BD_A_O</value>
+        </variable>
+        <!-- / Database -->
+
+        <!-- Mailer -->
+        <variable>
+            <name>TULSA_MAIL_JNDI_NAME</name>
+            <value>tulsa-web-jee-r01a-iq-jeec/jms/u0</value>
+        </variable>
+        <variable>
+            <name>TULSA_MAIL_FROM_ADDRESS</name>
+            <value>APP.TULSA.PPROD@sanidad.gob.es</value>
+        </variable>
+        <!-- / Mailer -->
+
+        <!-- Tulsa JWT -->
+        <variable>
+            <name>TULSAJWT_ISSUER</name>
+            <value>TULSA PreProduccion Auth</value>
+        </variable>
+        <variable>
+            <name>TULSAJWT_SECRET</name>
+            <value>T{;r.X-FZTm\UttDwbPwc{[q:]L4avmPyo3\a,CYTbDV(Em;M,5n:cKD(xw:p)bo</value>
+        </variable>
+        <variable>
+            <name>TULSAJWT_TOKEN_TTL</name>
+            <value>60</value>
+        </variable>
+        <variable>
+            <name>TULSAJWT_TEMP_TOKEN_TTL</name>
+            <value>5</value>
+        </variable>
+        <!-- / Tulsa JWT -->
+
+        <!-- Tulsa REST -->
+        <variable>
+            <name>TULSAREST_CONTEXT_PATH</name>
+            <value>/tulsarest</value>
+        </variable>
+
+        <!-- Logging -->
+        <variable>
+            <name>TULSAREST_LOGGING_FILENAME</name>
+            <value>/repo/wld-pre-206/apps/tulsa-web-jee-r01a-iq/logs/aesan-tulsa-rest_${weblogic.Name}.log</value>
+        </variable>
+        <variable>
+            <name>TULSAREST_LOGGING_MAX_FILESIZE</name>
+            <value>50MB</value>
+        </variable>
+
+        <variable>
+            <name>TULSAREST_WEBLOGIC_LOGGING_FILENAME</name>
+            <value>/repo/wld-pre-206/apps/tulsa-web-jee-r01a-iq/logs/aesan-tulsa-rest_server.log</value>
+        </variable>
+        <variable>
+            <name>TULSAREST_WEBLOGIC_LOGGING_MAX_FILESIZE</name>
+            <value>50</value>
+        </variable>
+        <!-- / Logging -->
+        <!-- / Tulsa REST -->
+
+        <!-- Tulsa AUTH -->
+        <variable>
+            <name>TULSAAUTH_CONTEXT_PATH</name>
+            <value>/tulsajwtrest</value>
+        </variable>
+
+        <!-- Logging -->
+        <variable>
+            <name>TULSAAUTH_LOGGING_FILENAME</name>
+            <value>/repo/wld-pre-206/apps/tulsa-web-jee-r01a-iq/logs/aesan-tulsa-jwt-rest_${weblogic.Name}.log</value>
+        </variable>
+        <variable>
+            <name>TULSAAUTH_LOGGING_MAX_FILESIZE</name>
+            <value>50MB</value>
+        </variable>
+
+        <variable>
+            <name>TULSAAUTH_WEBLOGIC_LOGGING_FILENAME</name>
+            <value>/repo/wld-pre-206/apps/tulsa-web-jee-r01a-iq/logs/aesan-tulsa-jwt-rest_server.log</value>
+        </variable>
+        <variable>
+            <name>TULSAAUTH_WEBLOGIC_LOGGING_MAX_FILESIZE</name>
+            <value>50</value>
+        </variable>
+        <!-- / Logging -->
+        <!-- / Tulsa AUTH -->
+    </variable-definition>
+
+    <module-override>
+        <module-name>tulsarest.war</module-name>
+        <module-type>war</module-type>
+
+        <module-descriptor external="false">
+            <root-element>weblogic-web-app</root-element>
+            <uri>WEB-INF/weblogic.xml</uri>
+
+            <variable-assignment>
+                <name>TULSAREST_CONTEXT_PATH</name>
+                <xpath>/weblogic-web-app/context-root</xpath>
+                <operation>replace</operation>
+            </variable-assignment>
+
+            <variable-assignment>
+                <name>TULSA_DB_JNDI_NAME</name>
+                <xpath>/weblogic-web-app/resource-description/[res-ref-name="tulsa-web-jee-r01a-iq-jeec-jds-u0"]/jndi-name</xpath>
+                <operation>replace</operation>
+            </variable-assignment>
+
+            <variable-assignment>
+                <name>TULSA_MAIL_JNDI_NAME</name>
+                <xpath>/weblogic-web-app/resource-description/[res-ref-name="tulsa-web-jee-r01a-iq-jeec-jms-u0"]/jndi-name</xpath>
+                <operation>replace</operation>
+            </variable-assignment>
+
+            <variable-assignment>
+                <name>TULSAREST_WEBLOGIC_LOGGING_FILENAME</name>
+                <xpath>/weblogic-web-app/logging/log-filename</xpath>
+                <operation>replace</operation>
+            </variable-assignment>
+
+            <variable-assignment>
+                <name>TULSAREST_WEBLOGIC_LOGGING_MAX_FILESIZE</name>
+                <xpath>/weblogic-web-app/logging/file-size-limit</xpath>
+                <operation>replace</operation>
+            </variable-assignment>
+        </module-descriptor>
+
+        <module-descriptor external="false">
+            <root-element>web-app</root-element>
+            <uri>WEB-INF/web.xml</uri>
+
+            <variable-assignment>
+                <name>PATH_REPO</name>
+                <xpath>/web-app/env-entry/[env-entry-name="PATH_REPO"]/env-entry-value</xpath>
+                <operation>replace</operation>
+            </variable-assignment>
+
+            <variable-assignment>
+                <name>TULSA_ACTIVE_PROFILE</name>
+                <xpath>/web-app/env-entry/[env-entry-name="TULSA_ACTIVE_PROFILE"]/env-entry-value</xpath>
+                <operation>replace</operation>
+            </variable-assignment>
+
+            <variable-assignment>
+                <name>TULSAREST_CONTEXT_PATH</name>
+                <xpath>/web-app/env-entry/[env-entry-name="TULSAREST_CONTEXT_PATH"]/env-entry-value</xpath>
+                <operation>replace</operation>
+            </variable-assignment>
+
+            <variable-assignment>
+                <name>TULSA_DB_JNDI_NAME</name>
+                <xpath>/web-app/env-entry/[env-entry-name="TULSA_DB_JNDI_NAME"]/env-entry-value</xpath>
+                <operation>replace</operation>
+            </variable-assignment>
+            <variable-assignment>
+                <name>TULSA_DB_SCHEMA_NAME</name>
+                <xpath>/web-app/env-entry/[env-entry-name="TULSA_DB_SCHEMA_NAME"]/env-entry-value</xpath>
+                <operation>replace</operation>
+            </variable-assignment>
+
+            <variable-assignment>
+                <name>TULSA_MAIL_JNDI_NAME</name>
+                <xpath>/web-app/env-entry/[env-entry-name="TULSA_MAIL_JNDI_NAME"]/env-entry-value</xpath>
+                <operation>replace</operation>
+            </variable-assignment>
+            <variable-assignment>
+                <name>TULSA_MAIL_FROM_ADDRESS</name>
+                <xpath>/web-app/env-entry/[env-entry-name="TULSA_MAIL_FROM_ADDRESS"]/env-entry-value</xpath>
+                <operation>replace</operation>
+            </variable-assignment>
+
+            <variable-assignment>
+                <name>TULSAREST_LOGGING_FILENAME</name>
+                <xpath>/web-app/env-entry/[env-entry-name="TULSAREST_LOGGING_FILENAME"]/env-entry-value</xpath>
+                <operation>replace</operation>
+            </variable-assignment>
+            <variable-assignment>
+                <name>TULSAREST_LOGGING_MAX_FILESIZE</name>
+                <xpath>/web-app/env-entry/[env-entry-name="TULSAREST_LOGGING_MAX_FILESIZE"]/env-entry-value</xpath>
+                <operation>replace</operation>
+            </variable-assignment>
+
+            <variable-assignment>
+                <name>TULSAJWT_ISSUER</name>
+                <xpath>/web-app/env-entry/[env-entry-name="TULSAJWT_ISSUER"]/env-entry-value</xpath>
+                <operation>replace</operation>
+            </variable-assignment>
+            <variable-assignment>
+                <name>TULSAJWT_SECRET</name>
+                <xpath>/web-app/env-entry/[env-entry-name="TULSAJWT_SECRET"]/env-entry-value</xpath>
+                <operation>replace</operation>
+            </variable-assignment>
+            <variable-assignment>
+                <name>TULSAJWT_TOKEN_TTL</name>
+                <xpath>/web-app/env-entry/[env-entry-name="TULSAJWT_TOKEN_TTL"]/env-entry-value</xpath>
+                <operation>replace</operation>
+            </variable-assignment>
+            <variable-assignment>
+                <name>TULSAJWT_TEMP_TOKEN_TTL</name>
+                <xpath>/web-app/env-entry/[env-entry-name="TULSAJWT_TEMP_TOKEN_TTL"]/env-entry-value</xpath>
+                <operation>replace</operation>
+            </variable-assignment>
+        </module-descriptor>
+    </module-override>
+
+    <module-override>
+        <module-name>tulsajwtrest.war</module-name>
+        <module-type>war</module-type>
+
+        <module-descriptor external="false">
+            <root-element>weblogic-web-app</root-element>
+            <uri>WEB-INF/weblogic.xml</uri>
+
+            <variable-assignment>
+                <name>TULSAAUTH_CONTEXT_PATH</name>
+                <xpath>/weblogic-web-app/context-root</xpath>
+                <operation>replace</operation>
+            </variable-assignment>
+
+            <variable-assignment>
+                <name>TULSA_DB_JNDI_NAME</name>
+                <xpath>/weblogic-web-app/resource-description/[res-ref-name="tulsa-web-jee-r01a-iq-jeec-jds-u0"]/jndi-name</xpath>
+                <operation>replace</operation>
+            </variable-assignment>
+
+            <variable-assignment>
+                <name>TULSAAUTH_WEBLOGIC_LOGGING_FILENAME</name>
+                <xpath>/weblogic-web-app/logging/log-filename</xpath>
+                <operation>replace</operation>
+            </variable-assignment>
+
+            <variable-assignment>
+                <name>TULSAAUTH_WEBLOGIC_LOGGING_MAX_FILESIZE</name>
+                <xpath>/weblogic-web-app/logging/file-size-limit</xpath>
+                <operation>replace</operation>
+            </variable-assignment>
+        </module-descriptor>
+
+        <module-descriptor external="false">
+            <root-element>web-app</root-element>
+            <uri>WEB-INF/web.xml</uri>
+
+            <variable-assignment>
+                <name>PATH_REPO</name>
+                <xpath>/web-app/env-entry/[env-entry-name="PATH_REPO"]/env-entry-value</xpath>
+                <operation>replace</operation>
+            </variable-assignment>
+
+            <variable-assignment>
+                <name>TULSA_ACTIVE_PROFILE</name>
+                <xpath>/web-app/env-entry/[env-entry-name="TULSA_ACTIVE_PROFILE"]/env-entry-value</xpath>
+                <operation>replace</operation>
+            </variable-assignment>
+
+            <variable-assignment>
+                <name>TULSAAUTH_CONTEXT_PATH</name>
+                <xpath>/web-app/env-entry/[env-entry-name="TULSAAUTH_CONTEXT_PATH"]/env-entry-value</xpath>
+                <operation>replace</operation>
+            </variable-assignment>
+
+            <variable-assignment>
+                <name>TULSA_DB_JNDI_NAME</name>
+                <xpath>/web-app/env-entry/[env-entry-name="TULSA_DB_JNDI_NAME"]/env-entry-value</xpath>
+                <operation>replace</operation>
+            </variable-assignment>
+            <variable-assignment>
+                <name>TULSA_DB_SCHEMA_NAME</name>
+                <xpath>/web-app/env-entry/[env-entry-name="TULSA_DB_SCHEMA_NAME"]/env-entry-value</xpath>
+                <operation>replace</operation>
+            </variable-assignment>
+
+            <variable-assignment>
+                <name>TULSAAUTH_LOGGING_FILENAME</name>
+                <xpath>/web-app/env-entry/[env-entry-name="TULSAAUTH_LOGGING_FILENAME"]/env-entry-value</xpath>
+                <operation>replace</operation>
+            </variable-assignment>
+            <variable-assignment>
+                <name>TULSAAUTH_LOGGING_MAX_FILESIZE</name>
+                <xpath>/web-app/env-entry/[env-entry-name="TULSAAUTH_LOGGING_MAX_FILESIZE"]/env-entry-value</xpath>
+                <operation>replace</operation>
+            </variable-assignment>
+
+            <variable-assignment>
+                <name>TULSAJWT_ISSUER</name>
+                <xpath>/web-app/env-entry/[env-entry-name="TULSAJWT_ISSUER"]/env-entry-value</xpath>
+                <operation>replace</operation>
+            </variable-assignment>
+            <variable-assignment>
+                <name>TULSAJWT_SECRET</name>
+                <xpath>/web-app/env-entry/[env-entry-name="TULSAJWT_SECRET"]/env-entry-value</xpath>
+                <operation>replace</operation>
+            </variable-assignment>
+            <variable-assignment>
+                <name>TULSAJWT_TOKEN_TTL</name>
+                <xpath>/web-app/env-entry/[env-entry-name="TULSAJWT_TOKEN_TTL"]/env-entry-value</xpath>
+                <operation>replace</operation>
+            </variable-assignment>
+            <variable-assignment>
+                <name>TULSAJWT_TEMP_TOKEN_TTL</name>
+                <xpath>/web-app/env-entry/[env-entry-name="TULSAJWT_TEMP_TOKEN_TTL"]/env-entry-value</xpath>
+                <operation>replace</operation>
+            </variable-assignment>
+        </module-descriptor>
+    </module-override>
+</deployment-plan>
