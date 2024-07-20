@@ -2,7 +2,7 @@ package es.aesan.rgseaa.service.repository;
 
 
 import es.aesan.rgseaa.model.criteria.CompanyCriteria;
-import es.aesan.rgseaa.model.entity.id.Company;
+import es.aesan.rgseaa.model.entity.Company;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;

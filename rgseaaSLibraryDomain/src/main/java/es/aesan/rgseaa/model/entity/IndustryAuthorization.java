@@ -2,8 +2,6 @@ package es.aesan.rgseaa.model.entity;
 
 
 import es.aesan.rgseaa.model.commom.db.AuditedBaseEntity;
-import es.aesan.rgseaa.model.entity.id.Company;
-import es.aesan.rgseaa.model.util.ConstantBD;
 import lombok.*;
 
 import javax.persistence.*;

@@ -2,7 +2,7 @@ package es.aesan.rgseaa.model.converter;
 
 import es.aesan.rgseaa.model.dto.CompanyDto;
 import es.aesan.rgseaa.model.dto.CompanyFindDto;
-import es.aesan.rgseaa.model.entity.id.Company;
+import es.aesan.rgseaa.model.entity.Company;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;

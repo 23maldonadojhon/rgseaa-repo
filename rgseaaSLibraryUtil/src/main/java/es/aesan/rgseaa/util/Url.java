@@ -6,6 +6,7 @@ public class Url {
     public static final String ACTIVITIES_KEYS ="/activities_keys";
     public static final String KEYS ="/keys";
     public static final String COMPANIES ="/companies";
+    public static final String SUBSTANCES ="/substances";
     public static final String ESTABLISHMENTS ="/establishments";
     public static final String FIND ="/find";
     public static final String PRODUCTS ="/products";

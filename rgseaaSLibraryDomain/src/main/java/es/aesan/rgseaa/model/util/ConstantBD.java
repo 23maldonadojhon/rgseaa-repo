@@ -41,6 +41,7 @@ public class ConstantBD {
     public static final String TABLE_FORM_PRESENTATION = "FORM_PRESENTATION";
     public static final String TABLE_LANGUAGES= "LANGUAGES";
     public static final String TABLE_CATEGORIES="CATEGORIES";
+    public static final String TABLE_SUBSTANCES="SUBSTANCES";
     public static final String TABLE_TYPES_ACTIONS="TYPES_ACTIONS";
     public static final String TABLE_TYPES_FILES="TYPES_FILES";
     public static final String TABLE_TYPES_DOCUMENTS="TYPES_DOCUMENTS";

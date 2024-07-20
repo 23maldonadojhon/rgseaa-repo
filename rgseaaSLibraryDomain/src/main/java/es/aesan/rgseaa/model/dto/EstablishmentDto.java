@@ -1,6 +1,5 @@
 package es.aesan.rgseaa.model.dto;
 
-import es.aesan.rgseaa.model.entity.id.Company;
 import lombok.Data;
 
 import java.io.Serializable;

@@ -46,11 +46,25 @@ INSERT INTO KEYS (ID, DATE_REGISTER, DATE_UNREGISTER, ALLOW_PRODUCT, NAME, IS_OL
 VALUES (37, DATE '2010-12-16', null, 0, 'Detergentes, desinfectantes, sesinsectantes y otros productos para uso en la industria alimentaria', 1, 0, null, null);
 
 
-INSERT INTO ACTIVITIES(code,NAME) VALUES ('02','Agua mineral natural');
-INSERT INTO ACTIVITIES(code,NAME) VALUES ('03','Agua de manantial');
-INSERT INTO ACTIVITIES(code,NAME) VALUES ('04','Agua potable preparada');
-INSERT INTO ACTIVITIES(code,NAME) VALUES ('06','Agua de abastecimiento público preparada');
+INSERT INTO ACTIVITIES(id,code,NAME) VALUES (1,'02','Agua mineral natural');
+INSERT INTO ACTIVITIES(id,code,NAME) VALUES (2,'03','Agua de manantial');
+INSERT INTO ACTIVITIES(id,code,NAME) VALUES (3,'04','Agua potable preparada');
+INSERT INTO ACTIVITIES(id,code,NAME) VALUES (4,'06','Agua de abastecimiento público preparada');
+
+INSERT INTO SUB_ACTIVITIES(id,NAME) VALUES (1,'02','Agua mineral natural');
+INSERT INTO SUB_ACTIVITIES(id,NAME) VALUES (2,'03','Agua de manantial');
 
 
-INSERT INTO ACTIVITIES_KEYS(KEY_ID, ACTIVITY_ID)
-VALUES (27,130,)
+INSERT INTO ACTIVITIES_KEYS(KEY_ID, ACTIVITY_ID,CATEGORIES,SUB_CATEGORIES)
+VALUES (
+        27,
+        130,
+        CATEGORY_ARRAY(
+            CATEGORY_REF(1),
+            CATEGORY_REF(2)
+        ),
+        SUB_CATEGORY_ARRAY(
+            SUB_CATEGORY_REF(1),
+            SUB_CATEGORY_REF(2)
+        )
+       )
