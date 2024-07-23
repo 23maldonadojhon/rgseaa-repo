@@ -92,7 +92,7 @@ public class CompanyFacade extends AbstractFacade<
         criteria.setCompanyId(id);
         Collection<Establishment> list = establishmentService.list(criteria);
         List<EstablishmentDto> dtoList = establishmentConverter.mapEntityToDtoList(new ArrayList<>(list));
-        dto.setEstablishment(dtoList);
+        //dto.setEstablishment(dtoList);
 
         return  dto;
     }

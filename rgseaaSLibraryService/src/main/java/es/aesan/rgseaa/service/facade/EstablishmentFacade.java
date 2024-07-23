@@ -3,6 +3,7 @@ package es.aesan.rgseaa.service.facade;
 
 import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 import es.aesan.rgseaa.model.converter.EstablishmentConverter;
+import es.aesan.rgseaa.model.criteria.EstablishmentCriteria;
 import es.aesan.rgseaa.model.dto.EstablishmentDto;
 import es.aesan.rgseaa.model.entity.Country;
 import es.aesan.rgseaa.model.entity.Establishment;
@@ -14,13 +15,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
 public class EstablishmentFacade  extends AbstractFacade<
         EstablishmentDto,
-        GeneralCriteria
+        EstablishmentCriteria
         >{
 
     private static final Logger logger = LoggerFactory.getLogger(CompanyFacade.class);
@@ -60,5 +64,14 @@ public class EstablishmentFacade  extends AbstractFacade<
 
         Establishment establishmentSaved = establishmentService.add(establishment);
     }
+
+    @Override
+    public List<EstablishmentDto> list(EstablishmentCriteria criteria) {
+
+        Collection<Establishment> list = establishmentService.list(criteria);
+        List<EstablishmentDto> dtoList = establishmentConverter.mapEntityToDtoList(new ArrayList<>(list));
+        return dtoList;
+    }
+
 
 }
