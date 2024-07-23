@@ -36,6 +36,7 @@ public class CompanyFacade extends AbstractFacade<
     private final SubActivityService subActivityService;
     private final KeyActivityCategoryService keyActivityCategoryService;
     private final SituationService situationService;
+    private final EstablishmentService establishmentService;
 
     private final CountryConverter countryConverter;
     private final CompanyConverter companyConverter;
@@ -48,6 +49,7 @@ public class CompanyFacade extends AbstractFacade<
     private final CategoryConverter categoryConverter;
     private final ActivityConverter activityConverter;
     private final SubActivityConverter subActivityConverter;
+    private final EstablishmentConverter establishmentConverter;
 
 
     private final FileUtilService fileUtilService;
@@ -63,11 +65,7 @@ public class CompanyFacade extends AbstractFacade<
         Company company = getValue(dto);
 
         Company companySaved = companyService.add(company);
-
-        //saveAction(dto.getActionList(),companySaved);
-        //saveAuthorization(dto.getAuthorizationList(),companySaved);
-       // saveKeyActivityCategory(dto.getIndustryKeyActivityCategoryList(),companySaved, Actions.ADD);
-    }
+}
 
 
     @Override
@@ -87,38 +85,14 @@ public class CompanyFacade extends AbstractFacade<
         logger.info("==== FACADE-> GET INDUSTRY ====");
 
         Company company = companyService.get(id);
-        //ActionCriteria criteria = ActionCriteria.builder().industryId(id).build();
-        //company.setActionList(actionService.all(criteria));
-
-        IndustryAuthorizationCriteria industryAuthorizationCriteria = null;
-
-        //IndustryAuthorizationCriteria.builder().industryId(id).build();
-
-       // List<IndustryAuthorization> industryAuthorizationList = industryAuthorizationService.all(industryAuthorizationCriteria);
-        //List<Authorization> authorizationList = industryAuthorizationList.stream().map(IndustryAuthorization::getAuthorization).collect(Collectors.toList());
-        //company.setAuthorizationList(authorizationList);
-
-        //<IndustryKeyActivityCategoryCriteria industryKeyActivityCategoryCriteria = IndustryKeyActivityCategoryCriteria.
-        //        builder().idIndustry(id).state(EntityState.ON.getValue()).build();
-
-        List<IndustryKeyActivityCategory> industryKeyActivityCategoryList = null; // (List) industryKeyActivityCategoryService.list(industryKeyActivityCategoryCriteria);
-
-        for (IndustryKeyActivityCategory item : industryKeyActivityCategoryList) {
-
-            //ActivityCriteria activityCriteria = ActivityCriteria
-            //        .builder().code(item.getCodeActivity()).build();
-
-            //Activity activity =  activityService.find(activityCriteria);
-
-            item.setKey(keyService.get(item.getIdKey()));
-            item.setCategory(categoryService.get(item.getIdCategory()));
-            item.setSubActivity(subActivityService.get(item.getIdSubActivity()));
-            //item.setActivity(activity);
-        }
-
-       // company.setIndustryKeyActivityCategoryList(industryKeyActivityCategoryList);
 
         CompanyDto dto = companyConverter.entityToDto(company);
+
+        EstablishmentCriteria criteria = new EstablishmentCriteria();
+        criteria.setCompanyId(id);
+        Collection<Establishment> list = establishmentService.list(criteria);
+        List<EstablishmentDto> dtoList = establishmentConverter.mapEntityToDtoList(new ArrayList<>(list));
+        dto.setEstablishment(dtoList);
 
         return  dto;
     }
