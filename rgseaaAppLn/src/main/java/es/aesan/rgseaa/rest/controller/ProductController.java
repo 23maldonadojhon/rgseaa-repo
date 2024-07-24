@@ -87,7 +87,7 @@ public class ProductController extends AbstractController<
     }
 
 
-    @GetMapping(Url.TYPE_DOCUMENT)
+    @GetMapping(Url.TYPE_DOCUMENTS)
     public ResponseEntity<Page<TypeDocumentDto>> getTypeDocumentAll(GeneralCriteria criteria) {
         logger.info("==== CONTROLLER -> GET getTypeDocumentAll ====");
 

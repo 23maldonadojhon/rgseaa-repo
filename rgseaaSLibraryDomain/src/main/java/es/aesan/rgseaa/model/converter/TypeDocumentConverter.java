@@ -8,6 +8,8 @@ import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface TypeDocumentConverter extends BaseConverter<TypeDocument,TypeDocumentDto> {
+public interface TypeDocumentConverter
+        extends BaseConverter
+        <TypeDocument,TypeDocumentDto> {
 
 }

@@ -13,7 +13,7 @@ public class TypeDocumentDto implements Serializable {
 
     private String name;
 
-    private String description;
+
 
     private Long typeCompanyProduct;
 
