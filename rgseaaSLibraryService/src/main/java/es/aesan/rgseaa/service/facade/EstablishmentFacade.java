@@ -4,6 +4,7 @@ package es.aesan.rgseaa.service.facade;
 import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 import es.aesan.rgseaa.model.converter.EstablishmentConverter;
 import es.aesan.rgseaa.model.criteria.EstablishmentCriteria;
+import es.aesan.rgseaa.model.dto.CompanyDto;
 import es.aesan.rgseaa.model.dto.EstablishmentDto;
 import es.aesan.rgseaa.model.entity.Country;
 import es.aesan.rgseaa.model.entity.Establishment;
@@ -13,7 +14,9 @@ import es.aesan.rgseaa.service.service.*;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,10 +27,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class EstablishmentFacade  extends AbstractFacade<
         EstablishmentDto,
-        EstablishmentCriteria
-        >{
+        EstablishmentCriteria>{
 
-    private static final Logger logger = LoggerFactory.getLogger(CompanyFacade.class);
+    private static final Logger logger = LoggerFactory.getLogger(EstablishmentFacade.class);
 
     private final EstablishmentService establishmentService;
     private final CompanyService companyService;
@@ -39,6 +41,7 @@ public class EstablishmentFacade  extends AbstractFacade<
     private final EstablishmentConverter establishmentConverter;
 
     @Override
+    @Transactional
     public void add(EstablishmentDto dto) {
 
         logger.info("==== FACADE-> ADD ESTABLISHMENT ====");
@@ -65,12 +68,33 @@ public class EstablishmentFacade  extends AbstractFacade<
         Establishment establishmentSaved = establishmentService.add(establishment);
     }
 
+
+    @Override
+    public void update(EstablishmentDto dto) {
+
+    }
+
+    @Override
+    public EstablishmentDto get(Long id) {
+       return null;
+    }
+
+    @Override
+    public EstablishmentDto find(EstablishmentCriteria criteria) {
+        return null;
+    }
+
     @Override
     public List<EstablishmentDto> list(EstablishmentCriteria criteria) {
 
         Collection<Establishment> list = establishmentService.list(criteria);
         List<EstablishmentDto> dtoList = establishmentConverter.mapEntityToDtoList(new ArrayList<>(list));
         return dtoList;
+    }
+
+    @Override
+    public Page<EstablishmentDto> page(EstablishmentCriteria criteria) {
+        return null;
     }
 
 
