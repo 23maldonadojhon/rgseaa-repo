@@ -21,6 +21,7 @@ public class Url {
     public static final String AUTHORIZATIONS ="/authorizations";
     public static final String ENTITIES ="/entities";
     public static final String TYPE_DOCUMENTS ="/type_documents";
+    public static final String TYPE_ACTUATIONS="/type_actuations";
     public static final String USERS_ENTITIES ="/user_scopes";
     public static final String PERMISSIONS ="/permissions";
     public static final String ENTITIES_TYPE ="/entity_types";
