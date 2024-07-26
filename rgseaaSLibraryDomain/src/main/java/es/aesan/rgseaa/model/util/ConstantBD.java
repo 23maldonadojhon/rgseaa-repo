@@ -34,6 +34,7 @@ public class ConstantBD {
     public static final String TABLE_PROFILES_PERMISSIONS="PROFILES_PERMISSIONS";
     public static final String TABLE_USERS_PROFILES="USERS_PROFILES";
     public static final String TABLE_ESTABLISHMENTS="ESTABLISHMENTS";
+    public static final String TABLE_TYPES_ACTUATIONS = "TYPES_ACTUATIONS";
 
     public static final String TABLE_USERS_MODELS="USERS_MODELS";
     public static final String TABLE_AUTH_USER_TOKEN="AUTH_USER_TOKEN";
@@ -52,5 +53,6 @@ public class ConstantBD {
     public static final String TABLE_SUB_ACTIVITIES="SUB_ACTIVITIES";
     public static final String TABLE_ACTIVITY_KEY = "ACTIVITIES_KEYS";
     public static final String TABLE_TYPE_SUBSTANCES = "TYPE_SUBSTANCES";
+
 
 }
