@@ -10,14 +10,18 @@ import java.util.List;
 
 @Service
 public class SubActivityService
-    extends AbstractService<SubActivity, Long, SubActivityRepository, GeneralCriteria> {
+    extends AbstractService<
+        SubActivity,
+        Long,
+        SubActivityRepository,
+        GeneralCriteria> {
 
 
     SubActivityService(SubActivityRepository repository) {
         super(repository);
     }
 
-    public List<SubActivity> findById(Collection<Long> list){
+   public List<SubActivity> findById(Collection<Long> list){
         logger.info("==== findByActivity ");
 
         List<SubActivity> resultList = repository.findById(list);

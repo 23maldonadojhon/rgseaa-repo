@@ -35,7 +35,6 @@ public class ConstantBD {
     public static final String TABLE_USERS_PROFILES="USERS_PROFILES";
     public static final String TABLE_ESTABLISHMENTS="ESTABLISHMENTS";
     public static final String TABLE_TYPES_ACTUATIONS = "TYPES_ACTUATIONS";
-
     public static final String TABLE_USERS_MODELS="USERS_MODELS";
     public static final String TABLE_AUTH_USER_TOKEN="AUTH_USER_TOKEN";
     public static final String TABLE_AUTH_USER_REQUEST="AUTH_USER_REQUEST";
