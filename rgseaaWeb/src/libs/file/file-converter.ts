@@ -21,8 +21,7 @@ export const fileToB64 = (file: Blob | File): Promise<B64EncodedFile> => {
     };
     reader.onerror = e => reject(e);
   });
-
-};
+}
 
 export const filesToB64 = (files: FileList | Array<Blob | File>): Promise<B64EncodedFile[]> => {
   const list: Promise<B64EncodedFile>[] = [];

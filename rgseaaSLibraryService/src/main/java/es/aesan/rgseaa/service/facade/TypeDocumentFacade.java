@@ -9,6 +9,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class TypeDocumentFacade extends AbstractFacade<
@@ -26,9 +30,16 @@ public class TypeDocumentFacade extends AbstractFacade<
     }
 
     @Override
-    public Page<TypeDocumentDto> page(GeneralCriteria criteria){
-        Page<TypeDocument> list= typeDocumentService.page(criteria);
-        Page<TypeDocumentDto> dtoList=converter.mapEntityToDtoPage(list);
+    public List<TypeDocumentDto> list(GeneralCriteria criteria) {
+        Collection<TypeDocument> list = typeDocumentService.list(criteria);
+        List<TypeDocumentDto> dtoList = converter.mapEntityToDtoList(new ArrayList<>(list));
         return dtoList;
+    }
+
+    @Override
+    public Page<TypeDocumentDto> page(GeneralCriteria criteria){
+        Page<TypeDocument> page= typeDocumentService.page(criteria);
+        Page<TypeDocumentDto> dtoPage=converter.mapEntityToDtoPage(page);
+        return dtoPage;
     }
 }

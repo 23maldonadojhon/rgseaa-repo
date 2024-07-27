@@ -1,6 +1,5 @@
 package es.aesan.rgseaa.rest.controller;
 
-import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 import es.aesan.rgseaa.model.criteria.EstablishmentCriteria;
 import es.aesan.rgseaa.model.dto.EstablishmentDto;
 import es.aesan.rgseaa.service.facade.EstablishmentFacade;
