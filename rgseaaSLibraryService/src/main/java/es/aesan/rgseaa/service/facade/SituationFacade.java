@@ -32,8 +32,10 @@ public class SituationFacade extends AbstractFacade<
     private final SituationConverter situationConverter;
 
     @Override
-    @Transactional
+    //@Transactional
     public void add(SituationDto dto) {
+        Situation situation= situationConverter.dtoToEntity(dto);
+        situationService.add(situation);
 
     }
 
@@ -50,7 +52,9 @@ public class SituationFacade extends AbstractFacade<
 
     @Override
     public Page<SituationDto> page(GeneralCriteria criteria){
-        return null;
+        Page<Situation> page= situationService.page(criteria);
+        Page<SituationDto> dtoPage=situationConverter.mapEntityToDtoPage(page);
+        return dtoPage;
     }
 
     @Override
