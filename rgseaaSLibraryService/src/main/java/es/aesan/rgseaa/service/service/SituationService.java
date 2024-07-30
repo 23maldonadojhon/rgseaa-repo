@@ -9,7 +9,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SituationService
-        extends AbstractService<Situation,Long,SituationRepository,GeneralCriteria> {
+        extends AbstractService<
+        Situation,
+        Long,
+        SituationRepository,
+        GeneralCriteria> {
 
     SituationService(SituationRepository repository){
         super(repository);

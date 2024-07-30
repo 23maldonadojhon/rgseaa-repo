@@ -8,6 +8,8 @@ import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface SituationConverter extends BaseConverter<Situation,SituationDto> {
+public interface SituationConverter extends BaseConverter<
+        Situation,
+        SituationDto> {
 
 }
