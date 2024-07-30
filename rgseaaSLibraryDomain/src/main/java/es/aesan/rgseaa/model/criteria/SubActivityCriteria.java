@@ -14,4 +14,7 @@ import lombok.experimental.SuperBuilder;
 public class SubActivityCriteria extends FilterCriteria {
     private Long id;
     private String name;
+    private Long activityId;
+    private Long keyId;
+    private Long categoryId;
 }

@@ -29,7 +29,7 @@ public class CategoryController extends AbstractController<
     public ResponseEntity<List<CategoryDto>> activityList(CategoryCriteria  categoryCriteria){
         logger.info("==== CONTROLLER -> LIST  :"+this.getClass().getSimpleName());
 
-        List<CategoryDto> userPage = facade.activityList(categoryCriteria);
+        List<CategoryDto> userPage = facade.list(categoryCriteria);
         return ResponseEntity.status(HttpStatus.OK).body(userPage);
     }
 
