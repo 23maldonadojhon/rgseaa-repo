@@ -4,10 +4,7 @@ import es.aesan.rgseaa.model.commom.db.AuditedBaseEntity;
 import es.aesan.rgseaa.model.util.ConstantBD;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalTime;
 
 @Entity
@@ -20,6 +17,7 @@ import java.time.LocalTime;
 public class FormPresentation extends AuditedBaseEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
 

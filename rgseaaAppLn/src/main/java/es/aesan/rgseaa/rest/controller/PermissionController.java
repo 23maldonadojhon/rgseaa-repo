@@ -20,22 +20,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping(Url.API+Url.PERMISSIONS)
-public class PermissionController {
-
-    private static final Logger logger = LoggerFactory.getLogger(PermissionController.class);
-
-
-    @Autowired
-    private PermissionFacade facade;
+public class PermissionController extends AbstractController<
+        PermissionDto,
+        PermissionFacade,
+        PermissionCriteria> {
 
 
-    @GetMapping
-    public ResponseEntity<Page<PermissionDto>> getAll(PermissionCriteria criteria){
-        logger.info("==== ALL Permission ====");
-
-        Page<PermissionDto> page = facade.permissionAll(criteria);
-
-        return ResponseEntity.status(HttpStatus.OK).body(page);
+    PermissionController(PermissionFacade facade) {
+        super(facade);
     }
-
 }

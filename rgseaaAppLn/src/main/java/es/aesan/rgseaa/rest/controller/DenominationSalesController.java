@@ -3,7 +3,6 @@ package es.aesan.rgseaa.rest.controller;
 
 import es.aesan.rgseaa.model.criteria.DenominationSaleCriterial;
 import es.aesan.rgseaa.model.dto.DenominationSaleDto;
-import es.aesan.rgseaa.service.facade.CrudFacade;
 import es.aesan.rgseaa.service.facade.DenominationSaleFacade;
 import es.aesan.rgseaa.util.Url;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,13 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping(Url.API+Url.DENOMINATION_SALES)
-public class DenominationController extends AbstractController<
+public class DenominationSalesController extends AbstractController<
         DenominationSaleDto,
         DenominationSaleFacade,
         DenominationSaleCriterial
         > {
 
-    DenominationController(DenominationSaleFacade facade) {
+    DenominationSalesController(DenominationSaleFacade facade) {
         super(facade);
     }
 }
