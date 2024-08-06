@@ -3,7 +3,6 @@ package es.aesan.rgseaa.model.converter;
 import es.aesan.rgseaa.model.dto.PermissionDto;
 import es.aesan.rgseaa.model.entity.Permission;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

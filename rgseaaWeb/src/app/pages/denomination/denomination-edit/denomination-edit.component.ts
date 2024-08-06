@@ -3,7 +3,6 @@ import {FORM_STATUS} from "@base/shared/components/form";
 import {ComponentStatus, ControlsOf} from "@libs/commons";
 import {DenominationSale, DenominationSaleCreate} from "@libs/sdk/denomination-sale";
 import {FormGroup} from "@angular/forms";
-import {KeyCreate} from "@libs/sdk/key";
 import {EditPageBaseComponent} from "@base/shared/pages/edit-page-base.component";
 
 @Component({

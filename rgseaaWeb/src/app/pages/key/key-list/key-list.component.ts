@@ -2,7 +2,6 @@ import {BaseListPageComponent} from "@base/shared/pages/list";
 import {Key} from "@libs/sdk/key";
 import {Component, OnInit} from "@angular/core";
 import {CrudImplService} from "@libs/crud-api";
-import {AuthIndustry} from "@libs/sdk/AuthIndustry";
 import {FilterService} from "@base/shared/filter";
 import {ActivatedRoute} from "@angular/router";
 import {AppContextService} from "@base/shared/app-context";

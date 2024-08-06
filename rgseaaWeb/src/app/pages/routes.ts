@@ -1,6 +1,5 @@
 import {Routes} from '@angular/router';
 import {AUTHENTICATION_PAGE_ROUTES} from "@base/pages/login";
-import {CanAccessGuard, IsAuthenticatedGuard} from '@libs/security';
 
 export const routes: Routes = [
     {

@@ -1,5 +1,7 @@
 import {NgModule} from "@angular/core";
-import {AuthIndustryEditComponent} from "@base/pages/autoritation-industry/auth-industry-edit/auth-industry-edit.component";
+import {
+    AuthIndustryEditComponent
+} from "@base/pages/autoritation-industry/auth-industry-edit/auth-industry-edit.component";
 import {CommonModule} from "@angular/common";
 import {AppCommonsModule} from "@base/shared/pages/commons.module";
 import {EditPageModule} from "@base/shared/pages/edit-page.module";

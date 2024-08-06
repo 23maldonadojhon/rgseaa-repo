@@ -8,11 +8,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface KeyActivityCategoryRepository
     extends BaseRepository<KeyActivityCategory,KeyActivityCategoryId>,
         QueryByCriteria<KeyActivityCategory, KeyActivityCategoryCriteria> {
+
 
     @Query(value = "SELECT k FROM KeyActivityCategory k" +
             " WHERE " +
@@ -27,4 +29,6 @@ public interface KeyActivityCategoryRepository
             " (:#{#criteria.isVisibleUe} IS NULL OR k.isVisibleUe = :#{#criteria.isVisibleUe}) ")
     List<KeyActivityCategory> findAllCriteria(@Param("criteria") KeyActivityCategoryCriteria criteria);
 
+
+    Optional<KeyActivityCategory> find(@Param("criteria")  KeyActivityCategoryCriteria criteria);
 }

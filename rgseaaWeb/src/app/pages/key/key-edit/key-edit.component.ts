@@ -4,8 +4,6 @@ import {FormGroup} from "@angular/forms";
 import {Component} from "@angular/core";
 import {FORM_STATUS} from "@base/shared/components/form";
 import {ComponentStatus, ControlsOf} from "@libs/commons";
-import {AuthIndustryCreate} from "@libs/sdk/AuthIndustry";
-
 
 
 @Component({

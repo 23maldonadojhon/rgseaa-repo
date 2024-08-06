@@ -3,8 +3,10 @@ package es.aesan.rgseaa.model.commom.criteria;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import es.aesan.rgseaa.model.commom.constants.EntityState;
 import es.aesan.rgseaa.model.commom.dto.PageRequestImpl;
-import lombok.*;
-import lombok.experimental.SuperBuilder;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Pageable;
 

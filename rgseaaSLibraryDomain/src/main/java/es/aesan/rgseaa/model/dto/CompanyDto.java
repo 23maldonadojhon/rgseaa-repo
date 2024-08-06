@@ -1,15 +1,12 @@
 package es.aesan.rgseaa.model.dto;
 
-import es.aesan.rgseaa.model.entity.*;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.List;
 
 @Data
 public class CompanyDto implements Serializable {
-
     private Long id;
     private String nif;
     private String name;
@@ -22,6 +19,8 @@ public class CompanyDto implements Serializable {
     private Long provinceId;
     private Long locationId;
     private Long situationId;
+    private List<AuthorizationDto> authorizationList;
+    private List<RgseaaActivityDto> rgseaaList;
 }
 
 

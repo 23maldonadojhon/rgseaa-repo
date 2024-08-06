@@ -1,5 +1,4 @@
 import {RouterModule, Routes} from "@angular/router";
-import {UserListComponent} from "@base/pages/user/user-list/user-list.component";
 import {NgModule} from "@angular/core";
 import {
     AuthIndustryListComponent

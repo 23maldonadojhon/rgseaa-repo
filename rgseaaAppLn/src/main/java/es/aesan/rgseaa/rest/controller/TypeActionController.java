@@ -3,7 +3,6 @@ package es.aesan.rgseaa.rest.controller;
 import es.aesan.rgseaa.model.criteria.TypeActionCriteria;
 import es.aesan.rgseaa.model.dto.TypeActionDto;
 import es.aesan.rgseaa.service.facade.TypeActionFacade;
-import es.aesan.rgseaa.service.service.TypeActionService;
 import es.aesan.rgseaa.util.Url;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,5 +1,4 @@
 import {RouterModule, Routes} from "@angular/router";
-import {KeyEditComponent} from "@base/pages/key/key-edit/key-edit.component";
 import {NgModule} from "@angular/core";
 import {DenominationEditComponent} from "@base/pages/denomination/denomination-edit/denomination-edit.component";
 

@@ -1,7 +1,7 @@
 package es.aesan.rgseaa.service.facade;
 
-import es.aesan.rgseaa.model.criteria.ModuleCriteria;
 import es.aesan.rgseaa.model.converter.ModuleConverter;
+import es.aesan.rgseaa.model.criteria.ModuleCriteria;
 import es.aesan.rgseaa.model.dto.ModuleDto;
 import es.aesan.rgseaa.model.entity.Module;
 import es.aesan.rgseaa.service.service.ModuleService;

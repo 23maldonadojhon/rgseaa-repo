@@ -1,7 +1,6 @@
 package es.aesan.rgseaa.service.repository;
 
 import es.aesan.rgseaa.model.commom.criteria.FilterCriteria;
-import jdk.nashorn.internal.runtime.options.Option;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;

@@ -6,6 +6,10 @@ public class Url {
     public static final String ACTIVITIES_KEYS ="/activities_keys";
     public static final String KEYS ="/keys";
     public static final String COMPANIES ="/companies";
+    public static final String COMPANY_ESTABLISHMENTS ="/company_establishments";
+    public static final String COMPANY_ESTABLISHMENTS_VIEW ="/company_establishments_view";
+    public static final String RGSEAA ="/rgseaa";
+    public static final String RGSEAA_ACTIVITIES ="/rgseaa_activities";
     public static final String SUBSTANCES ="/substances";
     public static final String ESTABLISHMENTS ="/establishments";
     public static final String FIND ="/find";
@@ -31,6 +35,7 @@ public class Url {
     public static final String API ="/api";
     public static final String NIF ="/nif";
     public static final String PAGE ="/page";
+    public static final String PAGE_CRITERIA ="/page_criteria";
     public static final String LOGIN ="/login";
     public static final String CREATE = "/create";
     public static final String UPDATE = "/update";

@@ -19,7 +19,7 @@ import java.util.Optional;
 
 
 public abstract class AbstractService<
-            E extends StandardEntity,
+            E,
             ID,
             R extends BaseRepository<E,ID>,
             C extends FilterCriteria
@@ -94,8 +94,18 @@ public abstract class AbstractService<
         if(criteria.getState()==null)
             criteria.setState(1);
 
+        if(criteria.getPage()==null)
+            criteria.setPage(0);
+
+        if(criteria.getSize()==null)
+            criteria.setSize(10);
+
         QueryByCriteria<E, FilterCriteria> filterRepository = (QueryByCriteria<E, FilterCriteria>) repository;
+
         Page<E> page =filterRepository.findAllByCriteria(criteria,criteria.toPageable());
+
+
+
         return page;
     }
 

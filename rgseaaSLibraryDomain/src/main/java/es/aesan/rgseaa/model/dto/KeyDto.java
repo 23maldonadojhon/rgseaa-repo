@@ -6,13 +6,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class KeyDto {
+public class KeyDto implements Serializable {
 
     private Long id;
 

@@ -1,6 +1,5 @@
 package es.aesan.rgseaa.service.facade;
 
-import es.aesan.rgseaa.model.converter.ActivityConverter;
 import es.aesan.rgseaa.model.converter.CategoryConverter;
 import es.aesan.rgseaa.model.criteria.ActivityKeyCategoryCriteria;
 import es.aesan.rgseaa.model.criteria.ActivityKeyCriteria;
@@ -16,7 +15,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;

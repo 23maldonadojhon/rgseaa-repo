@@ -1,15 +1,13 @@
 package es.aesan.rgseaa.service.facade;
 
 
-import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 import es.aesan.rgseaa.model.converter.EstablishmentConverter;
 import es.aesan.rgseaa.model.criteria.EstablishmentCriteria;
-import es.aesan.rgseaa.model.dto.CompanyDto;
 import es.aesan.rgseaa.model.dto.EstablishmentDto;
+import es.aesan.rgseaa.model.entity.Company;
 import es.aesan.rgseaa.model.entity.Country;
 import es.aesan.rgseaa.model.entity.Establishment;
 import es.aesan.rgseaa.model.entity.Situation;
-import es.aesan.rgseaa.model.entity.Company;
 import es.aesan.rgseaa.service.service.*;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -76,7 +74,11 @@ public class EstablishmentFacade  extends AbstractFacade<
 
     @Override
     public EstablishmentDto get(Long id) {
-       return null;
+        logger.info("==== FACADE-> GET ESTABLISHMENT ====");
+
+        Establishment establishment = establishmentService.get(id);
+        EstablishmentDto establishmentDto = establishmentConverter.entityToDto(establishment);
+        return establishmentDto;
     }
 
     @Override
@@ -96,6 +98,8 @@ public class EstablishmentFacade  extends AbstractFacade<
     public Page<EstablishmentDto> page(EstablishmentCriteria criteria) {
         return null;
     }
+
+
 
 
 }

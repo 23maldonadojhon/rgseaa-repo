@@ -2,11 +2,13 @@ package es.aesan.rgseaa.service.facade;
 
 import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 import es.aesan.rgseaa.model.converter.AuthorizationConverter;
+import es.aesan.rgseaa.model.criteria.AuthorizationCriteria;
+import es.aesan.rgseaa.model.criteria.CompanyAuthorizationCriteria;
 import es.aesan.rgseaa.model.dto.AuthorizationDto;
-import es.aesan.rgseaa.model.dto.UserDto;
 import es.aesan.rgseaa.model.entity.Authorization;
-import es.aesan.rgseaa.model.entity.User;
+import es.aesan.rgseaa.model.entity.CompanyAuthorization;
 import es.aesan.rgseaa.service.service.AuthorizationService;
+import es.aesan.rgseaa.service.service.CompanyAuthorizationService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,27 +18,28 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
 public class AuthorizationFacade extends AbstractFacade<
         AuthorizationDto,
-        GeneralCriteria
+        AuthorizationCriteria
         > {
 
-    @Autowired
-    private final AuthorizationService service;
 
-    @Autowired
+    private final AuthorizationService service;
+    private final CompanyAuthorizationService companyAuthorizationService;
+
     private final AuthorizationConverter converter;
 
 
     private static final Logger logger = LoggerFactory.getLogger(AuthorizationFacade.class);
 
+
     @Override
-    public Page<AuthorizationDto> page(GeneralCriteria criteria){
+    public Page<AuthorizationDto> page(AuthorizationCriteria criteria){
         logger.info("====  FACADE ->  PAGE ====");
         logger.info("criteria :"+criteria);
 
@@ -59,11 +62,24 @@ public class AuthorizationFacade extends AbstractFacade<
     }
 
     @Override
-    public List<AuthorizationDto> list(GeneralCriteria criteria) {
+    public List<AuthorizationDto> list(AuthorizationCriteria criteria) {
         logger.info("==== FACADE-> LIST ====");
-        Collection<Authorization> list = service.list(criteria);
+        List<AuthorizationDto> dtoList;
 
-        List<AuthorizationDto> dtoList = converter.mapEntityToDtoList(new ArrayList<>(list));
+        if(criteria.getCompanyId()!=null){
+
+            CompanyAuthorizationCriteria companyAuthorizationCriteria = new CompanyAuthorizationCriteria();
+            companyAuthorizationCriteria.setCompanyId(criteria.getCompanyId());
+            Collection<CompanyAuthorization> companyAuthorizationList = companyAuthorizationService.list(companyAuthorizationCriteria);
+            List<Authorization> authorizationList = companyAuthorizationList.stream().map(CompanyAuthorization::getAuthorization).collect(Collectors.toList());
+            dtoList = converter.mapEntityToDtoList(authorizationList);
+
+        } else {
+            Collection<Authorization> list = service.list(criteria);
+            dtoList = converter.mapEntityToDtoList(new ArrayList<>(list));
+        }
+
+
         return dtoList;
     }
 

@@ -1,4 +1,4 @@
-import {Route, Router, RouterModule} from "@angular/router";
+import {Route, RouterModule} from "@angular/router";
 import {ExpedientEditComponent} from "@base/pages/expedient/expedient-edit/expedient-edit.component";
 import {NgModule} from "@angular/core";
 

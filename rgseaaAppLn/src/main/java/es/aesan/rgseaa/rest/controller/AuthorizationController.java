@@ -2,9 +2,9 @@ package es.aesan.rgseaa.rest.controller;
 
 
 import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
+import es.aesan.rgseaa.model.criteria.AuthorizationCriteria;
 import es.aesan.rgseaa.model.dto.AuthorizationDto;
 import es.aesan.rgseaa.service.facade.AuthorizationFacade;
-import es.aesan.rgseaa.service.service.AuthorizationService;
 import es.aesan.rgseaa.util.Url;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthorizationController extends AbstractController<
         AuthorizationDto,
         AuthorizationFacade,
-        GeneralCriteria
+        AuthorizationCriteria
         > {
     AuthorizationController(AuthorizationFacade facade) {
         super(facade);

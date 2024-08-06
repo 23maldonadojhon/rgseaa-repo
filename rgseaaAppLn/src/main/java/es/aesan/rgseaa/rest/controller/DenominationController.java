@@ -3,7 +3,6 @@ package es.aesan.rgseaa.rest.controller;
 
 import es.aesan.rgseaa.model.criteria.DenominationSaleCriterial;
 import es.aesan.rgseaa.model.dto.DenominationSaleDto;
-import es.aesan.rgseaa.service.facade.CrudFacade;
 import es.aesan.rgseaa.service.facade.DenominationSaleFacade;
 import es.aesan.rgseaa.util.Url;
 import org.springframework.web.bind.annotation.CrossOrigin;

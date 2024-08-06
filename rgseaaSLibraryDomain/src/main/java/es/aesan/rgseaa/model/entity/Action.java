@@ -30,7 +30,7 @@ public class Action extends AuditedBaseEntity {
     private TypeAction typeAction;
 
     @ManyToOne
-    @JoinColumn(name = "INDUSTRY_ID", referencedColumnName = "ID")
+    @JoinColumn(name = "COMPANY_ID", referencedColumnName = "ID")
     private Company company;
 
     @ManyToOne

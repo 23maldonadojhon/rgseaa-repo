@@ -11,7 +11,7 @@ import org.mapstruct.ReportingPolicy;
 public interface EstablishmentConverter
         extends BaseConverter<Establishment, EstablishmentDto> {
 
-
+    @Override
     @Mapping(target = "countryId", source = "country.id")
     @Mapping(target = "provinceId", source = "province.id")
     @Mapping(target = "locationId", source = "location.id")

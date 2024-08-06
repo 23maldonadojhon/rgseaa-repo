@@ -1,7 +1,6 @@
 package es.aesan.rgseaa.service.facade;
 
 import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
-import es.aesan.rgseaa.model.commom.dto.StatusChange;
 import es.aesan.rgseaa.model.converter.PermissionConverter;
 import es.aesan.rgseaa.model.converter.ProfileConverter;
 import es.aesan.rgseaa.model.dto.PermissionDto;

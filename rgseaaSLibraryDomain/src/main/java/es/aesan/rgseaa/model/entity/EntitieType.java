@@ -5,8 +5,10 @@ import es.aesan.rgseaa.model.commom.db.AuditedBaseEntity;
 import es.aesan.rgseaa.model.util.ConstantBD;
 import lombok.*;
 
-import javax.persistence.*;
-import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = ConstantBD.TABLE_ENTITIES_TYPES)

@@ -4,7 +4,10 @@ package es.aesan.rgseaa.model.entity;
 import es.aesan.rgseaa.model.commom.db.AuditedBaseEntity;
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 
 @NoArgsConstructor
