@@ -4,12 +4,24 @@ import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 
 import es.aesan.rgseaa.model.converter.CategoryConverter;
 
+
 import es.aesan.rgseaa.model.criteria.CategoryCriteria;
 import es.aesan.rgseaa.model.dto.CategoryDto;
 
 
 import es.aesan.rgseaa.model.entity.Category;
 
+
+
+import es.aesan.rgseaa.model.criteria.ActivityKeyCategoryCriteria;
+import es.aesan.rgseaa.model.criteria.ActivityKeyCriteria;
+import es.aesan.rgseaa.model.criteria.CategoryCriteria;
+import es.aesan.rgseaa.model.dto.CategoryDto;
+import es.aesan.rgseaa.model.entity.ActivityKey;
+import es.aesan.rgseaa.model.entity.ActivityKeyCategory;
+import es.aesan.rgseaa.model.entity.Category;
+import es.aesan.rgseaa.service.service.ActivityKeyCategoryService;
+import es.aesan.rgseaa.service.service.ActivityKeyService;
 
 import es.aesan.rgseaa.service.service.CategoryService;
 import lombok.RequiredArgsConstructor;
@@ -36,6 +48,9 @@ public class CategoryFacade extends AbstractFacade<
   /*  @Autowired
     private final ActivityKeyService activityKeyService;*/
 
+    @Autowired
+    private final ActivityKeyCategoryService activityKeyCategoryService;
+
 
     @Autowired
     private final CategoryConverter categoryConverter;
@@ -53,18 +68,5 @@ public class CategoryFacade extends AbstractFacade<
         return dtoList;
     }
 
-   /* public List<CategoryDto> activityList(CategoryCriteria categoryCriteria) {
-
-        ActivityKeyCriteria criteria = new ActivityKeyCriteria();
-        criteria.setActivityId(categoryCriteria.getActivityId());
-
-        Collection<ActivityKey> categoryDtoList = activityKeyService.list(criteria);
-
-        List<Long> activityList = categoryDtoList.stream().map(item->item.getActivity().getId()).collect(Collectors.toList());
-        List<Category> categoryList = categoryService.findById(activityList);
-        List<CategoryDto> dtoList = categoryConverter.mapEntityToDtoList(categoryList);
-
-        return dtoList;
-    }*/
 
 }

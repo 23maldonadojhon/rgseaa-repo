@@ -1,6 +1,7 @@
 package es.aesan.rgseaa.service.service;
 
 import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
+import es.aesan.rgseaa.model.criteria.SubActivityCriteria;
 import es.aesan.rgseaa.model.entity.SubActivity;
 import es.aesan.rgseaa.service.repository.SubActivityRepository;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ public class SubActivityService
         SubActivity,
         Long,
         SubActivityRepository,
-        GeneralCriteria> {
+        SubActivityCriteria> {
 
 
     SubActivityService(SubActivityRepository repository) {

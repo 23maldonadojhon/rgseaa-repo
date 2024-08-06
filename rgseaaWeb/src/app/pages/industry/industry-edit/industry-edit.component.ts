@@ -300,7 +300,7 @@ export class IndustryEditComponent extends EditPageBaseComponent<Industry,Indust
         console.log("openDialog="+id);
 
         const dialogRef = this.dialog.open(DialogFileComponent,{
-            width: '75%',
+            //width: '75%',
             data: {
                 id: id
             }
@@ -600,7 +600,7 @@ export class IndustryEditComponent extends EditPageBaseComponent<Industry,Indust
             console.log("dato="+response)
             if(response.length>0){
                 const dialogRef = this.dialog.open(DialogFindComponent,{
-                    width: '75%',
+                    //width: '75%',
                     data: {
                         response: response
                     }
