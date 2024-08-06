@@ -20,32 +20,38 @@ public class DenominationSaleFacade extends AbstractFacade<
         > {
 
     @Autowired
-    private final DenominationSaleService service;
+    private final DenominationSaleService denominationSaleService;
 
     @Autowired
-    private final DenominationSaleConverter converter;
+    private final DenominationSaleConverter denominationSaleConverter;
 
 
     private static final Logger logger = LoggerFactory.getLogger(DenominationSaleFacade.class);
+
+@Override
+public void add(DenominationSaleDto dto) {
+    DenominationSale denominationSale=denominationSaleConverter.dtoToEntity(dto);
+    denominationSaleService.add(denominationSale);
+}
 
 
     @Override
     public Page<DenominationSaleDto> page(DenominationSaleCriterial criteria) {
         logger.info("====  FACADE->  KEY CRITERIA {} ====",criteria);
 
-        Page<DenominationSale> page = service.page(criteria);
+        Page<DenominationSale> denominationSalePage = denominationSaleService.page(criteria);
 
-        Page<DenominationSaleDto> pageDto = converter.mapEntityToDtoPage(page);
+        Page<DenominationSaleDto> denominationSaleDtoPage = denominationSaleConverter.mapEntityToDtoPage(denominationSalePage);
 
-        return pageDto;
+        return denominationSaleDtoPage;
     }
 
     @Override
     public DenominationSaleDto get(final Long id){
         logger.info("==== FACADE-> FIND BY KEY {}====",id);
 
-        DenominationSale entity = service.get(id);
-        DenominationSaleDto dto = converter.entityToDto(entity);
+        DenominationSale entity = denominationSaleService.get(id);
+        DenominationSaleDto dto = denominationSaleConverter.entityToDto(entity);
         return dto;
     }
 }

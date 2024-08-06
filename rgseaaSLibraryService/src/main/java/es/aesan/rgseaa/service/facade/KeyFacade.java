@@ -3,7 +3,15 @@ package es.aesan.rgseaa.service.facade;
 import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 import es.aesan.rgseaa.model.converter.KeyConverter;
 import es.aesan.rgseaa.model.dto.KeyDto;
+<<<<<<< HEAD
 import es.aesan.rgseaa.model.entity.Key;
+=======
+import es.aesan.rgseaa.model.dto.TypeDocumentDto;
+import es.aesan.rgseaa.model.entity.Authorization;
+import es.aesan.rgseaa.model.entity.Key;
+import es.aesan.rgseaa.model.entity.TypeDocument;
+import es.aesan.rgseaa.service.repository.KeyRepository;
+>>>>>>> 540deec7f3aa9a04632545069d20492c66fee373
 import es.aesan.rgseaa.service.service.KeyService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -24,16 +32,16 @@ public class KeyFacade extends AbstractFacade<
         > {
 
     @Autowired
-    private final KeyService service;
+    private final KeyService keyService;
 
     @Autowired
-    private final KeyConverter converter;
+    private final KeyConverter keyConverter;
 
 
-    private static final Logger logger = LoggerFactory.getLogger(KeyFacade.class);
+    //private static final Logger logger = LoggerFactory.getLogger(KeyFacade.class);
 
 
-    @Override
+   /* @Override
     public List<KeyDto> list(GeneralCriteria criteria) {
         logger.info("====  FACADE->  KEY LIST CRITERIA {} ====",criteria);
 
@@ -41,26 +49,37 @@ public class KeyFacade extends AbstractFacade<
         List<KeyDto> dtoList = converter.mapEntityToDtoList(new ArrayList<>(list));
 
         return dtoList;
-    }
+    }*/
 
+    @Override
+    public void add(KeyDto dto){
+        Key key=keyConverter.dtoToEntity(dto);
+        keyService.add(key);
+    }
+    @Override
+    public List<KeyDto> list (GeneralCriteria criteria) {
+        Collection<Key> list=keyService.list(criteria);
+        List<KeyDto> keyDtoList = keyConverter.mapEntityToDtoList(new ArrayList<>(list));
+        return keyDtoList;
+    }
     @Override
     public Page<KeyDto> page(GeneralCriteria criteria) {
-        logger.info("====  FACADE->  KEY PAGE CRITERIA {} ====",criteria);
+       //logger.info("====  FACADE->  KEY PAGE CRITERIA {} ====",criteria);
 
-        Page<Key> page = service.page(criteria);
-        Page<KeyDto> pageDto = converter.mapEntityToDtoPage(page);
+        Page<Key> page = keyService.page(criteria);
+        Page<KeyDto> keyDtoPage = keyConverter.mapEntityToDtoPage(page);
 
-        return pageDto;
+        return keyDtoPage;
     }
 
 
-    @Override
+  /*  @Override
     public KeyDto get(final Long id){
         logger.info("==== FACADE-> FIND BY KEY {}====",id);
 
         Key entity = service.get(id);
         KeyDto dto = converter.entityToDto(entity);
         return dto;
-    }
+    }*/
 
 }

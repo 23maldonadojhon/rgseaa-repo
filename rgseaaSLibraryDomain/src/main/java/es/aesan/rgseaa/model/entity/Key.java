@@ -4,10 +4,7 @@ import es.aesan.rgseaa.model.commom.db.AuditedBaseEntity;
 import es.aesan.rgseaa.model.util.ConstantBD;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -20,6 +17,7 @@ import java.time.LocalDate;
 public class Key extends AuditedBaseEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     @Column(name="ID")
     private Long id;
@@ -41,5 +39,13 @@ public class Key extends AuditedBaseEntity {
 
     @Column(name="IS_PUBLIC")
     private Long isPublic;
+/*
+     @Column(name = "STATE")
+    private long state;
+
+     @PrePersist
+    protected void onCreate() {
+        this.state = 1;
+    }*/
 
 }

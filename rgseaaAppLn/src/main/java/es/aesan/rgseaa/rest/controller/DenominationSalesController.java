@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping(Url.API+Url.DENOMINATION_SALES)
-public class DenominationController extends AbstractController<
+public class DenominationSalesController extends AbstractController<
         DenominationSaleDto,
         DenominationSaleFacade,
         DenominationSaleCriterial
         > {
 
-    DenominationController(DenominationSaleFacade facade) {
+    DenominationSalesController(DenominationSaleFacade facade) {
         super(facade);
     }
 }

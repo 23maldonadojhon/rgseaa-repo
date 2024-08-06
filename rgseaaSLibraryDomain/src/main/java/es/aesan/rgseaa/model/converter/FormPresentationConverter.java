@@ -8,6 +8,8 @@ import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface FormPresentationConverter extends BaseConverter<FormPresentation,FormPresentationDto> {
+public interface FormPresentationConverter extends BaseConverter<
+        FormPresentation,
+        FormPresentationDto> {
 
 }
