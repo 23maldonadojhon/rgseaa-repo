@@ -1,6 +1,7 @@
 package es.aesan.rgseaa.rest.controller;
 
 
+import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 import es.aesan.rgseaa.model.criteria.CategoryCriteria;
 import es.aesan.rgseaa.model.dto.CategoryDto;
 import es.aesan.rgseaa.service.facade.CategoryFacade;
@@ -18,6 +19,7 @@ public class CategoryController extends AbstractController<
         CategoryDto,
         CategoryFacade,
         CategoryCriteria
+
         > {
 
     CategoryController(CategoryFacade facade) {
@@ -29,7 +31,7 @@ public class CategoryController extends AbstractController<
     public ResponseEntity<List<CategoryDto>> activityList(CategoryCriteria  categoryCriteria){
         logger.info("==== CONTROLLER -> LIST  :"+this.getClass().getSimpleName());
 
-        List<CategoryDto> userPage = facade.activityList(categoryCriteria);
+        List<CategoryDto> userPage = facade.list(categoryCriteria);
         return ResponseEntity.status(HttpStatus.OK).body(userPage);
     }
 

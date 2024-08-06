@@ -4,10 +4,7 @@ import es.aesan.rgseaa.model.commom.db.AuditedBaseEntity;
 import es.aesan.rgseaa.model.util.ConstantBD;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = ConstantBD.TABLE_CATEGORIES)
@@ -19,6 +16,7 @@ import javax.persistence.Table;
 public class Category extends AuditedBaseEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
 
