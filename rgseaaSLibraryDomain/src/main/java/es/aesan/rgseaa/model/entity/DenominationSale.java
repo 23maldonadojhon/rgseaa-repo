@@ -17,6 +17,7 @@ import java.time.LocalDate;
 public class DenominationSale extends AuditedBaseEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
 
