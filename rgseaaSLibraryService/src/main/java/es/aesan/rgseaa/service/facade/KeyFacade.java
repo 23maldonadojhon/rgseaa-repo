@@ -3,15 +3,9 @@ package es.aesan.rgseaa.service.facade;
 import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 import es.aesan.rgseaa.model.converter.KeyConverter;
 import es.aesan.rgseaa.model.dto.KeyDto;
-<<<<<<< HEAD
+
 import es.aesan.rgseaa.model.entity.Key;
-=======
-import es.aesan.rgseaa.model.dto.TypeDocumentDto;
-import es.aesan.rgseaa.model.entity.Authorization;
-import es.aesan.rgseaa.model.entity.Key;
-import es.aesan.rgseaa.model.entity.TypeDocument;
-import es.aesan.rgseaa.service.repository.KeyRepository;
->>>>>>> 540deec7f3aa9a04632545069d20492c66fee373
+
 import es.aesan.rgseaa.service.service.KeyService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
