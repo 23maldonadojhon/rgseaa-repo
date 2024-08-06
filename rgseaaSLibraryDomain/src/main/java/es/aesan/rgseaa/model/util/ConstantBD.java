@@ -39,7 +39,6 @@ public class ConstantBD {
     public static final String TABLE_AUTH_USER_TOKEN="AUTH_USER_TOKEN";
     public static final String TABLE_AUTH_USER_REQUEST="AUTH_USER_REQUEST";
     public static final String TABLE_FORM_PRESENTATION = "FORM_PRESENTATION";
-    public static final String TABLE_LANGUAGES= "LANGUAGES";
     public static final String TABLE_CATEGORIES="CATEGORIES";
     public static final String TABLE_SUBSTANCES="SUBSTANCES";
     public static final String TABLE_TYPES_ACTIONS="TYPES_ACTIONS";
@@ -50,8 +49,8 @@ public class ConstantBD {
     public static final String TABLE_RGSEAA_ACTIVITY="RGSEAA_ACTIVITY";
     public static final String TABLE_ACTIVITIES="ACTIVITIES";
     public static final String TABLE_SUB_ACTIVITIES="SUB_ACTIVITIES";
-    public static final String TABLE_ACTIVITY_KEY = "ACTIVITIES_KEYS";
     public static final String TABLE_TYPE_SUBSTANCES = "TYPE_SUBSTANCES";
-
-
+    public static final String TABLE_ACTIVITY_KEY = "ACTIVITIES_KEYS";
+    public static final String TABLE_ACTIVITIES_KEYS_CATEGORIES = "ACTIVITIES_KEYS_CATEGORIES";
+    public static final String TABLE_ACTIVITIES_KEYS_CATEGORIES_SUB_ACTIVITIES = "ACTIVITIES_KEYS_CATEGORIES_SUB_ACTIVITIES";
 }

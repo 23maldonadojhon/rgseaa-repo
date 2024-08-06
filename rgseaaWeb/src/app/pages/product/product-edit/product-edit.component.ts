@@ -197,12 +197,11 @@ export class ProductEditComponent extends EditPageBaseComponent<Product, Product
     openDialog(id : number) {
 
         const dialogRef = this.dialog.open(DialogFileComponent,{
-            width: '75%',
+            //width: '75%',
             data: {
                 id: id
             }
         });
-
 
         dialogRef.afterClosed().subscribe(dataReturn => {
 

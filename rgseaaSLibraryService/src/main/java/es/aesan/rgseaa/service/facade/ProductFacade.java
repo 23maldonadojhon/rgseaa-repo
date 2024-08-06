@@ -204,14 +204,6 @@ public class ProductFacade extends AbstractFacade<ProductDto,ProductCriteria> {
     }
 
 
-    public Page<TypeDocumentDto> getTypeDocumentPage(GeneralCriteria criteria) {
-        logger.info("==== FACADE-> getTypeDocumentPage ====");
-
-        Page<TypeDocument> typeDocumentPage = typeDocumentService.page(criteria);
-
-        return typeDocumentConverter.mapEntityToDtoPage(typeDocumentPage);
-    }
-
 
     public ActionDto getActionById(Long id) {
         logger.info("==== FACADE-> getActionById ====");
@@ -221,12 +213,6 @@ public class ProductFacade extends AbstractFacade<ProductDto,ProductCriteria> {
     }
 
 
-    public Page<TypeActionDto> getTypeActionPage(GeneralCriteria criteria){
-        logger.info("==== FACADE-> getTypeActionById ====");
-        Page<TypeAction> typeAction = typeActionService.page(criteria);
-        Page<TypeActionDto> typeActionDto = typeActionConverter.mapEntityToDtoPage(typeAction);
-        return  typeActionDto;
-    }
 
     public TypeActionDto getTypeActionById(Long id){
         logger.info("==== FACADE-> getTypeActionById ====");

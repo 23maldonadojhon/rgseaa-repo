@@ -15,5 +15,5 @@ public class CategoryCriteria extends FilterCriteria {
     private Long id;
     private String name;
     private Long activityId;
-
+    private Long keyId;
 }

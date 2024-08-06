@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Repository
 public interface ActivityKeyRepository
@@ -15,6 +16,15 @@ public interface ActivityKeyRepository
     @Override
     @Query(" SELECT ak FROM ActivityKey ak " +
             " WHERE " +
-            " (:#{#criteria.activityId} IS NULL OR ak.activity.id = :#{#criteria.activityId} ) ")
+            " (:#{#criteria.activityId} IS NULL OR ak.activity.id = :#{#criteria.activityId} ) "+
+            " OR (:#{#criteria.keyId} IS NULL OR ak.key.id = :#{#criteria.keyId} ) ")
     Collection<ActivityKey> findAll(ActivityKeyCriteria criteria);
+
+
+    @Override
+    @Query(" SELECT ak FROM ActivityKey ak " +
+            " WHERE " +
+            " (:#{#criteria.activityId} IS NULL OR ak.activity.id = :#{#criteria.activityId} ) "+
+            " AND (:#{#criteria.keyId} IS NULL OR ak.key.id = :#{#criteria.keyId} ) ")
+    Optional<ActivityKey> find(ActivityKeyCriteria criteria);
 }
