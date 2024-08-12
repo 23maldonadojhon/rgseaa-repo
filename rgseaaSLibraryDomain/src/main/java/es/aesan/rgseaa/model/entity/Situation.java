@@ -24,9 +24,6 @@ public class Situation extends AuditedBaseEntity {
     @Column(name = "NAME")
     private String name;
 
-    @Column(name = "TYPE_COMPANY_PRODUCT")
-    private Long typeIndustryProduct;
-
     @Column(name = "NEW_OPTION")
     private Long newOption;
 

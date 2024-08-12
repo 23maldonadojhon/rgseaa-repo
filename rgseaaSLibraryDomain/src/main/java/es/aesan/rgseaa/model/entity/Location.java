@@ -4,10 +4,7 @@ import es.aesan.rgseaa.model.commom.db.AuditedBaseEntity;
 import es.aesan.rgseaa.model.util.ConstantBD;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = ConstantBD.TABLE_LOCATIONS)
@@ -25,19 +22,17 @@ public class Location extends AuditedBaseEntity {
     @Column(name = "NAME")
     private String name;
 
-    @Column(name = "ENROLLMENT_PROVINCES")
-    private String enrollmentProvince;
-
     @Column(name = "DESCRIPTION_PADRE")
     private String descriptionPadre;
 
     @Column(name = "COMBO")
     private Integer combo;
 
-    @Column(name = "LOCATIONS_ID")
-    private String provinceFather;
+    @ManyToOne
+    @JoinColumn(name = "PROVINCE_ID", referencedColumnName = "ID")
+    private Province province;
 
-    @Column(name = "CODE_INE")
-    private String codeIne;
+    @Column(name = "INE_CODE")
+    private String ineCode;
 
 }

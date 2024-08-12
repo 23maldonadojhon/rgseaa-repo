@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +27,9 @@ public interface RgseaaRepository
     @Override
     @Query(value = "SELECT r FROM Rgseaa r " +
             " WHERE " +
-            " (:#{#criteria.companyId} IS NULL OR r.company.id = :#{#criteria.companyId}) "
+            "(:#{#criteria.state} IS NULL OR r.state = :#{#criteria.state}) " +
+            " AND (:#{#criteria.companyId} IS NULL OR r.company.id = :#{#criteria.companyId})" +
+            " AND (:#{#criteria.establishmentId} IS NULL OR r.establishment.id = :#{#criteria.establishmentId}) "
     )
-    List<Rgseaa> findAll(@Param("criteria") RgseaaCriteria criteria);
+    Collection<Rgseaa> findAll(RgseaaCriteria criteria);
 }

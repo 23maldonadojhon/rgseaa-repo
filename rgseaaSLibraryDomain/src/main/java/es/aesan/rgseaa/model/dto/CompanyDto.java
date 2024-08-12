@@ -21,6 +21,7 @@ public class CompanyDto implements Serializable {
     private Long situationId;
     private List<AuthorizationDto> authorizationList;
     private List<RgseaaActivityDto> rgseaaList;
+    private List<TypeActuationDto> typeActuationList;
 }
 
 

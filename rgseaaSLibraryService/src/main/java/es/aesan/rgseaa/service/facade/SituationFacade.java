@@ -61,8 +61,7 @@ public class SituationFacade extends AbstractFacade<
 
         logger.info("==== FACADE-> getSituationPage ====");
 
-        Collection<Situation> entitiePage = situationService.list(criteria);
-
-        return situationConverter.mapEntityToDtoList(new ArrayList<>(entitiePage));
+        Collection<Situation> list = situationService.list(criteria);
+        return situationConverter.mapEntityToDtoList(new ArrayList<>(list));
     }
 }

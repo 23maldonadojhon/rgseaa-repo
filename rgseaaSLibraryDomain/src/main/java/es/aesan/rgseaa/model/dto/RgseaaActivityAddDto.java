@@ -13,12 +13,11 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-public class RgseaaDto implements Serializable {
-    private Long id;
+public class RgseaaActivityAddDto implements Serializable {
+
+    private Long rgseaaId;
     private Long companyId;
-    private Long keyId;
-    private KeyDto key;
     private Long establishmentId;
-    private String numRgseaa;
-    private String enrollment;
+    private List<RgseaaActivityDto> rgseaaList;
+
 }

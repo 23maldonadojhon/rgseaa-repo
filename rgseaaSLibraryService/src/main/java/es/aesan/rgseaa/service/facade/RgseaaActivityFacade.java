@@ -42,30 +42,6 @@ public class RgseaaActivityFacade extends AbstractFacade<
     private static final Logger logger = LoggerFactory.getLogger(RgseaaActivityFacade.class);
 
 
-    @Override
-    public void add(RgseaaActivityDto dto) {
-        super.add(dto);
-    }
-
-    @Override
-    public void update(RgseaaActivityDto dto) {
-        super.update(dto);
-    }
-
-    @Override
-    public RgseaaActivityDto get(Long id) {
-        return super.get(id);
-    }
-
-    @Override
-    public RgseaaActivityDto find(RgseaaActivityCriteria criteria) {
-        return super.find(criteria);
-    }
-
-    @Override
-    public Page<RgseaaActivityDto> page(RgseaaActivityCriteria criteria) {
-        return super.page(criteria);
-    }
 
     @Override
     public List<RgseaaActivityDto> list(RgseaaActivityCriteria criteria) {

@@ -14,6 +14,11 @@ public interface CategoryRepository
         extends BaseRepository<Category,Long>,
         QueryByCriteria<Category, CategoryCriteria> {
 
+
+    @Override
+    @Query(value = "SELECT c FROM Category c")
+    List<Category> findAll(CategoryCriteria criteria);
+
     @Query(value = "SELECT c FROM Category c")
     Page<Category> findAllByCriteria(CategoryCriteria criteria, Pageable pageable);
 

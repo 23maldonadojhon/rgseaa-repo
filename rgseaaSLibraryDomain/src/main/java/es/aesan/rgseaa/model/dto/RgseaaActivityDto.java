@@ -9,6 +9,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class RgseaaActivityDto implements Serializable {
+    private Long id;
     private KeyDto key;
     private ActivityDto activity;
     private CategoryDto category;

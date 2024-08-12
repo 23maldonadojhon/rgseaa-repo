@@ -11,9 +11,6 @@ public interface LocationRepository
     QueryByCriteria<Location, LocationCriteria>{
 
     @Override
-    @Query(value = "SELECT l " +
-            " FROM Location l " +
-            " WHERE " +
-            " (:#{#criteria.enrollmentProvince} IS NULL OR l.enrollmentProvince = :#{#criteria.enrollmentProvince}) ")
+    @Query(value = "SELECT l  FROM Location l ")
     Page<Location> findAllByCriteria(LocationCriteria criteria, Pageable pageable);
 }

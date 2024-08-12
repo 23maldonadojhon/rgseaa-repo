@@ -23,6 +23,7 @@ public class CompanyFacade extends AbstractFacade<
         CompanyDto,
         CompanyCriteria> {
 
+    private final CompanyActuationService companyActuationService;
     private final CompanyService companyService;
     private final CountryService countryService;
     private final ProvinceService provinceService;
@@ -55,6 +56,7 @@ public class CompanyFacade extends AbstractFacade<
     private final ActivityConverter activityConverter;
     private final SubActivityConverter subActivityConverter;
     private final EstablishmentConverter establishmentConverter;
+    private final TypeActuationConverter typeActuationConverter;
 
 
     private final FileUtilService fileUtilService;
@@ -76,6 +78,9 @@ public class CompanyFacade extends AbstractFacade<
 
         List<CompanyAuthorization> companyAuthorizationList = getValueAuthorization(dto,companySaved);
         companyAuthorizationList.forEach(companyAuthorizationService::add);
+
+        List<CompanyActuation> companyActuationList = getCompanyActuation(dto,companySaved);
+        companyActuationList.forEach(companyActuationService::add);
 
         Rgseaa rgseaaSaved = rgseaaService.add(rgseaa);
         List<RgseaaActivity> rgseaaActivityList = getValueRgseaaActivity(dto,rgseaaSaved);
@@ -438,6 +443,22 @@ public class CompanyFacade extends AbstractFacade<
         rgseaa.setKey(key);
 
         return rgseaa;
+    }
+
+
+    private List<CompanyActuation>  getCompanyActuation(CompanyDto dto,  Company company) {
+
+        List<CompanyActuation> companyActuationList = new ArrayList<>();
+
+        dto.getTypeActuationList().forEach(item->{
+            CompanyActuation companyActuation = new CompanyActuation();
+            TypeActuation typeActuation = typeActuationConverter.dtoToEntity(item);
+            companyActuation.setActuation(typeActuation);
+            companyActuation.setCompany(company);
+            companyActuationList.add(companyActuation);
+        });
+
+        return companyActuationList;
     }
 
 

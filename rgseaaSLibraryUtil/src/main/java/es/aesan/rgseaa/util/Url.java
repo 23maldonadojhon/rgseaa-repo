@@ -10,6 +10,7 @@ public class Url {
     public static final String COMPANY_ESTABLISHMENTS_VIEW ="/company_establishments_view";
     public static final String RGSEAA ="/rgseaa";
     public static final String RGSEAA_ACTIVITIES ="/rgseaa_activities";
+    public static final String RGSEAA_ACTIVITIES_ADD ="/rgseaa_activities_add";
     public static final String SUBSTANCES ="/substances";
     public static final String ESTABLISHMENTS ="/establishments";
     public static final String FIND ="/find";

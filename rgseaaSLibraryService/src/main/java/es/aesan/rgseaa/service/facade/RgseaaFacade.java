@@ -27,10 +27,24 @@ public class RgseaaFacade extends AbstractFacade<
 
     private final RgseaaConverter rgseaaConverter;
 
+    @Override
+    public RgseaaDto get(Long id) {
+        Rgseaa rgseaa = rgseaaService.get(id);
+        RgseaaDto rgseaaDto = rgseaaConverter.entityToDto(rgseaa);
+        return rgseaaDto;
+    }
 
     @Override
     public List<RgseaaDto> list(RgseaaCriteria criteria) {
-        Collection<Rgseaa> rgseaaCollection = rgseaaService.list(criteria);
+
+        RgseaaCriteria rgseaaCriteria = new RgseaaCriteria();
+
+        if(criteria.getEstablishmentId()>0)
+            rgseaaCriteria.setEstablishmentId(criteria.getEstablishmentId());
+        else
+            rgseaaCriteria.setCompanyId(criteria.getCompanyId());
+
+        Collection<Rgseaa> rgseaaCollection = rgseaaService.list(rgseaaCriteria);
         List<RgseaaDto> rgseaaDtoList = rgseaaConverter.mapEntityToDtoList(new ArrayList<>(rgseaaCollection));
         return rgseaaDtoList;
     }
