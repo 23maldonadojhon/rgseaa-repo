@@ -2,7 +2,6 @@ package es.aesan.rgseaa.service.service;
 
 
 import es.aesan.rgseaa.model.commom.criteria.FilterCriteria;
-import es.aesan.rgseaa.model.commom.db.StandardEntity;
 import es.aesan.rgseaa.model.util.exception.NotFoundException;
 import es.aesan.rgseaa.service.repository.BaseRepository;
 import es.aesan.rgseaa.service.repository.QueryByCriteria;

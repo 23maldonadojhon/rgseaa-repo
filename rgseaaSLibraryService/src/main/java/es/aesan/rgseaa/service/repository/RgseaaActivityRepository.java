@@ -1,9 +1,6 @@
 package es.aesan.rgseaa.service.repository;
 
-import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
-import es.aesan.rgseaa.model.criteria.CompanyCriteria;
 import es.aesan.rgseaa.model.criteria.RgseaaActivityCriteria;
-import es.aesan.rgseaa.model.criteria.RgseaaCriteria;
 import es.aesan.rgseaa.model.entity.RgseaaActivity;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

@@ -3,13 +3,9 @@ package es.aesan.rgseaa.service.facade;
 import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 import es.aesan.rgseaa.model.converter.KeyConverter;
 import es.aesan.rgseaa.model.dto.KeyDto;
-
 import es.aesan.rgseaa.model.entity.Key;
-
 import es.aesan.rgseaa.service.service.KeyService;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;

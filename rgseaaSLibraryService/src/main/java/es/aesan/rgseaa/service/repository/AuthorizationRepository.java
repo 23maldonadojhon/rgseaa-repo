@@ -1,6 +1,5 @@
 package es.aesan.rgseaa.service.repository;
 
-import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 import es.aesan.rgseaa.model.criteria.AuthorizationCriteria;
 import es.aesan.rgseaa.model.entity.Authorization;
 import org.springframework.data.domain.Page;

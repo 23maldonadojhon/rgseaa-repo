@@ -2,7 +2,10 @@ package es.aesan.rgseaa.service.facade;
 
 import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 import es.aesan.rgseaa.model.converter.*;
-import es.aesan.rgseaa.model.dto.*;
+import es.aesan.rgseaa.model.dto.AuthorizationDto;
+import es.aesan.rgseaa.model.dto.CompanyEstablishmentDto;
+import es.aesan.rgseaa.model.dto.EstablishmentDto;
+import es.aesan.rgseaa.model.dto.RgseaaActivityDto;
 import es.aesan.rgseaa.model.entity.*;
 import es.aesan.rgseaa.service.service.*;
 import lombok.RequiredArgsConstructor;

@@ -1,14 +1,12 @@
 package es.aesan.rgseaa.service.service;
 
 
-import es.aesan.rgseaa.model.commom.criteria.FilterCriteria;
 import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 import es.aesan.rgseaa.model.dto.CompanyEstablishmenInterface;
-import es.aesan.rgseaa.model.dto.CompanyEstablishmentViewDto;
 import es.aesan.rgseaa.model.entity.CompanyEstablishmentView;
 import es.aesan.rgseaa.service.repository.CompanyEstablishmentViewRepository;
-import es.aesan.rgseaa.service.repository.QueryByCriteria;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,7 +35,10 @@ public class CompanyEstablishmentViewService extends AbstractService<
         if(criteria.getSize()==null)
             criteria.setSize(10);
 
-        Page<CompanyEstablishmenInterface> page =repository.findCriteria(criteria,criteria.toPageable());
+        Long  size = repository.findListCount(criteria);
+        List<CompanyEstablishmenInterface> list = repository.findList(criteria);
+
+        Page page =  new PageImpl<>(list, criteria.toPageable(), size);
 
         return page;
     }

@@ -2,12 +2,12 @@ package es.aesan.rgseaa.model.entity;
 
 
 import es.aesan.rgseaa.model.util.ConstantBD;
-import lombok.*;
+import lombok.Getter;
 import org.springframework.data.annotation.Immutable;
 
-import javax.persistence.*;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity

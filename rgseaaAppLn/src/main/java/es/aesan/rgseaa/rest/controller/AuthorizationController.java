@@ -1,7 +1,6 @@
 package es.aesan.rgseaa.rest.controller;
 
 
-import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 import es.aesan.rgseaa.model.criteria.AuthorizationCriteria;
 import es.aesan.rgseaa.model.dto.AuthorizationDto;
 import es.aesan.rgseaa.service.facade.AuthorizationFacade;

@@ -3,11 +3,9 @@ package es.aesan.rgseaa.service.repository;
 import es.aesan.rgseaa.model.criteria.RgseaaCriteria;
 import es.aesan.rgseaa.model.entity.Rgseaa;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
 

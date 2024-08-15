@@ -1,12 +1,10 @@
 package es.aesan.rgseaa.service.facade;
 
-import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 import es.aesan.rgseaa.model.converter.ActivityConverter;
 import es.aesan.rgseaa.model.converter.CategoryConverter;
 import es.aesan.rgseaa.model.converter.KeyConverter;
 import es.aesan.rgseaa.model.converter.SubActivityConverter;
 import es.aesan.rgseaa.model.criteria.RgseaaActivityCriteria;
-import es.aesan.rgseaa.model.criteria.RgseaaCriteria;
 import es.aesan.rgseaa.model.dto.KeyDto;
 import es.aesan.rgseaa.model.dto.RgseaaActivityDto;
 import es.aesan.rgseaa.model.entity.Rgseaa;
@@ -16,7 +14,6 @@ import es.aesan.rgseaa.service.service.RgseaaService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

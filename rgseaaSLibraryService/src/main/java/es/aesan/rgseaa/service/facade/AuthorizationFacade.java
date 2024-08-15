@@ -1,6 +1,5 @@
 package es.aesan.rgseaa.service.facade;
 
-import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 import es.aesan.rgseaa.model.converter.AuthorizationConverter;
 import es.aesan.rgseaa.model.criteria.AuthorizationCriteria;
 import es.aesan.rgseaa.model.criteria.CompanyAuthorizationCriteria;
@@ -12,7 +11,6 @@ import es.aesan.rgseaa.service.service.CompanyAuthorizationService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 

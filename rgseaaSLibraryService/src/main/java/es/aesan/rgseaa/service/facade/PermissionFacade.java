@@ -1,11 +1,8 @@
 package es.aesan.rgseaa.service.facade;
 
-import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 import es.aesan.rgseaa.model.converter.PermissionConverter;
 import es.aesan.rgseaa.model.criteria.PermissionCriteria;
-import es.aesan.rgseaa.model.dto.AuthorizationDto;
 import es.aesan.rgseaa.model.dto.PermissionDto;
-import es.aesan.rgseaa.model.entity.Authorization;
 import es.aesan.rgseaa.model.entity.Permission;
 import es.aesan.rgseaa.service.service.PermissionService;
 import lombok.RequiredArgsConstructor;

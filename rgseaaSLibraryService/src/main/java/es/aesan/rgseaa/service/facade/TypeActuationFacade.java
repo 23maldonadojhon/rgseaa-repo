@@ -1,11 +1,8 @@
 package es.aesan.rgseaa.service.facade;
 
-import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 import es.aesan.rgseaa.model.converter.TypeActuationConverter;
 import es.aesan.rgseaa.model.criteria.ActuationCriteria;
-import es.aesan.rgseaa.model.criteria.CategoryCriteria;
 import es.aesan.rgseaa.model.criteria.CompanyActuationCriteria;
-import es.aesan.rgseaa.model.dto.CategoryDto;
 import es.aesan.rgseaa.model.dto.TypeActuationDto;
 import es.aesan.rgseaa.model.entity.CompanyActuation;
 import es.aesan.rgseaa.model.entity.TypeActuation;
