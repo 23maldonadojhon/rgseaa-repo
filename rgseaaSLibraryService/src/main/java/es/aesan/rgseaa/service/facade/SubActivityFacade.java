@@ -1,27 +1,21 @@
 package es.aesan.rgseaa.service.facade;
 
 
-import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 import es.aesan.rgseaa.model.converter.SubActivityConverter;
-
 import es.aesan.rgseaa.model.criteria.ActivityKeyCategoryCriteria;
 import es.aesan.rgseaa.model.criteria.ActivityKeyCategorySubActivityCriteria;
 import es.aesan.rgseaa.model.criteria.ActivityKeyCriteria;
 import es.aesan.rgseaa.model.criteria.SubActivityCriteria;
 import es.aesan.rgseaa.model.dto.SubActivityDto;
-
 import es.aesan.rgseaa.model.entity.ActivityKey;
 import es.aesan.rgseaa.model.entity.ActivityKeyCategory;
 import es.aesan.rgseaa.model.entity.ActivityKeyCategorySubActivity;
 import es.aesan.rgseaa.model.entity.SubActivity;
-
 import es.aesan.rgseaa.service.service.ActivityKeyCategoryService;
 import es.aesan.rgseaa.service.service.ActivityKeyCategorySubActivityService;
 import es.aesan.rgseaa.service.service.ActivityKeyService;
 import es.aesan.rgseaa.service.service.SubActivityService;
-
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 

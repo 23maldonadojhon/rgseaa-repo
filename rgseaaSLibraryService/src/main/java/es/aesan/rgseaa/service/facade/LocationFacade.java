@@ -1,7 +1,6 @@
 package es.aesan.rgseaa.service.facade;
 
 
-import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 import es.aesan.rgseaa.model.converter.LocationConverter;
 import es.aesan.rgseaa.model.criteria.LocationCriteria;
 import es.aesan.rgseaa.model.dto.LocationDto;

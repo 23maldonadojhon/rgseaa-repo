@@ -13,6 +13,10 @@ import es.aesan.rgseaa.model.entity.Category;
 
 
 
+
+
+import es.aesan.rgseaa.model.converter.CategoryConverter;
+
 import es.aesan.rgseaa.model.criteria.ActivityKeyCategoryCriteria;
 
 import es.aesan.rgseaa.model.criteria.ActivityKeyCriteria;
@@ -21,7 +25,6 @@ import es.aesan.rgseaa.model.dto.CategoryDto;
 import es.aesan.rgseaa.model.entity.ActivityKey;
 import es.aesan.rgseaa.model.entity.Category;
 import es.aesan.rgseaa.service.service.ActivityKeyService;
-
 import es.aesan.rgseaa.service.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +33,9 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 import java.util.stream.Collectors;
+
 
 @Component
 @RequiredArgsConstructor
@@ -41,6 +46,12 @@ public class CategoryFacade extends AbstractFacade<
     @Autowired
     private final CategoryService categoryService;
 
+    @Autowired
+
+    private final ActivityKeyService activityKeyService;
+
+
+    private final ActivityKeyCategoryService activityKeyCategoryService;
     @Autowired
     private final ActivityKeyService activityKeyService;
 
@@ -65,5 +76,36 @@ public class CategoryFacade extends AbstractFacade<
         return dtoList;
     }
 
+
+    @Override
+    public List<CategoryDto> list(CategoryCriteria criteria) {
+
+        Collection<Category> categoryCollection =  categoryService.list(criteria);
+        List<CategoryDto> dtoList = categoryConverter.mapEntityToDtoList(new ArrayList<>(categoryCollection));
+        return dtoList;
+    }
+
+    public List<CategoryDto> listActivity(CategoryCriteria categoryCriteria) {
+
+        List<Category> categoryList = new ArrayList<>();
+
+        ActivityKeyCriteria activityKeyCriteria = new ActivityKeyCriteria();
+        activityKeyCriteria.setKeyId(categoryCriteria.getKeyId());
+        activityKeyCriteria.setActivityId(categoryCriteria.getActivityId());
+
+        ActivityKey activityKey = activityKeyService.find(activityKeyCriteria);
+
+
+        ActivityKeyCategoryCriteria activityKeyCategoryCriteria = new ActivityKeyCategoryCriteria();
+        activityKeyCategoryCriteria.setActivityKeyId(activityKey.getId());
+
+        Collection<ActivityKeyCategory> activityKeyCategory = activityKeyCategoryService.list(activityKeyCategoryCriteria);
+
+        activityKeyCategory.forEach(item ->categoryList.add(item.getCategory()));
+
+        List<CategoryDto> categoryDtoList = categoryConverter.mapEntityToDtoList(categoryList);
+
+        return categoryDtoList;
+    }
 }
 

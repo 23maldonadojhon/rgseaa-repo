@@ -1,11 +1,8 @@
 package es.aesan.rgseaa.model.dto;
 
 
-import es.aesan.rgseaa.model.commom.constants.EntityState;
 import es.aesan.rgseaa.model.commom.dto.LongIdModel;
 import lombok.Data;
-
-import java.io.Serializable;
 
 
 @Data

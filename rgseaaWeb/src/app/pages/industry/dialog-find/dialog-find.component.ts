@@ -1,4 +1,3 @@
-import {Dialog} from "@angular/cdk/dialog";
 import {Component, Inject, OnInit} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogModule} from "@angular/material/dialog";
 import {MatCardModule} from "@angular/material/card";

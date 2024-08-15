@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AppliedFilter, FilterService, TulsaQuery} from '@base/shared/filter';
+import {FilterService, TulsaQuery} from '@base/shared/filter';
 import {BaseListPageComponent} from '@base/shared/pages/list';
 import {CrudImplService} from '@libs/crud-api';
 import {AuthContextService} from '@libs/security';

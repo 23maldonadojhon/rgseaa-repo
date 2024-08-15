@@ -27,9 +27,22 @@ public class SubstanceFacade extends AbstractFacade<
     }
 
     @Override
+    public void update(SubstanceDto dto) {
+        Substance substance = converter.dtoToEntity(dto);
+        substanceService.update(substance);
+    }
+
+    @Override
     public Page<SubstanceDto> page(GeneralCriteria criteria) {
         Page<Substance> list = substanceService.page(criteria);
         Page<SubstanceDto> dtoList = converter.mapEntityToDtoPage(list);
         return dtoList;
+    }
+
+    @Override
+    public SubstanceDto get(Long id) {
+        Substance substance  = substanceService.get(id);
+        SubstanceDto substanceDto = converter.entityToDto(substanceService.get(id));
+        return substanceDto;
     }
 }

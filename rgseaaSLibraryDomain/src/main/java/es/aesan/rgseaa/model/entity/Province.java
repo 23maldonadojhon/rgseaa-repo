@@ -4,7 +4,10 @@ import es.aesan.rgseaa.model.commom.db.AuditedBaseEntity;
 import es.aesan.rgseaa.model.util.ConstantBD;
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = ConstantBD.TABLE_PROVINCES)
@@ -28,21 +31,10 @@ public class Province extends AuditedBaseEntity {
     @Column(name = "PRE_POSTAL_CODE")
     private String prePostalCode;
 
-    @Column(name = "ENROLLMENT_CCAA")
-    private String enrollmentCCAA;
-
     @Column(name = "ADDRESS")
     private String address;
 
-    @Column(name = "EMAIL")
-    private String email;
+    @Column(name = "CCAA_ID")
+    private Long ccaa;
 
-    @Column(name = "OLD")
-    private Integer old;
-
-    @Column(name = "OLD_TWO")
-    private Integer oldTwo;
-
-    @Column(name = "OLD_THREE")
-    private Integer oldThree;
 }

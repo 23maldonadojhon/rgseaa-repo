@@ -5,7 +5,6 @@ import es.aesan.rgseaa.model.converter.TypeActionConverter;
 import es.aesan.rgseaa.model.criteria.TypeActionCriteria;
 import es.aesan.rgseaa.model.dto.TypeActionDto;
 import es.aesan.rgseaa.model.entity.TypeAction;
-import es.aesan.rgseaa.service.repository.TypeActionRepository;
 import es.aesan.rgseaa.service.service.TypeActionService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;

@@ -2,7 +2,6 @@ package es.aesan.rgseaa.rest.controller;
 
 
 import es.aesan.rgseaa.model.commom.criteria.FilterCriteria;
-import es.aesan.rgseaa.model.commom.dto.StatusChange;
 import es.aesan.rgseaa.service.facade.CrudFacade;
 import es.aesan.rgseaa.util.Url;
 import org.slf4j.Logger;

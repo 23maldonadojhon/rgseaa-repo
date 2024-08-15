@@ -2,12 +2,11 @@ package es.aesan.rgseaa.service.facade;
 
 
 import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
-import es.aesan.rgseaa.model.criteria.UserEntitieCriteria;
-import es.aesan.rgseaa.model.commom.dto.StatusChange;
 import es.aesan.rgseaa.model.converter.EntitieConverter;
 import es.aesan.rgseaa.model.converter.EntitieTypeConverter;
 import es.aesan.rgseaa.model.converter.UserEntitieConverter;
 import es.aesan.rgseaa.model.criteria.EntitieCriteria;
+import es.aesan.rgseaa.model.criteria.UserEntitieCriteria;
 import es.aesan.rgseaa.model.dto.EntitieDto;
 import es.aesan.rgseaa.model.dto.EntitieTypeDto;
 import es.aesan.rgseaa.model.dto.UserEntitieDto;

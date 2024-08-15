@@ -1,5 +1,4 @@
 import {RouterModule, Routes} from "@angular/router";
-import {KeyListComponent} from "@base/pages/key/key-list/key-list.component";
 import {NgModule} from "@angular/core";
 import {DenominationListComponent} from "@base/pages/denomination/denomination-list/denomination-list.component";
 

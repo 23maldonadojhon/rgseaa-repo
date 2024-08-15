@@ -2,22 +2,13 @@ package es.aesan.rgseaa.service.facade;
 
 import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 import es.aesan.rgseaa.model.converter.KeyConverter;
-import es.aesan.rgseaa.model.dto.AuthorizationDto;
 import es.aesan.rgseaa.model.dto.KeyDto;
-import es.aesan.rgseaa.model.dto.TypeDocumentDto;
-import es.aesan.rgseaa.model.entity.Authorization;
 import es.aesan.rgseaa.model.entity.Key;
-import es.aesan.rgseaa.model.entity.TypeDocument;
-import es.aesan.rgseaa.service.repository.KeyRepository;
 import es.aesan.rgseaa.service.service.KeyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Component;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collection;

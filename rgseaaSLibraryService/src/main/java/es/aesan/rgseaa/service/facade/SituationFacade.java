@@ -1,7 +1,6 @@
 package es.aesan.rgseaa.service.facade;
 
 
-import es.aesan.rgseaa.model.commom.criteria.FilterCriteria;
 import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 import es.aesan.rgseaa.model.converter.SituationConverter;
 import es.aesan.rgseaa.model.dto.SituationDto;
@@ -62,8 +61,7 @@ public class SituationFacade extends AbstractFacade<
 
         logger.info("==== FACADE-> getSituationPage ====");
 
-        Collection<Situation> entitiePage = situationService.list(criteria);
-
-        return situationConverter.mapEntityToDtoList(new ArrayList<>(entitiePage));
+        Collection<Situation> list = situationService.list(criteria);
+        return situationConverter.mapEntityToDtoList(new ArrayList<>(list));
     }
 }

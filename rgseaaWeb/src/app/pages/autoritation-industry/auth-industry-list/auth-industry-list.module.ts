@@ -3,7 +3,6 @@ import {
     AuthIndustryListComponent
 } from "@base/pages/autoritation-industry/auth-industry-list/auth-industry-list.component";
 import {CommonModule} from "@angular/common";
-import {UserListRoutingModule} from "@base/pages/user/user-list/user-list-routing.module";
 import {AppCommonsModule} from "@base/shared/pages/commons.module";
 import {ListPageModule} from "@base/shared/pages/list-page.module";
 import {FormsModule} from "@angular/forms";
@@ -11,9 +10,6 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {StateToggleModule} from "@base/shared/components/state-toggle";
-import {
-    AuthIndustryRoutingModule
-} from "@base/pages/autoritation-industry/auth-industry-edit/auth-industry.routing.module";
 import {
     AuthIndustryListRoutingModule
 } from "@base/pages/autoritation-industry/auth-industry-list/auth-industry-list.routing.module";

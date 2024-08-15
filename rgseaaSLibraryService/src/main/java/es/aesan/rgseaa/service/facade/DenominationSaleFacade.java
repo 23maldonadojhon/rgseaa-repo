@@ -1,12 +1,9 @@
 package es.aesan.rgseaa.service.facade;
 
-import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 import es.aesan.rgseaa.model.converter.DenominationSaleConverter;
 import es.aesan.rgseaa.model.criteria.DenominationSaleCriterial;
 import es.aesan.rgseaa.model.dto.DenominationSaleDto;
-import es.aesan.rgseaa.model.dto.KeyDto;
 import es.aesan.rgseaa.model.entity.DenominationSale;
-import es.aesan.rgseaa.model.entity.Key;
 import es.aesan.rgseaa.service.service.DenominationSaleService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;

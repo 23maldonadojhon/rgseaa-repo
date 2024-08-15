@@ -3,7 +3,6 @@ package es.aesan.rgseaa.model.converter;
 import es.aesan.rgseaa.model.dto.ModuleDto;
 import es.aesan.rgseaa.model.entity.Module;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = "spring",

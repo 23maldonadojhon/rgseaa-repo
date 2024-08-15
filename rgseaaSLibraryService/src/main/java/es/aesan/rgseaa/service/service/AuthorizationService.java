@@ -1,6 +1,6 @@
 package es.aesan.rgseaa.service.service;
 
-import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
+import es.aesan.rgseaa.model.criteria.AuthorizationCriteria;
 import es.aesan.rgseaa.model.entity.Authorization;
 import es.aesan.rgseaa.service.repository.AuthorizationRepository;
 import org.springframework.stereotype.Service;
@@ -13,13 +13,13 @@ public class AuthorizationService
             Authorization,
             Long,
             AuthorizationRepository,
-            GeneralCriteria> {
+         AuthorizationCriteria> {
 
     AuthorizationService(AuthorizationRepository repository) {
         super(repository);
     }
 
-    public List<Authorization> all(GeneralCriteria criteria){
+    public List<Authorization> all(AuthorizationCriteria criteria){
 
         logger.info("==== ALL Action ====");
         logger.info("entity :"+criteria.toString());

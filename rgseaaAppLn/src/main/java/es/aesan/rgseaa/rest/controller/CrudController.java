@@ -1,7 +1,6 @@
 package es.aesan.rgseaa.rest.controller;
 
 import es.aesan.rgseaa.model.commom.criteria.FilterCriteria;
-import es.aesan.rgseaa.model.commom.dto.StatusChange;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;

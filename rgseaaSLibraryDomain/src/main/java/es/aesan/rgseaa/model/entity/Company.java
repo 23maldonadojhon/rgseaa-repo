@@ -5,6 +5,7 @@ import es.aesan.rgseaa.model.util.ConstantBD;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = ConstantBD.TABLE_COMPANIES)
@@ -56,4 +57,7 @@ public class Company extends AuditedBaseEntity {
     @ManyToOne
     @JoinColumn(name = "SITUATION_ID", referencedColumnName = "ID")
     private Situation situation;
+
+    @Transient
+    private List<Rgseaa> rgseaaList;
 }

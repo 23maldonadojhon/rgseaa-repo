@@ -1,13 +1,9 @@
 package es.aesan.rgseaa.service.facade;
 
 
-import es.aesan.rgseaa.model.criteria.ActionCriteria;
-import es.aesan.rgseaa.model.criteria.DenominationSaleCriterial;
-import es.aesan.rgseaa.model.criteria.DocumentCriteria;
 import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 import es.aesan.rgseaa.model.converter.*;
-import es.aesan.rgseaa.model.criteria.EntitieCriteria;
-import es.aesan.rgseaa.model.criteria.ProductCriteria;
+import es.aesan.rgseaa.model.criteria.*;
 import es.aesan.rgseaa.model.dto.*;
 import es.aesan.rgseaa.model.entity.*;
 import es.aesan.rgseaa.model.util.exception.AppException;

@@ -1,10 +1,8 @@
 package es.aesan.rgseaa.rest.controller;
 
 
-import es.aesan.rgseaa.model.criteria.ActionCriteria;
-import es.aesan.rgseaa.model.criteria.DenominationSaleCriterial;
-import es.aesan.rgseaa.model.criteria.DocumentCriteria;
 import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
+import es.aesan.rgseaa.model.criteria.DenominationSaleCriterial;
 import es.aesan.rgseaa.model.criteria.EntitieCriteria;
 import es.aesan.rgseaa.model.criteria.ProductCriteria;
 import es.aesan.rgseaa.model.dto.*;
@@ -13,9 +11,10 @@ import es.aesan.rgseaa.util.Url;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController

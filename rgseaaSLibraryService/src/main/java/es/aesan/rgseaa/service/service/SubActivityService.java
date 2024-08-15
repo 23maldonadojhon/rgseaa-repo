@@ -1,6 +1,5 @@
 package es.aesan.rgseaa.service.service;
 
-import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 import es.aesan.rgseaa.model.criteria.SubActivityCriteria;
 import es.aesan.rgseaa.model.entity.SubActivity;
 import es.aesan.rgseaa.service.repository.SubActivityRepository;

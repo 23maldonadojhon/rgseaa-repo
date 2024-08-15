@@ -1,7 +1,6 @@
 package es.aesan.rgseaa.service.service;
 
 
-import es.aesan.rgseaa.model.commom.criteria.FilterCriteria;
 import es.aesan.rgseaa.model.criteria.TypeActionCriteria;
 import es.aesan.rgseaa.model.entity.TypeAction;
 import es.aesan.rgseaa.service.repository.TypeActionRepository;

@@ -5,7 +5,10 @@ import es.aesan.rgseaa.model.entity.Company;
 import es.aesan.rgseaa.service.repository.CompanyRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Service
 public class CompanyService extends AbstractService<

@@ -1,5 +1,3 @@
-import {AuthIndustryCreate} from "@libs/sdk/AuthIndustry";
-
 export interface Key {
     id : number;
     name : string;

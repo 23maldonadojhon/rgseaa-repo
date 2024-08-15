@@ -1,7 +1,6 @@
 package es.aesan.rgseaa.service.facade;
 
 import es.aesan.rgseaa.model.commom.criteria.FilterCriteria;
-import es.aesan.rgseaa.model.commom.dto.StatusChange;
 import org.springframework.data.domain.Page;
 
 import java.util.List;

@@ -1,8 +1,8 @@
 package es.aesan.rgseaa.service.repository;
 
 
-import es.aesan.rgseaa.model.criteria.ActionCriteria;
 import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
+import es.aesan.rgseaa.model.criteria.ActionCriteria;
 import es.aesan.rgseaa.model.entity.Action;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

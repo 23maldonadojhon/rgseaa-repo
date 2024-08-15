@@ -26,6 +26,7 @@ public class ConstantBD {
     public static final String TABLE_PRODUCTS="PRODUCTS";
     public static final String TABLE_PROVINCES="PROVINCES";
     public static final String TABLE_COMPANIES="COMPANIES";
+    public static final String TABLE_COMPANIES_AUTHORIZATIONS="COMPANIES_AUTHORIZATIONS";
     public static final String TABLE_TYPE_EXPEDIENTS="TYPE_EXPEDIENTS";
     public static final String TABLE_TYPE_CHANGE_EXPEDIENTS="TYPE_CHANGE_EXPEDIENTS";
     public static final String TABLE_INDUSTRIES_AUTHORIZATIONS="COMPANY_AUTHORIZATIONS";
@@ -35,6 +36,7 @@ public class ConstantBD {
     public static final String TABLE_USERS_PROFILES="USERS_PROFILES";
     public static final String TABLE_ESTABLISHMENTS="ESTABLISHMENTS";
     public static final String TABLE_TYPES_ACTUATIONS = "TYPES_ACTUATIONS";
+    public static final String TABLE_COMPANY_ACTUATIONS = "COMPANIES_ACTUATIONS";
     public static final String TABLE_USERS_MODELS="USERS_MODELS";
     public static final String TABLE_AUTH_USER_TOKEN="AUTH_USER_TOKEN";
     public static final String TABLE_AUTH_USER_REQUEST="AUTH_USER_REQUEST";
@@ -53,4 +55,6 @@ public class ConstantBD {
     public static final String TABLE_ACTIVITY_KEY = "ACTIVITIES_KEYS";
     public static final String TABLE_ACTIVITIES_KEYS_CATEGORIES = "ACTIVITIES_KEYS_CATEGORIES";
     public static final String TABLE_ACTIVITIES_KEYS_CATEGORIES_SUB_ACTIVITIES = "ACTIVITIES_KEYS_CATEGORIES_SUB_ACTIVITIES";
+
+    public static final String VIEW_COMPANIES_ESTABLISHMENTS="COMPANIES_ESTABLISHMENTS_VIEW";
 }

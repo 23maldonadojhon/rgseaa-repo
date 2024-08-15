@@ -1,7 +1,6 @@
 package es.aesan.rgseaa.rest.controller;
 
 
-import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 import es.aesan.rgseaa.model.criteria.SubActivityCriteria;
 import es.aesan.rgseaa.model.dto.SubActivityDto;
 import es.aesan.rgseaa.service.facade.SubActivityFacade;

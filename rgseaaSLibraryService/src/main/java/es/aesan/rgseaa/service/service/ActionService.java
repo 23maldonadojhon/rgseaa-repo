@@ -1,7 +1,7 @@
 package es.aesan.rgseaa.service.service;
 
-import es.aesan.rgseaa.model.criteria.ActionCriteria;
 import es.aesan.rgseaa.model.commom.criteria.FilterCriteria;
+import es.aesan.rgseaa.model.criteria.ActionCriteria;
 import es.aesan.rgseaa.model.entity.Action;
 import es.aesan.rgseaa.service.repository.ActionRepository;
 import org.springframework.stereotype.Service;

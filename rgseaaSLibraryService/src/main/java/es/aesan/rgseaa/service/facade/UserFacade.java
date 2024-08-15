@@ -1,13 +1,11 @@
 package es.aesan.rgseaa.service.facade;
 
-import es.aesan.rgseaa.model.commom.dto.StatusChange;
 import es.aesan.rgseaa.model.converter.UserConverter;
 import es.aesan.rgseaa.model.criteria.UserCriteria;
 import es.aesan.rgseaa.model.dto.UserDto;
 import es.aesan.rgseaa.model.entity.*;
 import es.aesan.rgseaa.service.service.*;
 import es.aesan.rgseaa.service.util.Accion;
-import es.aesan.rgseaa.service.util.Constant;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
