@@ -2,12 +2,26 @@ package es.aesan.rgseaa.service.facade;
 
 import es.aesan.rgseaa.model.converter.ActivityConverter;
 import es.aesan.rgseaa.model.converter.CategoryConverter;
+
+
+
+import es.aesan.rgseaa.model.criteria.CategoryCriteria;
+import es.aesan.rgseaa.model.dto.CategoryDto;
+
+
+import es.aesan.rgseaa.model.entity.Category;
+
+
+
+import es.aesan.rgseaa.model.criteria.ActivityKeyCategoryCriteria;
+
 import es.aesan.rgseaa.model.criteria.ActivityKeyCriteria;
 import es.aesan.rgseaa.model.criteria.CategoryCriteria;
 import es.aesan.rgseaa.model.dto.CategoryDto;
 import es.aesan.rgseaa.model.entity.ActivityKey;
 import es.aesan.rgseaa.model.entity.Category;
 import es.aesan.rgseaa.service.service.ActivityKeyService;
+
 import es.aesan.rgseaa.service.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +47,7 @@ public class CategoryFacade extends AbstractFacade<
 
     @Autowired
     private final CategoryConverter categoryConverter;
+
 
 
 
