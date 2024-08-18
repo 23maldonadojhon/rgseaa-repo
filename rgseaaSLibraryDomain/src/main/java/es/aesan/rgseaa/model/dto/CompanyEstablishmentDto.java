@@ -18,4 +18,5 @@ public class CompanyEstablishmentDto implements Serializable {
     private EstablishmentDto establishment;
     private List<RgseaaActivityDto> rgseaaActivityList;
     private List<AuthorizationDto> authorizationList;
+    private List<TypeActuationDto> typeActuationList;
 }

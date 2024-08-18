@@ -1,13 +1,12 @@
 package es.aesan.rgseaa.service.facade;
 
 
-import es.aesan.rgseaa.model.converter.EstablishmentConverter;
+import es.aesan.rgseaa.model.converter.*;
 import es.aesan.rgseaa.model.criteria.EstablishmentCriteria;
+import es.aesan.rgseaa.model.dto.CompanyDto;
 import es.aesan.rgseaa.model.dto.EstablishmentDto;
-import es.aesan.rgseaa.model.entity.Company;
-import es.aesan.rgseaa.model.entity.Country;
-import es.aesan.rgseaa.model.entity.Establishment;
-import es.aesan.rgseaa.model.entity.Situation;
+import es.aesan.rgseaa.model.dto.RgseaaActivityDto;
+import es.aesan.rgseaa.model.entity.*;
 import es.aesan.rgseaa.service.service.*;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -35,8 +34,19 @@ public class EstablishmentFacade  extends AbstractFacade<
     private final CountryService countryService;
     private final ProvinceService provinceService;
     private final LocationService locationService;
+    private final CompanyAuthorizationService companyAuthorizationService;
+    private final RgseaaService rgseaaService;
+    private final RgseaaActivityService rgseaaActivityService;
+    private final CompanyActuationService companyActuationService;
+
 
     private final EstablishmentConverter establishmentConverter;
+    private final AuthorizationConverter authorizationConverter;
+    private final CategoryConverter categoryConverter;
+    private final ActivityConverter activityConverter;
+    private final SubActivityConverter subActivityConverter;
+    private final KeyConverter keyConverter;
+    private final TypeActuationConverter typeActuationConverter;
 
     @Override
     @Transactional
@@ -44,11 +54,43 @@ public class EstablishmentFacade  extends AbstractFacade<
 
         logger.info("==== FACADE-> ADD ESTABLISHMENT ====");
 
+    }
+
+
+    @Override
+    public void update(EstablishmentDto dto) {
+
+    }
+
+
+    @Override
+    public EstablishmentDto get(Long id) {
+        logger.info("==== FACADE-> GET ESTABLISHMENT ====");
+
+        Establishment establishment = establishmentService.get(id);
+        EstablishmentDto establishmentDto = establishmentConverter.entityToDto(establishment);
+        return establishmentDto;
+    }
+
+
+    @Override
+    public List<EstablishmentDto> list(EstablishmentCriteria criteria) {
+        Collection<Establishment> list = establishmentService.list(criteria);
+        List<EstablishmentDto> dtoList = establishmentConverter.mapEntityToDtoList(new ArrayList<>(list));
+        return dtoList;
+    }
+
+
+
+
+
+    private Establishment getValue(EstablishmentDto dto) {
+
+        Establishment establishment = establishmentConverter.dtoToEntity(dto);
+
         Situation situation = situationService.get(dto.getSituationId());
         Country country = countryService.get(dto.getCountryId());
         Company company = companyService.get(dto.getCompanyId());
-
-        Establishment establishment = establishmentConverter.dtoToEntity(dto);
 
         establishment.setSituation(situation);
         establishment.setCountry(country);
@@ -63,42 +105,9 @@ public class EstablishmentFacade  extends AbstractFacade<
                 .map(locationService::get)
                 .ifPresent(establishment::setLocation);
 
-        Establishment establishmentSaved = establishmentService.add(establishment);
-    }
-
-
-    @Override
-    public void update(EstablishmentDto dto) {
+        return establishment;
 
     }
-
-    @Override
-    public EstablishmentDto get(Long id) {
-        logger.info("==== FACADE-> GET ESTABLISHMENT ====");
-
-        Establishment establishment = establishmentService.get(id);
-        EstablishmentDto establishmentDto = establishmentConverter.entityToDto(establishment);
-        return establishmentDto;
-    }
-
-    @Override
-    public EstablishmentDto find(EstablishmentCriteria criteria) {
-        return null;
-    }
-
-    @Override
-    public List<EstablishmentDto> list(EstablishmentCriteria criteria) {
-
-        Collection<Establishment> list = establishmentService.list(criteria);
-        List<EstablishmentDto> dtoList = establishmentConverter.mapEntityToDtoList(new ArrayList<>(list));
-        return dtoList;
-    }
-
-    @Override
-    public Page<EstablishmentDto> page(EstablishmentCriteria criteria) {
-        return null;
-    }
-
 
 
 

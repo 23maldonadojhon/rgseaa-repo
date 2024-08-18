@@ -96,8 +96,11 @@ public class CompanyFacade extends AbstractFacade<
         logger.info("user :"+dto);
 
         Company company = getValue(dto);
+        Company companyUpdated = companyService.update(company);
 
-        companyService.update(company);
+        List<CompanyActuation> companyActuationList = getCompanyActuationUpdate(dto,companyUpdated);
+        companyActuationList.forEach(companyActuationService::add);
+
     }
 
 
@@ -407,6 +410,21 @@ public class CompanyFacade extends AbstractFacade<
     }
 
 
+    private List<TypeActuation> getValueTypeActuation(List<TypeActuationDto> dto) {
+
+        List<TypeActuation> list = new ArrayList<>();
+
+        dto.stream()
+            .filter(TypeActuationDto::isSaved)
+            .forEach(item -> {
+                TypeActuation typeActuation = typeActuationConverter.dtoToEntity(item);
+                list.add(typeActuation);
+            });
+
+        return list;
+    }
+
+
     private Company getValue(CompanyDto dto) {
 
         Company company = companyConverter.dtoToEntity(dto);
@@ -445,6 +463,20 @@ public class CompanyFacade extends AbstractFacade<
         return rgseaa;
     }
 
+
+    private List<CompanyActuation>  getCompanyActuationUpdate(CompanyDto dto,  Company company) {
+
+        List<CompanyActuation> companyActuationList = new ArrayList<>();
+
+        getValueTypeActuation(dto.getTypeActuationList()).forEach(item->{
+            CompanyActuation companyActuation = new CompanyActuation();
+            companyActuation.setActuation(item);
+            companyActuation.setCompany(company);
+            companyActuationList.add(companyActuation);
+        });
+
+        return companyActuationList;
+    }
 
     private List<CompanyActuation>  getCompanyActuation(CompanyDto dto,  Company company) {
 

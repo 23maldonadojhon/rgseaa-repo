@@ -12,5 +12,6 @@ import lombok.*;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CompanyActuationCriteria  extends GeneralCriteria {
     private Long companyId;
+    private Long establishmentId;
 }
 

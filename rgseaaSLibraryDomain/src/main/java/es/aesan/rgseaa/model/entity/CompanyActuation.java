@@ -27,6 +27,10 @@ public class CompanyActuation extends AuditedBaseEntity {
     private Company company;
 
     @ManyToOne
+    @JoinColumn(name = "ESTABLISHMENT_ID", referencedColumnName = "ID")
+    private Establishment establishment;
+
+    @ManyToOne
     @JoinColumn(name = "ACTUATION_ID", referencedColumnName = "ID")
     private TypeActuation actuation;
 }
