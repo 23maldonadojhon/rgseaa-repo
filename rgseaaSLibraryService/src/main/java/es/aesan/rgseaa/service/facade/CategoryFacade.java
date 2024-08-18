@@ -9,6 +9,7 @@ import es.aesan.rgseaa.model.criteria.CategoryCriteria;
 import es.aesan.rgseaa.model.dto.CategoryDto;
 
 
+import es.aesan.rgseaa.model.entity.ActivityKeyCategory;
 import es.aesan.rgseaa.model.entity.Category;
 
 
@@ -24,6 +25,7 @@ import es.aesan.rgseaa.model.criteria.CategoryCriteria;
 import es.aesan.rgseaa.model.dto.CategoryDto;
 import es.aesan.rgseaa.model.entity.ActivityKey;
 import es.aesan.rgseaa.model.entity.Category;
+import es.aesan.rgseaa.service.service.ActivityKeyCategoryService;
 import es.aesan.rgseaa.service.service.ActivityKeyService;
 import es.aesan.rgseaa.service.service.CategoryService;
 import lombok.RequiredArgsConstructor;
@@ -52,8 +54,8 @@ public class CategoryFacade extends AbstractFacade<
 
 
     private final ActivityKeyCategoryService activityKeyCategoryService;
-    @Autowired
-    private final ActivityKeyService activityKeyService;
+
+
 
 
     @Autowired

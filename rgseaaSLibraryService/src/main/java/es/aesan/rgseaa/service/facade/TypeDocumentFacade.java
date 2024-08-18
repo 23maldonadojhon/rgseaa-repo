@@ -30,6 +30,12 @@ public class TypeDocumentFacade extends AbstractFacade<
     }
 
     @Override
+    public void update(TypeDocumentDto dto){
+        TypeDocument typeDocument= converter.dtoToEntity(dto);
+        typeDocumentService.update(typeDocument);
+    }
+
+    @Override
     public List<TypeDocumentDto> list(GeneralCriteria criteria) {
         Collection<TypeDocument> list = typeDocumentService.list(criteria);
         List<TypeDocumentDto> dtoList = converter.mapEntityToDtoList(new ArrayList<>(list));
@@ -42,4 +48,10 @@ public class TypeDocumentFacade extends AbstractFacade<
         Page<TypeDocumentDto> dtoPage=converter.mapEntityToDtoPage(page);
         return dtoPage;
     }
+@Override
+    public TypeDocumentDto get(Long id) {
+    TypeDocument typeDocument = typeDocumentService.get(id);
+    TypeDocumentDto typeDocumentDto = converter.entityToDto(typeDocumentService.get(id));
+    return  typeDocumentDto;
+}
 }

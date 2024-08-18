@@ -49,10 +49,23 @@ public class SubActivityFacade extends AbstractFacade<
     }
 
     @Override
+    public void update(SubActivityDto dto){
+        SubActivity subActivity=converter.dtoToEntity(dto);
+        subActivityService.update(subActivity);
+    }
+
+    @Override
     public Page<SubActivityDto> page(SubActivityCriteria criteria) {
         Page<SubActivity> list = subActivityService.page(criteria);
         Page<SubActivityDto> dtoList = converter.mapEntityToDtoPage(list);
         return dtoList;
+    }
+
+    @Override
+    public SubActivityDto get(Long id){
+        SubActivity subActivity=subActivityService.get(id);
+        SubActivityDto subActivityDto=converter.entityToDto(subActivityService.get(id));
+        return  subActivityDto;
     }
 
     @Override
