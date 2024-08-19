@@ -24,17 +24,12 @@ public class TypeActuationFacade extends AbstractFacade<
         ActuationCriteria> {
 
     private final TypeActuationService typeActuationService;
-    private final CompanyActuationService companyActuationService;
+   private final CompanyActuationService companyActuationService;
 
     private final TypeActuationConverter converter;
 
 
-    @Override
-    public TypeActuationDto get(Long id) {
-        TypeActuation typeActuation = typeActuationService.get(id);
-        TypeActuationDto dto = converter.entityToDto(typeActuation);
-        return dto;
-    }
+
 
     @Override
     public void add(TypeActuationDto dto){
@@ -42,6 +37,11 @@ public class TypeActuationFacade extends AbstractFacade<
         typeActuationService.add(typeActuation);
     }
 
+    @Override
+    public  void update(TypeActuationDto dto){
+        TypeActuation typeActuation= converter.dtoToEntity(dto);
+        typeActuationService.update(typeActuation);
+    }
 
     @Override
     public List<TypeActuationDto> list(ActuationCriteria criteria) {
@@ -55,6 +55,13 @@ public class TypeActuationFacade extends AbstractFacade<
         Page<TypeActuation> list= typeActuationService.page(criteria);
         Page<TypeActuationDto> dtoList=converter.mapEntityToDtoPage(list);
         return dtoList;
+    }
+
+    @Override
+    public TypeActuationDto get(Long id){
+        TypeActuation typeActuation = typeActuationService.get(id);
+        TypeActuationDto typeActuationDto=converter.entityToDto(typeActuationService.get(id));
+        return  typeActuationDto;
     }
 
     public List<TypeActuationDto> listCompany(ActuationCriteria criteria) {

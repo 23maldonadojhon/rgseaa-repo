@@ -17,6 +17,7 @@ import java.util.Set;
 public class Profile extends AuditedBaseEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
 
