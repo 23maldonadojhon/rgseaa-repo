@@ -2,7 +2,6 @@ package es.aesan.rgseaa.service.facade;
 
 
 import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
-import es.aesan.rgseaa.model.converter.CompanyEstablishmentViewConverter;
 import es.aesan.rgseaa.model.dto.CompanyEstablishmenInterface;
 import es.aesan.rgseaa.model.dto.CompanyEstablishmentViewDto;
 import es.aesan.rgseaa.service.service.CompanyEstablishmentViewService;
@@ -22,8 +21,7 @@ public class CompanyEstablishmentViewFacade extends AbstractFacade<
     > {
 
     private final CompanyEstablishmentViewService companyEstablishmentViewService;
-
-    private final CompanyEstablishmentViewConverter companyEstablishmentViewConverter;
+    
 
 
     private static final Logger logger = LoggerFactory.getLogger(CompanyEstablishmentViewFacade.class);

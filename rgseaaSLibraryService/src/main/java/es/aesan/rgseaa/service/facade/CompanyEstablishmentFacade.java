@@ -2,10 +2,7 @@ package es.aesan.rgseaa.service.facade;
 
 import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 import es.aesan.rgseaa.model.converter.*;
-import es.aesan.rgseaa.model.dto.AuthorizationDto;
-import es.aesan.rgseaa.model.dto.CompanyEstablishmentDto;
-import es.aesan.rgseaa.model.dto.EstablishmentDto;
-import es.aesan.rgseaa.model.dto.RgseaaActivityDto;
+import es.aesan.rgseaa.model.dto.*;
 import es.aesan.rgseaa.model.entity.*;
 import es.aesan.rgseaa.service.service.*;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +28,7 @@ public class CompanyEstablishmentFacade extends AbstractFacade<
     private final RgseaaService rgseaaService;
     private final CompanyAuthorizationService companyAuthorizationService;
     private final RgseaaActivityService rgseaaActivityService;
+    private final CompanyActuationService companyActuationService;
 
 
     private final CompanyConverter companyConverter;
@@ -41,6 +39,7 @@ public class CompanyEstablishmentFacade extends AbstractFacade<
     private final ActivityConverter activityConverter;
     private final SubActivityConverter subActivityConverter;
     private final KeyConverter keyConverter;
+    private final TypeActuationConverter typeActuationConverter;
 
 
 
@@ -49,37 +48,34 @@ public class CompanyEstablishmentFacade extends AbstractFacade<
 
         EstablishmentDto dto = companyEstablishmentDto.getEstablishment();
 
-        Situation situation = situationService.get(dto.getSituationId());
-        Country country = countryService.get(dto.getCountryId());
-        Company company = companyService.get(companyEstablishmentDto.getCompany().getId());
-
-        Establishment establishment = establishmentConverter.dtoToEntity(dto);
-
-        establishment.setSituation(situation);
-        establishment.setCountry(country);
-        establishment.setCompany(company);
-
-        Optional.ofNullable(dto.getProvinceId())
-                .map(provinceService::get)
-                .ifPresent(establishment::setProvince);
-
-
-        Optional.ofNullable(dto.getLocationId())
-                .map(locationService::get)
-                .ifPresent(establishment::setLocation);
-
+        Establishment establishment = getValue(dto);
         Establishment establishmentSaved = establishmentService.add(establishment);
 
         Rgseaa rgseaa = getValueRgseaa(companyEstablishmentDto.getRgseaaActivityList());
         rgseaa.setEstablishment(establishmentSaved);
 
-        Rgseaa rgseaaSaved = rgseaaService.add(rgseaa);
-
         List<CompanyAuthorization> companyAuthorizationList = getValueAuthorization(companyEstablishmentDto.getAuthorizationList(),establishmentSaved);
         companyAuthorizationList.forEach(companyAuthorizationService::add);
 
+        List<CompanyActuation> companyActuationList = getCompanyActuation(companyEstablishmentDto.getTypeActuationList(),establishmentSaved);
+        companyActuationList.forEach(companyActuationService::add);
+
+        Rgseaa rgseaaSaved = rgseaaService.add(rgseaa);
         List<RgseaaActivity> rgseaaActivityList = getValueRgseaaActivity(companyEstablishmentDto.getRgseaaActivityList(),rgseaaSaved);
         rgseaaActivityList.forEach(rgseaaActivityService::add);
+
+    }
+
+
+    public void update(CompanyEstablishmentDto companyEstablishmentDto) {
+
+        EstablishmentDto dto = companyEstablishmentDto.getEstablishment();
+
+        Establishment establishment = getValue(dto);
+        Establishment establishmentSaved = establishmentService.update(establishment);
+
+        List<CompanyActuation> companyActuationList = getCompanyActuationUpdate(companyEstablishmentDto.getTypeActuationList(),establishmentSaved);
+        companyActuationList.forEach(companyActuationService::add);
     }
 
 
@@ -134,4 +130,77 @@ public class CompanyEstablishmentFacade extends AbstractFacade<
 
         return list;
     }
+
+
+
+    private Establishment getValue(EstablishmentDto dto) {
+
+        Establishment establishment = establishmentConverter.dtoToEntity(dto);
+
+        Situation situation = situationService.get(dto.getSituationId());
+        Country country = countryService.get(dto.getCountryId());
+        Company company = companyService.get(dto.getCompanyId());
+
+        establishment.setSituation(situation);
+        establishment.setCountry(country);
+        establishment.setCompany(company);
+
+        Optional.ofNullable(dto.getProvinceId())
+                .map(provinceService::get)
+                .ifPresent(establishment::setProvince);
+
+
+        Optional.ofNullable(dto.getLocationId())
+                .map(locationService::get)
+                .ifPresent(establishment::setLocation);
+
+        return establishment;
+
+    }
+
+
+
+    private List<CompanyActuation>  getCompanyActuation(List<TypeActuationDto> list, Establishment establishment) {
+
+        List<CompanyActuation> companyActuationList = new ArrayList<>();
+
+        list.forEach(item->{
+            CompanyActuation companyActuation = new CompanyActuation();
+            TypeActuation typeActuation = typeActuationConverter.dtoToEntity(item);
+            companyActuation.setActuation(typeActuation);
+            companyActuation.setEstablishment(establishment);
+            companyActuationList.add(companyActuation);
+        });
+
+        return companyActuationList;
+    }
+
+    private List<TypeActuation> getValueTypeActuation(List<TypeActuationDto> dto) {
+
+        List<TypeActuation> list = new ArrayList<>();
+
+        dto.stream()
+                .filter(TypeActuationDto::isSaved)
+                .forEach(item -> {
+                    TypeActuation typeActuation = typeActuationConverter.dtoToEntity(item);
+                    list.add(typeActuation);
+                });
+
+        return list;
+    }
+
+    private List<CompanyActuation>  getCompanyActuationUpdate(List<TypeActuationDto> dto,  Establishment establishment) {
+
+        List<CompanyActuation> companyActuationList = new ArrayList<>();
+
+        getValueTypeActuation(dto).forEach(item->{
+            CompanyActuation companyActuation = new CompanyActuation();
+            companyActuation.setActuation(item);
+            companyActuation.setEstablishment(establishment);
+            companyActuationList.add(companyActuation);
+        });
+
+        return companyActuationList;
+    }
+
 }

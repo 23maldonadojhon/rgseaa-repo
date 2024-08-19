@@ -17,6 +17,8 @@ public interface CompanyActuationRepository
     @Query(" SELECT c FROM CompanyActuation c" +
             " WHERE " +
             "(:#{#criteria.state} IS NULL OR c.state = :#{#criteria.state}) " +
-            " AND (:#{#criteria.companyId} IS NULL OR c.company.id = :#{#criteria.companyId})")
+            " AND (:#{#criteria.companyId} IS NULL OR c.company.id = :#{#criteria.companyId})" +
+            " AND (:#{#criteria.establishmentId} IS NULL OR c.establishment.id = :#{#criteria.establishmentId})")
+
     List<CompanyActuation> findAll(CompanyActuationCriteria criteria);
 }

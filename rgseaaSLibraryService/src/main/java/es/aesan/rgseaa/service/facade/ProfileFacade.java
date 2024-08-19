@@ -44,7 +44,7 @@ public class ProfileFacade extends AbstractFacade<ProfileDto,GeneralCriteria> {
     private final PermissionConverter permissionConverter;
 
 
-    private static final Logger logger = LoggerFactory.getLogger(PermissionFacade.class);
+    private static final Logger logger = LoggerFactory.getLogger(ProfileFacade.class);
 
 
     @Override

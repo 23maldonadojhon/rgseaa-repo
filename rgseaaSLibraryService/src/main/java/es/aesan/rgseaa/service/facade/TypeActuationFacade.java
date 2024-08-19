@@ -67,7 +67,12 @@ public class TypeActuationFacade extends AbstractFacade<
     public List<TypeActuationDto> listCompany(ActuationCriteria criteria) {
 
         CompanyActuationCriteria companyActuationCriteria = new CompanyActuationCriteria();
-        companyActuationCriteria.setCompanyId(criteria.getCompanyId());
+
+        if(criteria.getEstablishmentId()>0)
+            companyActuationCriteria.setEstablishmentId(criteria.getEstablishmentId());
+        else
+            companyActuationCriteria.setCompanyId(criteria.getCompanyId());
+
 
         Collection<CompanyActuation> companyActuationCollection = companyActuationService.list(companyActuationCriteria);
         List<TypeActuation> typeActuationList =  companyActuationCollection.stream().map(CompanyActuation::getActuation).collect(Collectors.toList());

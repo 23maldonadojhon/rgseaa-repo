@@ -4,7 +4,6 @@ package es.aesan.rgseaa.service.repository;
 import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 import es.aesan.rgseaa.model.dto.CompanyEstablishmenInterface;
 import es.aesan.rgseaa.model.entity.CompanyEstablishmentView;
-import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
