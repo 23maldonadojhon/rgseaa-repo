@@ -24,7 +24,7 @@ public class SituationFacade extends AbstractFacade<
         GeneralCriteria
         > {
 
-    private static final Logger logger = LoggerFactory.getLogger(SituationFacade.class);
+    //private static final Logger logger = LoggerFactory.getLogger(SituationFacade.class);
 
     private final SituationService situationService;
 
@@ -33,35 +33,42 @@ public class SituationFacade extends AbstractFacade<
     @Override
     //@Transactional
     public void add(SituationDto dto) {
-        Situation situation= situationConverter.dtoToEntity(dto);
+        Situation situation = situationConverter.dtoToEntity(dto);
         situationService.add(situation);
 
     }
 
     @Override
-    @Transactional
     public void update(SituationDto dto) {
+        Situation situation = situationConverter.dtoToEntity(dto);
+        situationService.update(situation);
 
-    }
-
-    @Override
-    public SituationDto get(final Long id){
-        return null;
-    }
-
-    @Override
-    public Page<SituationDto> page(GeneralCriteria criteria){
-        Page<Situation> page= situationService.page(criteria);
-        Page<SituationDto> dtoPage=situationConverter.mapEntityToDtoPage(page);
-        return dtoPage;
     }
 
     @Override
     public List<SituationDto> list(GeneralCriteria criteria) {
 
-        logger.info("==== FACADE-> getSituationPage ====");
-
+        //  logger.info("==== FACADE-> getSituationPage ====");
         Collection<Situation> list = situationService.list(criteria);
-        return situationConverter.mapEntityToDtoList(new ArrayList<>(list));
+        List<SituationDto> situationDtos = situationConverter.mapEntityToDtoList(new ArrayList<>(list));
+        //return situationConverter.mapEntityToDtoList(new ArrayList<>(list));
+        return situationDtos;
     }
+
+    @Override
+    public Page<SituationDto> page(GeneralCriteria criteria) {
+        Page<Situation> page = situationService.page(criteria);
+        Page<SituationDto> dtoPage = situationConverter.mapEntityToDtoPage(page);
+        return dtoPage;
+    }
+
+    @Override
+    public SituationDto get(Long id) {
+        Situation situation = situationService.get(id);
+        SituationDto situationDto = situationConverter.entityToDto(situationService.get(id));
+        return situationDto;
+    }
+
+
 }
+
