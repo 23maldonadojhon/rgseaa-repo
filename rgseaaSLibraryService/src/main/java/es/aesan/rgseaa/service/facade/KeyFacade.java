@@ -46,6 +46,13 @@ public class KeyFacade extends AbstractFacade<
         Key key=keyConverter.dtoToEntity(dto);
         keyService.add(key);
     }
+
+    @Override
+    public void update(KeyDto dto){
+        Key key= keyConverter.dtoToEntity(dto);
+        keyService.update((key));
+    }
+
     @Override
     public List<KeyDto> list (GeneralCriteria criteria) {
         Collection<Key> list=keyService.list(criteria);
@@ -60,6 +67,13 @@ public class KeyFacade extends AbstractFacade<
         Page<KeyDto> keyDtoPage = keyConverter.mapEntityToDtoPage(page);
 
         return keyDtoPage;
+    }
+
+    @Override
+    public  KeyDto get(Long id){
+        Key key = keyService.get(id);
+        KeyDto keyDto = keyConverter.entityToDto(keyService.get(id));
+        return keyDto;
     }
 
 
