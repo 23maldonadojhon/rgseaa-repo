@@ -14,13 +14,11 @@ public class SituationDto {
 
     private Long id;
 
+    private String code;
+
     private String name;
 
     private Long typeIndustryProduct;
-
-    private Long newOption;
-
-    private Integer noDelete;
 
     private Integer visibleRgsa;
 

@@ -5,6 +5,7 @@ import es.aesan.rgseaa.model.util.ConstantBD;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -45,6 +46,10 @@ public class Company extends AuditedBaseEntity {
     @ManyToOne
     @JoinColumn(name = "COUNTRY_ID", referencedColumnName = "ID")
     private Country country;
+
+    @ManyToOne
+    @JoinColumn(name = "CCAA_ID", referencedColumnName = "ID")
+    private Ccaa ccaa;
 
     @ManyToOne
     @JoinColumn(name = "PROVINCE_ID", referencedColumnName = "ID")

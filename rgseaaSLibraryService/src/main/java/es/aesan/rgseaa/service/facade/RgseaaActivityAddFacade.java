@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -97,6 +98,7 @@ public class RgseaaActivityAddFacade extends AbstractFacade<
     public void update(RgseaaActivityAddDto dto) {
 
         Rgseaa rgseaa = rgseaaService.get(dto.getRgseaaId());
+        rgseaa.setDateModification(LocalDate.now());
 
         RgseaaActivityCriteria rgseaaActivityCriteria = new RgseaaActivityCriteria();
         rgseaaActivityCriteria.setRgseaaId(rgseaa.getId());

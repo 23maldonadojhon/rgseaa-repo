@@ -3,15 +3,12 @@ package es.aesan.rgseaa.service.facade;
 
 import es.aesan.rgseaa.model.converter.*;
 import es.aesan.rgseaa.model.criteria.EstablishmentCriteria;
-import es.aesan.rgseaa.model.dto.CompanyDto;
 import es.aesan.rgseaa.model.dto.EstablishmentDto;
-import es.aesan.rgseaa.model.dto.RgseaaActivityDto;
 import es.aesan.rgseaa.model.entity.*;
 import es.aesan.rgseaa.service.service.*;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,7 +31,7 @@ public class EstablishmentFacade  extends AbstractFacade<
     private final CountryService countryService;
     private final ProvinceService provinceService;
     private final LocationService locationService;
-    private final CompanyAuthorizationService companyAuthorizationService;
+    private final RgseaaAuthorizationService rgseaaAuthorizationService;
     private final RgseaaService rgseaaService;
     private final RgseaaActivityService rgseaaActivityService;
     private final CompanyActuationService companyActuationService;

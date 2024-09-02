@@ -27,9 +27,6 @@ public class TypeDocument extends AuditedBaseEntity {
     @Column(name = "NAME")
     private String name;
 
-    @Column(name = "TYPE_COMPANY_PRODUCT")
-    private Long typeCompanyProduct;
-
     @Column(name = "VISIBLE_CCAA")
     private Integer visible;
 

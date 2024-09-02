@@ -11,6 +11,6 @@ public class TypeActuationDto implements Serializable {
     private Long id;
     private String name;
     private Integer visible;
-    private Long typeIndustry;
+    private Long typeIndustryProduct;
     private boolean saved;
 }

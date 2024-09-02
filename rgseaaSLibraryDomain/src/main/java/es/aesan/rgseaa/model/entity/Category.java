@@ -20,6 +20,9 @@ public class Category extends AuditedBaseEntity {
     @Column(name = "ID")
     private Long id;
 
+    @Column(name = "CODE")
+    private String code;
+
     @Column(name = "NAME")
     private String name;
 

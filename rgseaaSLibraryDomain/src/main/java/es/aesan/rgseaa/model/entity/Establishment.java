@@ -35,6 +35,10 @@ public class Establishment extends AuditedBaseEntity {
     private Country country;
 
     @ManyToOne
+    @JoinColumn(name = "CCAA_ID", referencedColumnName = "ID")
+    private Ccaa ccaa;
+
+    @ManyToOne
     @JoinColumn(name = "PROVINCE_ID", referencedColumnName = "ID")
     private Province province;
 

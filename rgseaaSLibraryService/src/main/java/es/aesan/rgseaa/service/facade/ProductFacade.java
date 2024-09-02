@@ -142,36 +142,6 @@ public class ProductFacade extends AbstractFacade<ProductDto,ProductCriteria> {
     }
 
 
-    public Page<SituationDto> getSituationPage(GeneralCriteria criteria) {
-        logger.info("==== FACADE-> getSituationPage ====");
-
-        Page<Situation> entitiePage = situationService.page(criteria);
-
-        return situationConverter.mapEntityToDtoPage(entitiePage);
-    }
-
-
-    public List<DocumentDto> getDocumentList(DocumentCriteria criteria){
-        logger.info("==== FACADE-> getDocumentList ====");
-
-        List<Document> documentList = documentService.all(criteria);
-
-        List<DocumentDto> documentDtoList = getDocumentDtoList(documentList);
-
-        return documentDtoList;
-    }
-
-
-    public List<ActionDto> getListAction(ActionCriteria criteria){
-        logger.info("==== FACADE-> getListAction ====");
-
-        List<Action> actionList =  actionService.all(criteria);
-
-        List<ActionDto> actionDtoList = actionConverter.mapEntityToDtoList(actionList);
-
-        return actionDtoList;
-    }
-
 
     public Page<CountryDto> getCountriesAvailablePage() {
         logger.info("==== FACADE-> getCountriesAvailablePage ====");

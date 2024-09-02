@@ -1,6 +1,7 @@
 package es.aesan.rgseaa.service.repository;
 
 import es.aesan.rgseaa.model.criteria.ActuationCriteria;
+import es.aesan.rgseaa.model.criteria.TypeActuationCriteria;
 import es.aesan.rgseaa.model.entity.TypeActuation;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,12 +11,14 @@ import java.util.Collection;
 
 public interface TypeActuationRepository
         extends BaseRepository<TypeActuation,Long>,
-        QueryByCriteria<TypeActuation,ActuationCriteria> {
+        QueryByCriteria<TypeActuation, TypeActuationCriteria> {
 
     @Query(value = "SELECT t FROM TypeActuation t")
-    Page<TypeActuation> findAllByCriteria(ActuationCriteria criteria, Pageable pageable);
+    Page<TypeActuation> findAllByCriteria(TypeActuationCriteria criteria, Pageable pageable);
 
     @Override
-    @Query(value = "SELECT t FROM TypeActuation t")
-    Collection<TypeActuation> findAll(ActuationCriteria criteria);
+    @Query(value = " SELECT t FROM TypeActuation t " +
+            " WHERE :#{#criteria.state} = t.state " +
+            " AND (:#{#criteria.typeIndustryProduct} IS NULL OR t.typeIndustryProduct = :#{#criteria.typeIndustryProduct}) ")
+    Collection<TypeActuation> findAll(TypeActuationCriteria criteria);
 }

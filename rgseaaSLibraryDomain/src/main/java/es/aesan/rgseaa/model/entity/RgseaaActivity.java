@@ -7,7 +7,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name = ConstantBD.TABLE_RGSEAA_ACTIVITY)
+@Table(name = ConstantBD.TABLE_RGSEAA_ACTIVITIES)
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

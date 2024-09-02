@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -41,7 +42,8 @@ public class CompanyFacade extends AbstractFacade<
     private final EstablishmentService establishmentService;
     private final RgseaaService rgseaaService;
     private final RgseaaActivityService rgseaaActivityService;
-    private final CompanyAuthorizationService companyAuthorizationService;
+    private final RgseaaAuthorizationService rgseaaAuthorizationService;
+    private final CcaaService ccaaService;
 
 
     private final CountryConverter countryConverter;
@@ -57,6 +59,7 @@ public class CompanyFacade extends AbstractFacade<
     private final SubActivityConverter subActivityConverter;
     private final EstablishmentConverter establishmentConverter;
     private final TypeActuationConverter typeActuationConverter;
+    private final CcaaConverter ccaaConverter;
 
 
     private final FileUtilService fileUtilService;
@@ -76,13 +79,14 @@ public class CompanyFacade extends AbstractFacade<
         Rgseaa rgseaa = getValueRgseaa(dto);
         rgseaa.setCompany(companySaved);
 
-        List<CompanyAuthorization> companyAuthorizationList = getValueAuthorization(dto,companySaved);
-        companyAuthorizationList.forEach(companyAuthorizationService::add);
-
-        List<CompanyActuation> companyActuationList = getCompanyActuation(dto,companySaved);
-        companyActuationList.forEach(companyActuationService::add);
+        List<Actuation> actuationList = getCompanyActuation(dto,companySaved);
+        actuationList.forEach(companyActuationService::add);
 
         Rgseaa rgseaaSaved = rgseaaService.add(rgseaa);
+
+        List<RgseaaAuthorization> rgseaaAuthorizationList = getValueAuthorization(dto,rgseaaSaved);
+        rgseaaAuthorizationList.forEach(rgseaaAuthorizationService::add);
+
         List<RgseaaActivity> rgseaaActivityList = getValueRgseaaActivity(dto,rgseaaSaved);
         rgseaaActivityList.forEach(rgseaaActivityService::add);
 
@@ -98,8 +102,8 @@ public class CompanyFacade extends AbstractFacade<
         Company company = getValue(dto);
         Company companyUpdated = companyService.update(company);
 
-        List<CompanyActuation> companyActuationList = getCompanyActuationUpdate(dto,companyUpdated);
-        companyActuationList.forEach(companyActuationService::add);
+        List<Actuation> actuationList = getCompanyActuationUpdate(dto,companyUpdated);
+        actuationList.forEach(companyActuationService::add);
 
     }
 
@@ -440,6 +444,9 @@ public class CompanyFacade extends AbstractFacade<
                 .map(provinceService::get)
                 .ifPresent(company::setProvince);
 
+        Optional.ofNullable(dto.getCcaaId())
+                .map(ccaaService::get)
+                .ifPresent(company::setCcaa);
 
         Optional.ofNullable(dto.getLocationId())
                 .map(locationService::get)
@@ -459,53 +466,54 @@ public class CompanyFacade extends AbstractFacade<
                 .findFirst().get());
 
         rgseaa.setKey(key);
+        rgseaa.setDateAnnotation(LocalDate.now());
 
         return rgseaa;
     }
 
 
-    private List<CompanyActuation>  getCompanyActuationUpdate(CompanyDto dto,  Company company) {
+    private List<Actuation>  getCompanyActuationUpdate(CompanyDto dto, Company company) {
 
-        List<CompanyActuation> companyActuationList = new ArrayList<>();
+        List<Actuation> actuationList = new ArrayList<>();
 
         getValueTypeActuation(dto.getTypeActuationList()).forEach(item->{
-            CompanyActuation companyActuation = new CompanyActuation();
-            companyActuation.setActuation(item);
-            companyActuation.setCompany(company);
-            companyActuationList.add(companyActuation);
+            Actuation actuation = new Actuation();
+            actuation.setActuation(item);
+            actuation.setCompany(company);
+            actuationList.add(actuation);
         });
 
-        return companyActuationList;
+        return actuationList;
     }
 
-    private List<CompanyActuation>  getCompanyActuation(CompanyDto dto,  Company company) {
+    private List<Actuation>  getCompanyActuation(CompanyDto dto, Company company) {
 
-        List<CompanyActuation> companyActuationList = new ArrayList<>();
+        List<Actuation> actuationList = new ArrayList<>();
 
         dto.getTypeActuationList().forEach(item->{
-            CompanyActuation companyActuation = new CompanyActuation();
+            Actuation actuation = new Actuation();
             TypeActuation typeActuation = typeActuationConverter.dtoToEntity(item);
-            companyActuation.setActuation(typeActuation);
-            companyActuation.setCompany(company);
-            companyActuationList.add(companyActuation);
+            actuation.setActuation(typeActuation);
+            actuation.setCompany(company);
+            actuationList.add(actuation);
         });
 
-        return companyActuationList;
+        return actuationList;
     }
 
 
-    private List<CompanyAuthorization>  getValueAuthorization(CompanyDto dto,  Company company) {
+    private List<RgseaaAuthorization>  getValueAuthorization(CompanyDto dto, Rgseaa rgseaa) {
 
-        List<CompanyAuthorization> authorizationList = new ArrayList<>();
+        List<RgseaaAuthorization> authorizationList = new ArrayList<>();
 
         dto.getAuthorizationList().forEach(item->{
             Authorization authorization = authorizationConverter.dtoToEntity(item);
 
-            CompanyAuthorization companyAuthorization = new CompanyAuthorization();
-            companyAuthorization.setCompany(company);
-            companyAuthorization.setAuthorization(authorization);
+            RgseaaAuthorization rgseaaAuthorization = new RgseaaAuthorization();
+            rgseaaAuthorization.setRgseaa(rgseaa);
+            rgseaaAuthorization.setAuthorization(authorization);
 
-            authorizationList.add(companyAuthorization);
+            authorizationList.add(rgseaaAuthorization);
         });
 
         return authorizationList;

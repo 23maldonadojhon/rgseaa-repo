@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 
 @NoArgsConstructor
@@ -20,4 +21,7 @@ public class RgseaaDto implements Serializable {
     private Long establishmentId;
     private String numRgseaa;
     private String enrollment;
+    private LocalDate dateRegister;
+    private LocalDate dateAnnotation;
+    private LocalDate dateModification;
 }

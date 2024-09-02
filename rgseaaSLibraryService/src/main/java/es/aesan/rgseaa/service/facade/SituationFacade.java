@@ -3,6 +3,7 @@ package es.aesan.rgseaa.service.facade;
 
 import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 import es.aesan.rgseaa.model.converter.SituationConverter;
+import es.aesan.rgseaa.model.criteria.SituationCriteria;
 import es.aesan.rgseaa.model.dto.SituationDto;
 import es.aesan.rgseaa.model.entity.Situation;
 import es.aesan.rgseaa.service.service.SituationService;
@@ -21,7 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SituationFacade extends AbstractFacade<
         SituationDto,
-        GeneralCriteria
+        SituationCriteria
         > {
 
     //private static final Logger logger = LoggerFactory.getLogger(SituationFacade.class);
@@ -46,7 +47,7 @@ public class SituationFacade extends AbstractFacade<
     }
 
     @Override
-    public List<SituationDto> list(GeneralCriteria criteria) {
+    public List<SituationDto> list(SituationCriteria criteria) {
 
         //  logger.info("==== FACADE-> getSituationPage ====");
         Collection<Situation> list = situationService.list(criteria);
@@ -56,7 +57,7 @@ public class SituationFacade extends AbstractFacade<
     }
 
     @Override
-    public Page<SituationDto> page(GeneralCriteria criteria) {
+    public Page<SituationDto> page(SituationCriteria criteria) {
         Page<Situation> page = situationService.page(criteria);
         Page<SituationDto> dtoPage = situationConverter.mapEntityToDtoPage(page);
         return dtoPage;

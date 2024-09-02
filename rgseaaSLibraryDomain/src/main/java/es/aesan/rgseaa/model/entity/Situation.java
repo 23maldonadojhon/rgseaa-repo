@@ -21,14 +21,14 @@ public class Situation extends AuditedBaseEntity {
     @Column(name = "ID")
     private Long id;
 
+    @Column(name = "CODE")
+    private String code;
+
     @Column(name = "NAME")
     private String name;
 
-    @Column(name = "NEW_OPTION")
-    private Long newOption;
-
-    @Column(name = "NO_DELETE")
-    private Integer noDelete;
+    @Column(name = "TYPE_INDUSTRY_PRODUCT")
+    private Long typeIndustryProduct;
 
     @Column(name = "VISIBLE_RGSA")
     private Integer visibleRgsa;

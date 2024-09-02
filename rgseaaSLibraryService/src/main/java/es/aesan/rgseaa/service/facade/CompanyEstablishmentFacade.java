@@ -24,9 +24,10 @@ public class CompanyEstablishmentFacade extends AbstractFacade<
     private final SituationService situationService;
     private final CountryService countryService;
     private final ProvinceService provinceService;
+    private final CcaaService ccaaService;
     private final LocationService locationService;
     private final RgseaaService rgseaaService;
-    private final CompanyAuthorizationService companyAuthorizationService;
+    private final RgseaaAuthorizationService rgseaaAuthorizationService;
     private final RgseaaActivityService rgseaaActivityService;
     private final CompanyActuationService companyActuationService;
 
@@ -54,13 +55,16 @@ public class CompanyEstablishmentFacade extends AbstractFacade<
         Rgseaa rgseaa = getValueRgseaa(companyEstablishmentDto.getRgseaaActivityList());
         rgseaa.setEstablishment(establishmentSaved);
 
-        List<CompanyAuthorization> companyAuthorizationList = getValueAuthorization(companyEstablishmentDto.getAuthorizationList(),establishmentSaved);
-        companyAuthorizationList.forEach(companyAuthorizationService::add);
 
-        List<CompanyActuation> companyActuationList = getCompanyActuation(companyEstablishmentDto.getTypeActuationList(),establishmentSaved);
-        companyActuationList.forEach(companyActuationService::add);
+
+        List<Actuation> actuationList = getCompanyActuation(companyEstablishmentDto.getTypeActuationList(),establishmentSaved);
+        actuationList.forEach(companyActuationService::add);
 
         Rgseaa rgseaaSaved = rgseaaService.add(rgseaa);
+
+        List<RgseaaAuthorization> rgseaaAuthorizationList = getValueAuthorization(companyEstablishmentDto.getAuthorizationList(),rgseaaSaved);
+        rgseaaAuthorizationList.forEach(rgseaaAuthorizationService::add);
+
         List<RgseaaActivity> rgseaaActivityList = getValueRgseaaActivity(companyEstablishmentDto.getRgseaaActivityList(),rgseaaSaved);
         rgseaaActivityList.forEach(rgseaaActivityService::add);
 
@@ -74,8 +78,8 @@ public class CompanyEstablishmentFacade extends AbstractFacade<
         Establishment establishment = getValue(dto);
         Establishment establishmentSaved = establishmentService.update(establishment);
 
-        List<CompanyActuation> companyActuationList = getCompanyActuationUpdate(companyEstablishmentDto.getTypeActuationList(),establishmentSaved);
-        companyActuationList.forEach(companyActuationService::add);
+        List<Actuation> actuationList = getCompanyActuationUpdate(companyEstablishmentDto.getTypeActuationList(),establishmentSaved);
+        actuationList.forEach(companyActuationService::add);
     }
 
 
@@ -92,18 +96,18 @@ public class CompanyEstablishmentFacade extends AbstractFacade<
         return rgseaa;
     }
 
-    private List<CompanyAuthorization> getValueAuthorization(List<AuthorizationDto> dto, Establishment establishment) {
+    private List<RgseaaAuthorization> getValueAuthorization(List<AuthorizationDto> dto, Rgseaa rgseaa) {
 
-        List<CompanyAuthorization> authorizationList = new ArrayList<>();
+        List<RgseaaAuthorization> authorizationList = new ArrayList<>();
 
         dto.forEach(item->{
             Authorization authorization = authorizationConverter.dtoToEntity(item);
 
-            CompanyAuthorization companyAuthorization = new CompanyAuthorization();
-            companyAuthorization.setEstablishment(establishment);
-            companyAuthorization.setAuthorization(authorization);
+            RgseaaAuthorization rgseaaAuthorization = new RgseaaAuthorization();
+            rgseaaAuthorization.setRgseaa(rgseaa);
+            rgseaaAuthorization.setAuthorization(authorization);
 
-            authorizationList.add(companyAuthorization);
+            authorizationList.add(rgseaaAuthorization);
         });
 
         return authorizationList;
@@ -142,13 +146,16 @@ public class CompanyEstablishmentFacade extends AbstractFacade<
         Company company = companyService.get(dto.getCompanyId());
 
         establishment.setSituation(situation);
-        establishment.setCountry(country);
         establishment.setCompany(company);
+        establishment.setCountry(country);
 
         Optional.ofNullable(dto.getProvinceId())
                 .map(provinceService::get)
                 .ifPresent(establishment::setProvince);
 
+        Optional.ofNullable(dto.getCcaaId())
+                .map(ccaaService::get)
+                .ifPresent(establishment::setCcaa);
 
         Optional.ofNullable(dto.getLocationId())
                 .map(locationService::get)
@@ -160,19 +167,19 @@ public class CompanyEstablishmentFacade extends AbstractFacade<
 
 
 
-    private List<CompanyActuation>  getCompanyActuation(List<TypeActuationDto> list, Establishment establishment) {
+    private List<Actuation>  getCompanyActuation(List<TypeActuationDto> list, Establishment establishment) {
 
-        List<CompanyActuation> companyActuationList = new ArrayList<>();
+        List<Actuation> actuationList = new ArrayList<>();
 
         list.forEach(item->{
-            CompanyActuation companyActuation = new CompanyActuation();
+            Actuation actuation = new Actuation();
             TypeActuation typeActuation = typeActuationConverter.dtoToEntity(item);
-            companyActuation.setActuation(typeActuation);
-            companyActuation.setEstablishment(establishment);
-            companyActuationList.add(companyActuation);
+            actuation.setActuation(typeActuation);
+            actuation.setEstablishment(establishment);
+            actuationList.add(actuation);
         });
 
-        return companyActuationList;
+        return actuationList;
     }
 
     private List<TypeActuation> getValueTypeActuation(List<TypeActuationDto> dto) {
@@ -189,18 +196,18 @@ public class CompanyEstablishmentFacade extends AbstractFacade<
         return list;
     }
 
-    private List<CompanyActuation>  getCompanyActuationUpdate(List<TypeActuationDto> dto,  Establishment establishment) {
+    private List<Actuation>  getCompanyActuationUpdate(List<TypeActuationDto> dto, Establishment establishment) {
 
-        List<CompanyActuation> companyActuationList = new ArrayList<>();
+        List<Actuation> actuationList = new ArrayList<>();
 
         getValueTypeActuation(dto).forEach(item->{
-            CompanyActuation companyActuation = new CompanyActuation();
-            companyActuation.setActuation(item);
-            companyActuation.setEstablishment(establishment);
-            companyActuationList.add(companyActuation);
+            Actuation actuation = new Actuation();
+            actuation.setActuation(item);
+            actuation.setEstablishment(establishment);
+            actuationList.add(actuation);
         });
 
-        return companyActuationList;
+        return actuationList;
     }
 
 }

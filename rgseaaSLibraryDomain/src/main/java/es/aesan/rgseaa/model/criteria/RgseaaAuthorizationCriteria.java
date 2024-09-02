@@ -1,7 +1,7 @@
 package es.aesan.rgseaa.model.criteria;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import es.aesan.rgseaa.model.commom.criteria.FilterCriteria;
+import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 import lombok.*;
 
 @Getter
@@ -10,6 +10,6 @@ import lombok.*;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AuthorizationCriteria extends FilterCriteria {
+public class RgseaaAuthorizationCriteria extends GeneralCriteria {
     private Long rgseaaId;
 }
