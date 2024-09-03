@@ -1,5 +1,6 @@
 package es.aesan.rgseaa.service.service;
 
+import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 import es.aesan.rgseaa.model.criteria.CategoryCriteria;
 import es.aesan.rgseaa.model.entity.Category;
 import es.aesan.rgseaa.service.repository.CategoryRepository;
@@ -13,7 +14,9 @@ public class CategoryService
         Category,
         Long,
         CategoryRepository,
-        CategoryCriteria
+        GeneralCriteria
+        //CategoryCriteria
+
 
         > {
 

@@ -1,16 +1,16 @@
 package es.aesan.rgseaa.model.dto;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
-@NoArgsConstructor
+import java.io.Serializable;
+
+/*@NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@Setter
-public class CategoryDto {
+@Setter*/
+@Data
+public class CategoryDto implements Serializable {
     private Long id;
     private String name;
 }
