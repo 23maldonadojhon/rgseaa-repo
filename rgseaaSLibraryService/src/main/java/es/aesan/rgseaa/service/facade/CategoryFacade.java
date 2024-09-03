@@ -1,6 +1,7 @@
 package es.aesan.rgseaa.service.facade;
 
-import es.aesan.rgseaa.model.converter.ActivityConverter;
+import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
+//import es.aesan.rgseaa.model.converter.ActivityConverter;
 import es.aesan.rgseaa.model.converter.CategoryConverter;
 
 
@@ -16,20 +17,21 @@ import es.aesan.rgseaa.model.entity.Category;
 
 
 
-import es.aesan.rgseaa.model.converter.CategoryConverter;
+//import es.aesan.rgseaa.model.converter.CategoryConverter;
 
 import es.aesan.rgseaa.model.criteria.ActivityKeyCategoryCriteria;
 
 import es.aesan.rgseaa.model.criteria.ActivityKeyCriteria;
-import es.aesan.rgseaa.model.criteria.CategoryCriteria;
+//import es.aesan.rgseaa.model.criteria.CategoryCriteria;
 import es.aesan.rgseaa.model.dto.CategoryDto;
 import es.aesan.rgseaa.model.entity.ActivityKey;
-import es.aesan.rgseaa.model.entity.Category;
-import es.aesan.rgseaa.service.service.ActivityKeyCategoryService;
-import es.aesan.rgseaa.service.service.ActivityKeyService;
+//import es.aesan.rgseaa.model.entity.Category;
+//import es.aesan.rgseaa.service.service.ActivityKeyCategoryService;
+//import es.aesan.rgseaa.service.service.ActivityKeyService;
 import es.aesan.rgseaa.service.service.CategoryService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -43,28 +45,46 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CategoryFacade extends AbstractFacade<
         CategoryDto,
-        CategoryCriteria> {
+        GeneralCriteria> {
 
-    @Autowired
     private final CategoryService categoryService;
 
-    @Autowired
-
-    private final ActivityKeyService activityKeyService;
+    //private final ActivityKeyService activityKeyService;
 
 
-    private final ActivityKeyCategoryService activityKeyCategoryService;
+    //private final ActivityKeyCategoryService activityKeyCategoryService;
 
-
-
-
-    @Autowired
     private final CategoryConverter categoryConverter;
 
+    @Override
+    public void add(CategoryDto dto){
+        Category category=categoryConverter.dtoToEntity(dto);
+        categoryService.update(category);
+    }
+
+    @Override
+    public void update(CategoryDto dto){
+        Category category=categoryConverter.dtoToEntity(dto);
+        categoryService.update(category);
+    }
 
 
+    @Override
+    public Page<CategoryDto> page(GeneralCriteria criteria){
+        Page<Category> categoryPage=categoryService.page(criteria);
+        Page<CategoryDto> categoryDtoPage=categoryConverter.mapEntityToDtoPage(categoryPage);
+        return  categoryDtoPage;
+    }
 
-    public List<CategoryDto> activityList(CategoryCriteria categoryCriteria) {
+    @Override
+    public CategoryDto get(Long id){
+        Category category= categoryService.get(id);
+        CategoryDto categoryDto=categoryConverter.entityToDto(categoryService.get(id));
+        return  categoryDto;
+    }
+
+
+   /* public List<CategoryDto> activityList(CategoryCriteria categoryCriteria) {
 
         ActivityKeyCriteria criteria = new ActivityKeyCriteria();
         criteria.setActivityId(categoryCriteria.getActivityId());
@@ -76,18 +96,18 @@ public class CategoryFacade extends AbstractFacade<
         List<CategoryDto> dtoList = categoryConverter.mapEntityToDtoList(categoryList);
 
         return dtoList;
-    }
+    }*/
 
 
-    @Override
+   /* @Override
     public List<CategoryDto> list(CategoryCriteria criteria) {
 
         Collection<Category> categoryCollection =  categoryService.list(criteria);
         List<CategoryDto> dtoList = categoryConverter.mapEntityToDtoList(new ArrayList<>(categoryCollection));
         return dtoList;
-    }
+    }*/
 
-    public List<CategoryDto> listActivity(CategoryCriteria categoryCriteria) {
+    /*public List<CategoryDto> listActivity(CategoryCriteria categoryCriteria) {
 
         List<Category> categoryList = new ArrayList<>();
 
@@ -108,6 +128,6 @@ public class CategoryFacade extends AbstractFacade<
         List<CategoryDto> categoryDtoList = categoryConverter.mapEntityToDtoList(categoryList);
 
         return categoryDtoList;
-    }
+    }*/
 }
 
