@@ -13,10 +13,6 @@ public class TypeDocumentDto implements Serializable {
 
     private String name;
 
-
-
-    private Long typeCompanyProduct;
-
     private Integer visible;
 
     private Integer noDelete;

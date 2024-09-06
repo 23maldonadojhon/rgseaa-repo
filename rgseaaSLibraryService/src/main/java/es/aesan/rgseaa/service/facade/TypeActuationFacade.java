@@ -3,8 +3,9 @@ package es.aesan.rgseaa.service.facade;
 import es.aesan.rgseaa.model.converter.TypeActuationConverter;
 import es.aesan.rgseaa.model.criteria.ActuationCriteria;
 import es.aesan.rgseaa.model.criteria.CompanyActuationCriteria;
+import es.aesan.rgseaa.model.criteria.TypeActuationCriteria;
 import es.aesan.rgseaa.model.dto.TypeActuationDto;
-import es.aesan.rgseaa.model.entity.CompanyActuation;
+import es.aesan.rgseaa.model.entity.Actuation;
 import es.aesan.rgseaa.model.entity.TypeActuation;
 import es.aesan.rgseaa.service.service.CompanyActuationService;
 import es.aesan.rgseaa.service.service.TypeActuationService;
@@ -21,7 +22,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class TypeActuationFacade extends AbstractFacade<
         TypeActuationDto,
-        ActuationCriteria> {
+        TypeActuationCriteria> {
 
     private final TypeActuationService typeActuationService;
    private final CompanyActuationService companyActuationService;
@@ -44,14 +45,14 @@ public class TypeActuationFacade extends AbstractFacade<
     }
 
     @Override
-    public List<TypeActuationDto> list(ActuationCriteria criteria) {
+    public List<TypeActuationDto> list(TypeActuationCriteria criteria) {
         Collection<TypeActuation> list = typeActuationService.list(criteria);
         List<TypeActuationDto> dtoList = converter.mapEntityToDtoList(new ArrayList<>(list));
         return dtoList;
     }
 
     @Override
-    public Page<TypeActuationDto> page(ActuationCriteria criteria){
+    public Page<TypeActuationDto> page(TypeActuationCriteria criteria){
         Page<TypeActuation> list= typeActuationService.page(criteria);
         Page<TypeActuationDto> dtoList=converter.mapEntityToDtoPage(list);
         return dtoList;
@@ -74,8 +75,8 @@ public class TypeActuationFacade extends AbstractFacade<
             companyActuationCriteria.setCompanyId(criteria.getCompanyId());
 
 
-        Collection<CompanyActuation> companyActuationCollection = companyActuationService.list(companyActuationCriteria);
-        List<TypeActuation> typeActuationList =  companyActuationCollection.stream().map(CompanyActuation::getActuation).collect(Collectors.toList());
+        Collection<Actuation> actuationCollection = companyActuationService.list(companyActuationCriteria);
+        List<TypeActuation> typeActuationList =  actuationCollection.stream().map(Actuation::getActuation).collect(Collectors.toList());
         List<TypeActuationDto> typeActuationDtoList = converter.mapEntityToDtoList(typeActuationList);
         return typeActuationDtoList;
     }

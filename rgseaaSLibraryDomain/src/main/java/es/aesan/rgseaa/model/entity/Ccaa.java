@@ -1,5 +1,6 @@
 package es.aesan.rgseaa.model.entity;
 
+
 import es.aesan.rgseaa.model.commom.db.AuditedBaseEntity;
 import es.aesan.rgseaa.model.util.ConstantBD;
 import lombok.*;
@@ -7,13 +8,13 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name = ConstantBD.TABLE_TYPES_ACTUATIONS)
+@Table(name = ConstantBD.TABLE_CCAA)
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
-public class TypeActuation extends  AuditedBaseEntity {
+public class Ccaa extends AuditedBaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,10 +24,7 @@ public class TypeActuation extends  AuditedBaseEntity {
     @Column(name = "NAME")
     private String name;
 
-    @Column(name = "TYPE_INDUSTRY_PRODUCT")
-    private Long typeIndustryProduct;
-
-    @Column(name = "VISIBLE_CCAA")
-    private Integer visible;
+    @Column(name = "ENROLLMENT")
+    private String enrollment;
 
 }

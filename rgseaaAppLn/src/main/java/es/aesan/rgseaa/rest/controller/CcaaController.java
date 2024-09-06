@@ -2,9 +2,8 @@ package es.aesan.rgseaa.rest.controller;
 
 
 import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
-import es.aesan.rgseaa.model.criteria.SituationCriteria;
-import es.aesan.rgseaa.model.dto.SituationDto;
-import es.aesan.rgseaa.service.facade.SituationFacade;
+import es.aesan.rgseaa.model.dto.CcaaDto;
+import es.aesan.rgseaa.service.facade.CcaaFacade;
 import es.aesan.rgseaa.util.Url;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,14 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(Url.API+Url.SITUATIONS)
-public class SituationController extends AbstractController<
-        SituationDto,
-        SituationFacade,
-        SituationCriteria
+@RequestMapping(Url.API+Url.CCAA)
+public class CcaaController extends  AbstractController<
+        CcaaDto,
+        CcaaFacade,
+        GeneralCriteria
         > {
 
-    SituationController(SituationFacade facade) {
+    CcaaController(CcaaFacade facade) {
         super(facade);
     }
 }

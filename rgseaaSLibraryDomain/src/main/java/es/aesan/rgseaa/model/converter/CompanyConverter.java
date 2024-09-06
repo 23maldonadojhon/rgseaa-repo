@@ -25,6 +25,7 @@ public interface CompanyConverter
     @Mapping(target = "provinceId", source = "province.id")
     @Mapping(target = "locationId", source = "location.id")
     @Mapping(target = "situationId", source = "situation.id")
+    @Mapping(target = "ccaaId", source = "ccaa.id")
     CompanyDto entityToDto(Company entity);
 
     List<CompanyFindDto> dtoToEntityFindList(List<Company> company);

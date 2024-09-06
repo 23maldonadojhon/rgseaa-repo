@@ -50,15 +50,6 @@ public class ProductController extends AbstractController<
     }
 
 
-    @GetMapping(Url.SITUATIONS)
-    public ResponseEntity<Page<SituationDto>> getSituationPage(GeneralCriteria criteria) {
-        logger.info("==== CONTROLLER -> GET getAllSituations ====");
-
-        Page<SituationDto> dtoPage = facade.getSituationPage(criteria);
-        return ResponseEntity.status(HttpStatus.OK).body(dtoPage);
-    }
-
-
     @GetMapping(Url.COUNTRIES)
     public ResponseEntity<Page<CountryDto>> getCountryAll() {
         logger.info("==== CONTROLLER -> GET getCountryAll ====");

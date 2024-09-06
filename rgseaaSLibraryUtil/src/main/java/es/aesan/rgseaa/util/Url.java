@@ -5,10 +5,11 @@ public class Url {
     public static final String DENOMINATION_SALES ="/denomination_sales";
     public static final String ACTIVITIES_KEYS ="/activities_keys";
     public static final String KEYS ="/keys";
+    public static final String CCAA ="/ccaa";
     public static final String COMPANIES ="/companies";
     public static final String COMPANY_ESTABLISHMENTS ="/company_establishments";
     public static final String COMPANY_ESTABLISHMENTS_VIEW ="/company_establishments_view";
-    public static final String RGSEAA ="/rgseaa";
+    public static final String RGSEAA ="/codes";
     public static final String RGSEAA_ACTIVITIES ="/rgseaa_activities";
     public static final String RGSEAA_ACTIVITIES_ADD ="/rgseaa_activities_add";
     public static final String SUBSTANCES ="/substances";

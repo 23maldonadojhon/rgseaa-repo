@@ -11,7 +11,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CountryService extends AbstractService<Country,Long,CountryRepository,GeneralCriteria> {
+public class CountryService extends AbstractService<
+        Country,
+        Long,
+        CountryRepository,
+        GeneralCriteria> {
 
     CountryService(CountryRepository repository){
         super(repository);
@@ -22,4 +26,5 @@ public class CountryService extends AbstractService<Country,Long,CountryReposito
         Page<Country> countryPage = new PageImpl<>(countryList);
         return countryPage;
     }
+
 }

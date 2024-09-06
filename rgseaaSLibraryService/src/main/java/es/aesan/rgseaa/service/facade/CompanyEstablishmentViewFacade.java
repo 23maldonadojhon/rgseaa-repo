@@ -38,8 +38,6 @@ public class CompanyEstablishmentViewFacade extends AbstractFacade<
         if(criteria.getSearch()!=null)
             criteria.setSearch("%"+criteria.getSearch()+"%");
 
-
-
         Page<CompanyEstablishmenInterface> dtoPage =  companyEstablishmentViewService.pageCriteria(criteria);
         return dtoPage;
     }

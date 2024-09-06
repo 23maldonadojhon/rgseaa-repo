@@ -1,25 +1,25 @@
 package es.aesan.rgseaa.model.entity;
 
+
 import es.aesan.rgseaa.model.commom.db.AuditedBaseEntity;
 import es.aesan.rgseaa.model.util.ConstantBD;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Entity
-@Table(name = ConstantBD.TABLE_RGSEAA)
+@Table(name = ConstantBD.TABLE_ACTUATIONS)
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
-public class Rgseaa extends AuditedBaseEntity {
+public class Actuation extends AuditedBaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    @Column(name = "ID")
+    @EqualsAndHashCode.Include
+    @Column(name="ID")
     private Long id;
 
     @ManyToOne
@@ -31,21 +31,6 @@ public class Rgseaa extends AuditedBaseEntity {
     private Establishment establishment;
 
     @ManyToOne
-    @JoinColumn(name = "KEY_ID", referencedColumnName = "ID")
-    private Key key;
-
-    @Column(name = "NUM_RGSEAA")
-    private String numRgseaa;
-
-    @Column(name = "ENROLLMENT")
-    private String  enrollment;
-
-    @Column(name = "DATE_REGISTER")
-    private LocalDate dateRegister;
-
-    @Column(name = "DATE_ANNOTATION")
-    private LocalDate dateAnnotation;
-
-    @Column(name = "DATE_MODIFICATION")
-    private LocalDate dateModification;
+    @JoinColumn(name = "ACTUATION_ID", referencedColumnName = "ID")
+    private TypeActuation actuation;
 }
