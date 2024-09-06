@@ -5,6 +5,7 @@ import es.aesan.rgseaa.model.util.ConstantBD;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -24,9 +25,12 @@ public class Profile extends AuditedBaseEntity {
     @Column(name = "NAME", nullable = false)
     private String name;
 
-    @Column(name = "ID_STATE")
+    @Column(name = "STATE")
     private Integer state = 1;
 
     @Transient
     private Set<ProfilePermission> profilePermission;
+
+    @Transient
+    private List<Permission> permission;
 }

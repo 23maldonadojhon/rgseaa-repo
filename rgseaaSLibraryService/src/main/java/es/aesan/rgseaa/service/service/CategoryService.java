@@ -14,10 +14,7 @@ public class CategoryService
         Category,
         Long,
         CategoryRepository,
-        GeneralCriteria
-        //CategoryCriteria
-
-
+        CategoryCriteria
         > {
 
     CategoryService(CategoryRepository repository) {

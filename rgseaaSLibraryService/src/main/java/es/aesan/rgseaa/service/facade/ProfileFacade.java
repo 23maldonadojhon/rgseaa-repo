@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -96,10 +97,17 @@ public class ProfileFacade extends AbstractFacade<ProfileDto,GeneralCriteria> {
 
         Set<ProfilePermission> profilePermissionSet = profilePermissionService.getByProfileId(id);
 
+        List<Permission> permissionList = profilePermissionSet.stream().map(ProfilePermission::getPermission).collect(Collectors.toList());
+
         Profile entity = profileService.get(id);
-        entity.setProfilePermission(profilePermissionSet);
+
+        entity.setPermission(permissionList);
 
         ProfileDto entityDto = profileConverter.entityToDto(entity);
+
+        List<PermissionDto> permissionDtoList = permissionConverter.mapEntityToDtoList(permissionList);
+
+        entityDto.setPermissions(permissionDtoList);
         return  entityDto;
     }
 

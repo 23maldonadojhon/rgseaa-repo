@@ -53,11 +53,9 @@ public interface UserConverter {
         ProfileDto profileDto = new ProfileDto();
 
         if( entity.getProfile()!=null){
-
             profileDto.setId(entity.getProfile().getProfile().getId());
             profileDto.setName(entity.getProfile().getProfile().getName());
             profileDto.setState(entity.getProfile().getProfile().getState());
-            profileDto.setPermissions(new HashSet<>());
         }
 
         return profileDto;
