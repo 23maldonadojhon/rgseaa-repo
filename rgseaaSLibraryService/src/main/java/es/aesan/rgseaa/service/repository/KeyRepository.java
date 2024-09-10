@@ -12,14 +12,15 @@ import java.util.Collection;
 @Repository
 public interface KeyRepository extends BaseRepository<Key,Long>, QueryByCriteria<Key,GeneralCriteria> {
 
-    @Query(value = "  SELECT k FROM Key k" +
-                    " WHERE " +
-                    " (:#{#criteria.id} IS NULL OR k.id = :#{#criteria.id} )")
+    @Query(value = "  SELECT k FROM Key k"
+                    //" WHERE " +
+                   // " (:#{#criteria.id} IS NULL OR k.id = :#{#criteria.id} )"
+            )
     Page<Key> findAllByCriteria(GeneralCriteria criteria, Pageable pageable);
 
     @Override
     @Query(value = "  SELECT k FROM Key k" +
-            " WHERE " +
+            " WHERE  " +
             " (:#{#criteria.id} IS NULL OR k.id = :#{#criteria.id} )")
     Collection<Key> findAll(GeneralCriteria criteria);
 

@@ -8,7 +8,11 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class KeyService extends AbstractService<Key,Long,KeyRepository, GeneralCriteria> {
+public class KeyService extends AbstractService<
+        Key,
+        Long,
+        KeyRepository,
+        GeneralCriteria> {
 
     KeyService(KeyRepository repository){
         super(repository);
