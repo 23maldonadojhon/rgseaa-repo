@@ -28,6 +28,9 @@ public class Key extends AuditedBaseEntity {
     @Column(name="NAME")
     private String name;
 
+    @Column(name="CODE")
+    private Long code;
+
     @Column(name="DATE_REGISTER")
     private LocalDate dateRegister;
 
@@ -42,6 +45,9 @@ public class Key extends AuditedBaseEntity {
 
     @Column(name="IS_PUBLIC")
     private Long isPublic;
+
+
+
 /*
      @Column(name = "STATE")
     private long state;

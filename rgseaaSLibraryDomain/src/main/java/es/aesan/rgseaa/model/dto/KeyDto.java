@@ -21,9 +21,7 @@ public class KeyDto implements Serializable {
 
     private String name;
 
-    private LocalDate dateRegister;
-
-    private LocalDate dateUnregister;
+    private Long code;
 
     private Long allowProduct;
 
@@ -31,5 +29,5 @@ public class KeyDto implements Serializable {
 
     private Long isPublic;
 
-    private Integer state;
+
 }
