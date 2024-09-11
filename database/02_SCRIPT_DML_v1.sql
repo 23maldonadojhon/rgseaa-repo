@@ -3869,3 +3869,10 @@ INSERT INTO SITUATIONS (ID, NAME, TYPE_INDUSTRY_PRODUCT) VALUES(20, 'Final de ex
 INSERT INTO SITUATIONS (ID, NAME, TYPE_INDUSTRY_PRODUCT) VALUES(21, 'SIN NOTIFICAR A LAS AACC', 1);
 INSERT INTO SITUATIONS (ID, NAME, TYPE_INDUSTRY_PRODUCT) VALUES(22, 'Alta condicional', 0);
 
+
+INSERT INTO AUTHORIZATIONS (ID, NAME) VALUES (1, 'Mataderos NO RUMIANTES (hemoderivados) (anexo IV, cap IV, secc C, a), 1ºpárr R(CE) 999/2001)');
+INSERT INTO AUTHORIZATIONS (ID, NAME) VALUES (2, 'Mataderos PORCINO y RUMIANTES, autorizados (hemoderivados) (anexo IV, cap IV, secc C, a), 2º, 3º,4ºpárr. R(CE) 999/2001)');
+INSERT INTO AUTHORIZATIONS (ID, NAME) VALUES (3, 'Mataderos, salas de despiece, establecimientos - NO RUMIANTES (PATs) (anexo IV, cap IV, secc D, a) 1ºpárr. R(CE) 999/2001)');
+INSERT INTO AUTHORIZATIONS (ID, NAME) VALUES (4, 'Mataderos, salas de despiece, establecimientos - RUMIANTES, autorizados (PATs) (anexo IV, cap IV, secc D, a), 2º,3º, 4ºpárr. R(CE) 999/2001)');
+INSERT INTO AUTHORIZATIONS (ID, NAME) VALUES (5, 'Suministrador de materias primas para piensos (R(CE) nº 183/2005)');
+
