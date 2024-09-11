@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -24,5 +25,5 @@ public class ProfileDto implements LongIdModel {
     @NotBlank
     private String name;
 
-    private Set<PermissionDto> permissions;
+    private List<PermissionDto> permissions;
 }

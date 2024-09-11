@@ -19,18 +19,18 @@ public interface UserRepository
     @Override
     @Query(value = "SELECT t FROM User t " +
             "WHERE :#{#criteria.state} = t.state " +
-            "AND (:#{#criteria.name} IS NULL OR t.name LIKE :#{#criteria.name}) "+
-            "AND (:#{#criteria.firstSurname} IS NULL OR UPPER(t.firstSurname) LIKE UPPER(:#{#criteria.firstSurname})) "+
-            "AND (:#{#criteria.secondSurname} IS NULL OR UPPER(t.secondSurname) LIKE UPPER(:#{#criteria.secondSurname})) "+
-            "AND (:#{#criteria.nif} IS NULL OR UPPER(t.nif) LIKE UPPER(:#{#criteria.nif})) "+
-            "AND (:#{#criteria.email} IS NULL OR UPPER(t.email) LIKE UPPER(:#{#criteria.email})) "+
+            " AND (:#{#criteria.name} IS NULL OR t.name LIKE :#{#criteria.name}) "+
+            " AND (:#{#criteria.firstSurname} IS NULL OR UPPER(t.firstSurname) LIKE UPPER(:#{#criteria.firstSurname})) "+
+            " AND (:#{#criteria.secondSurname} IS NULL OR UPPER(t.secondSurname) LIKE UPPER(:#{#criteria.secondSurname})) "+
+            " AND (:#{#criteria.nif} IS NULL OR UPPER(t.nif) LIKE UPPER(:#{#criteria.nif})) "+
+            " AND (:#{#criteria.email} IS NULL OR UPPER(t.email) LIKE UPPER(:#{#criteria.email})) "+
             " AND (" +
             ":#{#criteria.search} IS NULL "+
-            "OR UPPER(t.name) LIKE UPPER(:#{#criteria.search}) "+
-            "OR UPPER(t.firstSurname) LIKE UPPER(:#{#criteria.search}) "+
-            "OR UPPER(t.secondSurname) LIKE UPPER(:#{#criteria.search}) "+
-            "OR UPPER(t.nif) LIKE UPPER(:#{#criteria.search}) "+
-            "OR UPPER(t.email) LIKE UPPER(:#{#criteria.search}) "+
+            " OR UPPER(t.name) LIKE UPPER(:#{#criteria.search}) "+
+            " OR UPPER(t.firstSurname) LIKE UPPER(:#{#criteria.search}) "+
+            " OR UPPER(t.secondSurname) LIKE UPPER(:#{#criteria.search}) "+
+            " OR UPPER(t.nif) LIKE UPPER(:#{#criteria.search}) "+
+            " OR UPPER(t.email) LIKE UPPER(:#{#criteria.search}) "+
             ") "
     )
     Page<User> findAllByCriteria(@Param("criteria") UserCriteria criteria, Pageable pageable);

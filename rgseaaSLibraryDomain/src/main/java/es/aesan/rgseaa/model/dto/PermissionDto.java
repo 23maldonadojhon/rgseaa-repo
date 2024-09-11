@@ -13,10 +13,6 @@ public class PermissionDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Long id;
-    private Long languageId;
-
-    private Integer state = EntityState.ON.getValue();
-
     @NotNull
     @NotBlank
     private String code;

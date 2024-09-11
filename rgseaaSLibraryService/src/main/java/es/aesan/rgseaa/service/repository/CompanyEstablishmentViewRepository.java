@@ -71,9 +71,14 @@ public interface CompanyEstablishmentViewRepository
             "RIGHT JOIN " +
             "    ESTABLISHMENTS e ON c.ID = e.COMPANY_ID " +
             ") t " +
-            "WHERE" +
+            " WHERE" +
             " (:#{#criteria.state} IS NULL OR t.COMPANY_STATE = :#{#criteria.state}) " +
-            " AND (:#{#criteria.search} IS NULL OR  UPPER(t.COMPANY_NAME) LIKE(UPPER(:#{#criteria.search}))) ",
+            " AND ( " +
+            "   :#{#criteria.search} IS NULL "+
+            "   OR (UPPER(t.COMPANY_NAME) LIKE(UPPER(:#{#criteria.search}))) " +
+            "   OR (UPPER(t.COMPANY_ADDRESS) LIKE(UPPER(:#{#criteria.search}))) " +
+            "   OR (UPPER(t.ESTABLISHMENT_ADDRESS) LIKE(UPPER(:#{#criteria.search}))) " +
+            " ) ",
             nativeQuery = true)
     Long findListCount(@Param("criteria") GeneralCriteria criteria);
 
@@ -150,22 +155,25 @@ public interface CompanyEstablishmentViewRepository
             "           COMPANIES c\n" +
             "        RIGHT JOIN\n" +
             "           ESTABLISHMENTS e ON c.ID = e.COMPANY_ID\n" +
-            ") T\n" +
-            "INNER JOIN SITUATIONS S ON S.ID = T.COMPANY_SITUATION_ID\n" +
-            "LEFT JOIN COUNTRIES C ON C.ID = T.COMPANY_COUNTRY_ID\n" +
-            "LEFT JOIN CCAA CA ON CA.ID = T.COMPANY_CCAA_ID\n" +
-            "LEFT JOIN PROVINCES P ON P.ID = T.COMPANY_PROVINCE_ID\n" +
-            "LEFT JOIN LOCATIONS L ON L.ID = T.COMPANY_LOCATION_ID\n" +
-            "LEFT JOIN SITUATIONS ES ON ES.ID = T.ESTABLISHMENT_SITUATION_ID\n" +
-            "LEFT JOIN COUNTRIES EC ON EC.ID = T.ESTABLISHMENT_COUNTRY_ID\n" +
-            "LEFT JOIN CCAA ECA ON ECA.ID = T.ESTABLISHMENT_CCAA_ID\n" +
-            "LEFT JOIN PROVINCES EP ON EP.ID = T.ESTABLISHMENT_PROVINCE_ID\n" +
-            "LEFT JOIN LOCATIONS EL ON EL.ID = T.ESTABLISHMENT_LOCATION_ID " +
-            "WHERE" +
+            " ) T\n" +
+            " INNER JOIN SITUATIONS S ON S.ID = T.COMPANY_SITUATION_ID\n" +
+            " LEFT JOIN COUNTRIES C ON C.ID = T.COMPANY_COUNTRY_ID\n" +
+            " LEFT JOIN CCAA CA ON CA.ID = T.COMPANY_CCAA_ID\n" +
+            " LEFT JOIN PROVINCES P ON P.ID = T.COMPANY_PROVINCE_ID\n" +
+            " LEFT JOIN LOCATIONS L ON L.ID = T.COMPANY_LOCATION_ID\n" +
+            " LEFT JOIN SITUATIONS ES ON ES.ID = T.ESTABLISHMENT_SITUATION_ID\n" +
+            " LEFT JOIN COUNTRIES EC ON EC.ID = T.ESTABLISHMENT_COUNTRY_ID\n" +
+            " LEFT JOIN CCAA ECA ON ECA.ID = T.ESTABLISHMENT_CCAA_ID\n" +
+            " LEFT JOIN PROVINCES EP ON EP.ID = T.ESTABLISHMENT_PROVINCE_ID\n" +
+            " LEFT JOIN LOCATIONS EL ON EL.ID = T.ESTABLISHMENT_LOCATION_ID " +
+            " WHERE" +
             " (:#{#criteria.state} IS NULL OR t.COMPANY_STATE = :#{#criteria.state}) " +
-            " AND (:#{#criteria.search} IS NULL OR  UPPER(t.COMPANY_NAME) LIKE(UPPER(:#{#criteria.search}))) " +
-            " AND (:#{#criteria.search} IS NULL OR  UPPER(t.COMPANY_ADDRESS) LIKE(UPPER(:#{#criteria.search}))) " +
-            " AND (:#{#criteria.search} IS NULL OR  UPPER(t.ESTABLISHMENT_ADDRESS) LIKE(UPPER(:#{#criteria.search}))) " +
+            " AND ( " +
+            "   :#{#criteria.search} IS NULL "+
+            "   OR (UPPER(t.COMPANY_NAME) LIKE(UPPER(:#{#criteria.search}))) " +
+            "   OR (UPPER(t.COMPANY_ADDRESS) LIKE(UPPER(:#{#criteria.search}))) " +
+            "   OR (UPPER(t.ESTABLISHMENT_ADDRESS) LIKE(UPPER(:#{#criteria.search}))) " +
+            " ) "+
             " ORDER BY t.COMPANY_NAME " +
             " OFFSET (:#{#criteria.size}*:#{#criteria.page}) ROWS FETCH NEXT :#{#criteria.size} ROWS ONLY ",
             nativeQuery = true)

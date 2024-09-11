@@ -17,6 +17,8 @@ public class KeyDto implements Serializable {
 
     private Long id;
 
+    private String code;
+
     private String name;
 
     private Long code;

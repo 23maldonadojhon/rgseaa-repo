@@ -1,8 +1,8 @@
 package es.aesan.rgseaa.rest.controller;
 
 
-//import es.aesan.rgseaa.model.criteria.CategoryCriteria;
-import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
+
+import es.aesan.rgseaa.model.criteria.CategoryCriteria;
 import es.aesan.rgseaa.model.dto.CategoryDto;
 import es.aesan.rgseaa.service.facade.CategoryFacade;
 import es.aesan.rgseaa.util.Url;
@@ -21,8 +21,7 @@ import java.util.List;
 public class CategoryController extends AbstractController<
         CategoryDto,
         CategoryFacade,
-        GeneralCriteria
-//        CategoryCriteria
+        CategoryCriteria
 
         > {
 
@@ -32,12 +31,12 @@ public class CategoryController extends AbstractController<
     }
 
 
-   /* @GetMapping(Url.ACTIVITIES + Url.LIST)
+   @GetMapping(Url.ACTIVITIES + Url.LIST)
     public ResponseEntity<List<CategoryDto>> activityList(CategoryCriteria  categoryCriteria){
         logger.info("==== CONTROLLER -> LIST  :"+this.getClass().getSimpleName());
 
         List<CategoryDto> userPage = facade.listActivity(categoryCriteria);
         return ResponseEntity.status(HttpStatus.OK).body(userPage);
-    }*/
+    }
 
 }

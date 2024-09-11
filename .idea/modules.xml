@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/rgseaaSLibraryDomain/model.iml" filepath="$PROJECT_DIR$/rgseaaSLibraryDomain/model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rgseaaAppLn/rest.iml" filepath="$PROJECT_DIR$/rgseaaAppLn/rest.iml" />
       <module fileurl="file://$PROJECT_DIR$/rgseaaSLibraryService/service.iml" filepath="$PROJECT_DIR$/rgseaaSLibraryService/service.iml" />
     </modules>
   </component>

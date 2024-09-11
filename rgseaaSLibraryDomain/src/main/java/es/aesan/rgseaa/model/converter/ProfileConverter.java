@@ -19,32 +19,6 @@ import java.util.Set;
 public interface ProfileConverter extends BaseConverter<Profile,ProfileDto> {
 
 
-
-    @Override
-    @Mapping(target ="permissions", expression = "java(getPermission(item.getProfilePermission()))")
     ProfileDto entityToDto(Profile item);
-
-
-    default Set<PermissionDto> getPermission(Set<ProfilePermission> profilePermissions){
-
-        Set<PermissionDto> permissionDtoSet = new HashSet<>();
-
-        if(profilePermissions!=null){
-            Iterator<ProfilePermission>  iterator = profilePermissions.iterator();
-
-
-            while(iterator.hasNext()){
-                ProfilePermission profilePermission = iterator.next();
-
-                PermissionDto permissionDto = new PermissionDto();
-                permissionDto.setId(profilePermission.getPermission().getId());
-                permissionDto.setName(permissionDto.getName());
-                permissionDtoSet.add(permissionDto);
-
-            }
-        }
-
-        return permissionDtoSet;
-    }
 
 }
