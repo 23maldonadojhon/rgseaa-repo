@@ -21,7 +21,7 @@ public class KeyDto implements Serializable {
 
     private String name;
 
-    private Long code;
+
 
     private Long allowProduct;
 
