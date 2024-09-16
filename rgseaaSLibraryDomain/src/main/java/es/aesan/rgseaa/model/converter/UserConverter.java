@@ -12,13 +12,11 @@ import org.mapstruct.ReportingPolicy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 
-import java.util.HashSet;
 import java.util.List;
 
 @Mapper(componentModel = "spring",
         uses = {
                 ProfileConverter.class,
-                EntitieConverter.class
         },
         unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface UserConverter {

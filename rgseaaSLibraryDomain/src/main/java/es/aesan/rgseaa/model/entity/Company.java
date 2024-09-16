@@ -5,7 +5,6 @@ import es.aesan.rgseaa.model.util.ConstantBD;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.List;
 
 @Entity

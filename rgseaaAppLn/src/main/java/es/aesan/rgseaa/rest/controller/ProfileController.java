@@ -5,7 +5,6 @@ import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 import es.aesan.rgseaa.model.dto.ProfileDto;
 import es.aesan.rgseaa.service.facade.ProfileFacade;
 import es.aesan.rgseaa.util.Url;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

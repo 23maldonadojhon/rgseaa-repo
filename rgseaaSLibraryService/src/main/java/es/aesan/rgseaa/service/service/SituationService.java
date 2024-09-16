@@ -1,7 +1,6 @@
 package es.aesan.rgseaa.service.service;
 
 
-import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 import es.aesan.rgseaa.model.criteria.SituationCriteria;
 import es.aesan.rgseaa.model.entity.Situation;
 import es.aesan.rgseaa.service.repository.SituationRepository;

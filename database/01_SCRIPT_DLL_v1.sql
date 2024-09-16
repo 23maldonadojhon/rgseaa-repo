@@ -523,9 +523,7 @@ create table ESTABLISHMENTS
 
 create table TYPES_ACTUATIONS
 (
-    ID                    NUMBER(12) default "SEQ_TYPES_ACTUATIONS"."NEXTVAL" not null
-        constraint PK_TYPES_ACTUATIONS__ID
-            primary key,
+    ID                    NUMBER(12) default "SEQ_TYPES_ACTUATIONS"."NEXTVAL" not null constraint PK_TYPES_ACTUATIONS__ID primary key,
     NAME                  VARCHAR2(250),
     TYPE_INDUSTRY_PRODUCT NUMBER(1),
     VISIBLE_CCAA          NUMBER,
@@ -539,18 +537,11 @@ create table TYPES_ACTUATIONS
 
 create table ACTUATIONS
 (
-    ID               NUMBER(12) default "SEQ_COMPANIES_ACTUATIONS"."NEXTVAL" not null
-        constraint PK_ACTUATIONS__ID
-            primary key,
-    COMPANY_ID       NUMBER(12)
-        constraint FK_ACTUATIONS__COMPANY_ID
-            references COMPANIES,
-    ESTABLISHMENT_ID NUMBER(12)
-        constraint FK_ACTUATIONS__ESTABLISHMENT_ID
-            references ESTABLISHMENTS,
-    ACTUATION_ID     NUMBER(12)                                                       not null
-        constraint FK_ACTUATIONS__ACTUATION_ID
-            references TYPES_ACTUATIONS,
+    ID               NUMBER(12) default "SEQ_COMPANIES_ACTUATIONS"."NEXTVAL" not null constraint PK_ACTUATIONS__ID primary key,
+    COMPANY_ID       NUMBER(12) constraint FK_ACTUATIONS__COMPANY_ID references COMPANIES,
+    ESTABLISHMENT_ID NUMBER(12) constraint FK_ACTUATIONS__ESTABLISHMENT_ID references ESTABLISHMENTS,
+    TYPE_ACTUATION_ID NUMBER(12) not null constraint FK_ACTUATIONS__ACTUATION_ID references TYPES_ACTUATIONS,
+    PRODUCT_ID       NUMBER(12),
     CREATED_BY       NUMBER(32),
     CREATED_AT       TIMESTAMP(6),
     UPDATED_BY       NUMBER(32),
@@ -559,37 +550,12 @@ create table ACTUATIONS
 )
 /
 
-create table ACTIONS
-(
-    ID                 NUMBER(12) default "SEQ_ACTIONS"."NEXTVAL" not null
-        constraint PK_ACTIONS__ID
-            primary key,
-    DESCRIPTION        VARCHAR2(200),
-    TYPE_ACTUATION_ID  NUMBER(12)
-        constraint FK_ACTIONS__TYPE_ACTUATION_ID
-            references TYPES_ACTUATIONS,
-    COMPANY_ID         NUMBER(12)
-        constraint FK_ACTIONS__COMPANY_ID
-            references COMPANIES,
-    PRODUCT_ID         NUMBER(12),
-    NUMBER_FILES       NUMBER,
-    TELEMATIC_REGISTER VARCHAR2(25),
-    CREATED_BY         NUMBER(32),
-    CREATED_AT         TIMESTAMP(6),
-    UPDATED_BY         NUMBER(32),
-    UPDATED_AT         TIMESTAMP(6),
-    STATE              NUMBER(1)  default 1                                not null
-)
-/
-
 create table TYPES_DOCUMENTS
 (
-    ID                      NUMBER(12) default "SEQ_TYPES_DOCUMENTS"."NEXTVAL" not null
-        constraint PK_TYPES_DOCUMENTS__ID
-            primary key,
+    ID                      NUMBER(12) default "SEQ_TYPES_DOCUMENTS"."NEXTVAL" not null constraint PK_TYPES_DOCUMENTS__ID primary key,
     TYPE                    VARCHAR2(20),
     NAME                    VARCHAR2(200),
-    TYPE_COMPANY_PRODUCT_ID NUMBER(32),
+    TYPE_COMPANY_PRODUCT    NUMBER(1),
     VISIBLE_CCAA            NUMBER,
     NO_DELETE               NUMBER,
     CREATED_BY              NUMBER(32),
@@ -602,20 +568,12 @@ create table TYPES_DOCUMENTS
 
 create table DOCUMENTS
 (
-    ID               NUMBER(32) default "SEQ_DOCUMENTS"."NEXTVAL" not null
-        constraint PK_DOCUMENTS__ID
-            primary key,
+    ID               NUMBER(32) default "SEQ_DOCUMENTS"."NEXTVAL" not null constraint PK_DOCUMENTS__ID primary key,
     NAME             VARCHAR2(200),
     TYPE_FILE_ID     NUMBER(12),
-    COMPANY_ID       NUMBER(12)
-        constraint FK_DOCUMENTS__COMPANY_ID
-            references COMPANIES,
-    ACTION_ID        NUMBER(12)
-        constraint FK_DOCUMENTS__ACTION_ID
-            references ACTIONS,
-    TYPE_DOCUMENT_ID NUMBER(12)
-        constraint FK_DOCUMENTS__TYPE_DOCUMENT_ID
-            references TYPES_DOCUMENTS,
+    COMPANY_ID       NUMBER(12) constraint FK_DOCUMENTS__COMPANY_ID references COMPANIES,
+    ACTUATION_ID     NUMBER(12) constraint FK_DOCUMENTS__ACTUATION_ID references ACTUATIONS,
+    TYPE_DOCUMENT_ID NUMBER(12) constraint FK_DOCUMENTS__TYPE_DOCUMENT_ID references TYPES_DOCUMENTS,
     PRODUCT_ID       NUMBER(12),
     CASE_FILE_ID     NUMBER(12),
     NUMBER_EXIT      VARCHAR2(25),
@@ -632,15 +590,13 @@ create table DOCUMENTS
 
 create table TYPES_CHANGES_EXPEDIENTS
 (
-    ID         NUMBER(12) default "SEQ_TYPES_CHANGES_EXPEDIENTS"."NEXTVAL" not null
-        constraint PK_TYPES_CHANGES_EXPEDIENTS__ID
-            primary key,
+    ID         NUMBER(12) default "SEQ_TYPES_CHANGES_EXPEDIENTS"."NEXTVAL" not null constraint PK_TYPES_CHANGES_EXPEDIENTS__ID primary key,
     NAME       VARCHAR2(250),
     CREATED_AT TIMESTAMP(6),
     CREATED_BY NUMBER(32),
     UPDATED_AT TIMESTAMP(6),
     UPDATED_BY NUMBER(32),
-    STATE      NUMBER(1)  default 1                                                 not null
+    STATE      NUMBER(1)  default 1 not null
 )
 /
 

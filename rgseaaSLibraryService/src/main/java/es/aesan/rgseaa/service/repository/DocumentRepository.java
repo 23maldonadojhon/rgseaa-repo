@@ -18,7 +18,7 @@ public interface DocumentRepository extends BaseRepository<Document,Long>,
 
     @Query(value = " SELECT d FROM Document d " +
             " WHERE " +
-            " (:#{#criteria.actionId} is null or d.action.id = :#{#criteria.actionId}) "
+            " (:#{#criteria.actuationId} is null or d.actuation.id = :#{#criteria.actuationId}) "
     )
     List<Document> findAll(DocumentCriteria criteria);
 }

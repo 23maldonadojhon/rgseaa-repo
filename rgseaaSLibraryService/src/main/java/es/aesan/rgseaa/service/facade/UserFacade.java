@@ -138,6 +138,10 @@ public class UserFacade extends AbstractFacade<
 
         Page<User> page = userService.page(criteria);
 
+        page.stream().forEach(item->{
+
+        });
+
         Page<UserDto> dtoPage = userConverter.mapEntityToDtoPage(page);
 
         return dtoPage;

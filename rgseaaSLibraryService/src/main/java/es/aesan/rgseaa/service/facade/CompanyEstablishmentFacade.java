@@ -29,13 +29,11 @@ public class CompanyEstablishmentFacade extends AbstractFacade<
     private final RgseaaService rgseaaService;
     private final RgseaaAuthorizationService rgseaaAuthorizationService;
     private final RgseaaActivityService rgseaaActivityService;
-    private final CompanyActuationService companyActuationService;
+    private final ActuationService actuationService;
 
 
-    private final CompanyConverter companyConverter;
     private final EstablishmentConverter establishmentConverter;
     private final AuthorizationConverter authorizationConverter;
-    private final ActionConverter actionConverter;
     private final CategoryConverter categoryConverter;
     private final ActivityConverter activityConverter;
     private final SubActivityConverter subActivityConverter;
@@ -58,7 +56,7 @@ public class CompanyEstablishmentFacade extends AbstractFacade<
 
 
         List<Actuation> actuationList = getCompanyActuation(companyEstablishmentDto.getTypeActuationList(),establishmentSaved);
-        actuationList.forEach(companyActuationService::add);
+        actuationList.forEach(actuationService::add);
 
         Rgseaa rgseaaSaved = rgseaaService.add(rgseaa);
 
@@ -79,7 +77,7 @@ public class CompanyEstablishmentFacade extends AbstractFacade<
         Establishment establishmentSaved = establishmentService.update(establishment);
 
         List<Actuation> actuationList = getCompanyActuationUpdate(companyEstablishmentDto.getTypeActuationList(),establishmentSaved);
-        actuationList.forEach(companyActuationService::add);
+        actuationList.forEach(actuationService::add);
     }
 
 
@@ -174,7 +172,7 @@ public class CompanyEstablishmentFacade extends AbstractFacade<
         list.forEach(item->{
             Actuation actuation = new Actuation();
             TypeActuation typeActuation = typeActuationConverter.dtoToEntity(item);
-            actuation.setActuation(typeActuation);
+            actuation.setTypeActuation(typeActuation);
             actuation.setEstablishment(establishment);
             actuationList.add(actuation);
         });
@@ -202,7 +200,7 @@ public class CompanyEstablishmentFacade extends AbstractFacade<
 
         getValueTypeActuation(dto).forEach(item->{
             Actuation actuation = new Actuation();
-            actuation.setActuation(item);
+            actuation.setTypeActuation(item);
             actuation.setEstablishment(establishment);
             actuationList.add(actuation);
         });

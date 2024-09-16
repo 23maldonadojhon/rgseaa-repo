@@ -14,7 +14,5 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DocumentCriteria extends FilterCriteria {
-
-    private Long actionId;
-
+    private Long actuationId;
 }
