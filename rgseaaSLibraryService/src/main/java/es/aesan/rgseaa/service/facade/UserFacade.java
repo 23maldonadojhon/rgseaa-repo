@@ -1,5 +1,6 @@
 package es.aesan.rgseaa.service.facade;
 
+import es.aesan.rgseaa.model.converter.ProfileConverter;
 import es.aesan.rgseaa.model.converter.UserConverter;
 import es.aesan.rgseaa.model.criteria.UserCriteria;
 import es.aesan.rgseaa.model.dto.UserDto;
@@ -38,7 +39,9 @@ public class UserFacade extends AbstractFacade<
     final private UserService userService;
 
     @Autowired
-    final private UserProfileService userProfileService;
+    final private Profile userProfileService;
+
+    final private ProfileConverter profileConverter;
 
     @Autowired
     final private ProfileService profileService;
@@ -76,9 +79,9 @@ public class UserFacade extends AbstractFacade<
 
         User userSaved = userService.add(user);
 
-        UserProfile userProfile = userProfileService.getProfile(userSaved,profile);
-
-        UserEntitie userEntitie = userEntitieService.getUserEntitie(userSaved,entitie);
+//        UserProfile userProfile = userProfileService.getProfile(userSaved,profile);
+//
+//        UserEntitie userEntitie = userEntitieService.getUserEntitie(userSaved,entitie);
 
         UserProfile userProfileSaved = userProfileService.add(userProfile);
         logger.info("userProfileSaved="+userProfileSaved.getId());

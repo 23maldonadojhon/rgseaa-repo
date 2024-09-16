@@ -42,8 +42,9 @@ public class User extends AuditedBaseEntity {
     @Column(name = "PHONE")
     private String phone;
 
-    @Transient
-    private UserProfile profile;
+    @ManyToOne
+    @JoinColumn(name= "PROFILE_ID", referencedColumnName = "ID")
+    private Profile profile;
 
     @Transient
     private Set<UserModule> modules;
