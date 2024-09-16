@@ -17,7 +17,7 @@ public class Url {
     public static final String FIND ="/find";
     public static final String PRODUCTS ="/products";
     public static final String DOCUMENTS ="/documents";
-    public static final String ACTIONS ="/actions";
+    public static final String ACTUATIONS ="/actuations";
     public static final String ACTIVITIES ="/activities";
     public static final String SUBACTIVITIES ="/subactivities";
     public static final String CATEGORIES ="/categories";
@@ -25,6 +25,7 @@ public class Url {
     public static final String USERS ="/users";
     public static final String AUTH_INDUSTRY ="/auth-industry";
     public static final String AUTHORIZATIONS ="/authorizations";
+    public static final String RGSEAA_AUTHORIZATIONS ="/rgseaa_authorizations";
     public static final String ENTITIES ="/entities";
     public static final String TYPE_DOCUMENTS ="/type_documents";
     public static final String TYPE_ACTUATIONS="/type_actuations";

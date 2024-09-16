@@ -4,7 +4,10 @@ package es.aesan.rgseaa.service.facade;
 import es.aesan.rgseaa.model.converter.*;
 import es.aesan.rgseaa.model.criteria.EstablishmentCriteria;
 import es.aesan.rgseaa.model.dto.EstablishmentDto;
-import es.aesan.rgseaa.model.entity.*;
+import es.aesan.rgseaa.model.entity.Company;
+import es.aesan.rgseaa.model.entity.Country;
+import es.aesan.rgseaa.model.entity.Establishment;
+import es.aesan.rgseaa.model.entity.Situation;
 import es.aesan.rgseaa.service.service.*;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -34,7 +37,7 @@ public class EstablishmentFacade  extends AbstractFacade<
     private final RgseaaAuthorizationService rgseaaAuthorizationService;
     private final RgseaaService rgseaaService;
     private final RgseaaActivityService rgseaaActivityService;
-    private final CompanyActuationService companyActuationService;
+    private final ActuationService actuationService;
 
 
     private final EstablishmentConverter establishmentConverter;

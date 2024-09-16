@@ -19,5 +19,6 @@ public class RgseaaActivityAddDto implements Serializable {
     private Long companyId;
     private Long establishmentId;
     private List<RgseaaActivityDto> rgseaaList;
+    private List<RgseaaAuthorizationDto> rgseaaAuthorization;
 
 }

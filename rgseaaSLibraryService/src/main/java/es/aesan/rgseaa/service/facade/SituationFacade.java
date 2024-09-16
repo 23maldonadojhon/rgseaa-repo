@@ -1,18 +1,14 @@
 package es.aesan.rgseaa.service.facade;
 
 
-import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 import es.aesan.rgseaa.model.converter.SituationConverter;
 import es.aesan.rgseaa.model.criteria.SituationCriteria;
 import es.aesan.rgseaa.model.dto.SituationDto;
 import es.aesan.rgseaa.model.entity.Situation;
 import es.aesan.rgseaa.service.service.SituationService;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collection;

@@ -6,8 +6,6 @@ import es.aesan.rgseaa.model.dto.CountryDto;
 import es.aesan.rgseaa.model.entity.Country;
 import es.aesan.rgseaa.service.service.CountryService;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 

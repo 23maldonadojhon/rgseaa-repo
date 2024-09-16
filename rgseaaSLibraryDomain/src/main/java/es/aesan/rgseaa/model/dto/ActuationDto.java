@@ -6,16 +6,13 @@ import java.io.Serializable;
 import java.util.List;
 
 @Data
-public class ActionDto implements Serializable {
+public class ActuationDto implements Serializable {
 
     private Long id;
-
     private String description;
-
-    private TypeActionDto typeAction;
-
+    private TypeActuationDto typeActuation;
     private List<DocumentDto> documentList;
-
     private Long update;
+    private boolean saved;
 
 }

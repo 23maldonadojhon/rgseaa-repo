@@ -44,6 +44,6 @@ public class ProductDto implements Serializable {
     private LocalDate lastDateKey26;
     private CountryDto countryNotificationKey26;
 
-    private List<ActionDto> action;
+    private List<ActuationDto> action;
 
 }

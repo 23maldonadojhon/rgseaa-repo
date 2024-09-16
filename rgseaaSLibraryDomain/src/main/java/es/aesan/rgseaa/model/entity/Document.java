@@ -17,6 +17,7 @@ import javax.persistence.*;
 public class Document extends AuditedBaseEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
 
@@ -24,20 +25,19 @@ public class Document extends AuditedBaseEntity {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "INDUSTRY_ID", referencedColumnName = "ID")
+    @JoinColumn(name = "COMPANY_ID", referencedColumnName = "ID")
     private Company company;
 
     @ManyToOne
     @JoinColumn(name = "TYPE_DOCUMENT_ID", referencedColumnName = "ID")
     private TypeDocument typeDocument;
 
-    @ManyToOne
-    @JoinColumn(name = "PRODUCT_ID", referencedColumnName = "ID")
+    @Transient
     private Product product;
 
     @ManyToOne
-    @JoinColumn(name = "ACTION_ID", referencedColumnName = "ID")
-    private Action action;
+    @JoinColumn(name = "ACTUATION_ID", referencedColumnName = "ID")
+    private Actuation actuation;
 
     @Column(name = "CASE_FILE_ID")
     private Long caseFile;

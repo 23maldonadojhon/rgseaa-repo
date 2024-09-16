@@ -3,8 +3,10 @@ package es.aesan.rgseaa.service.facade;
 import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 import es.aesan.rgseaa.model.converter.*;
 import es.aesan.rgseaa.model.criteria.RgseaaActivityCriteria;
+import es.aesan.rgseaa.model.criteria.RgseaaAuthorizationCriteria;
 import es.aesan.rgseaa.model.dto.RgseaaActivityAddDto;
 import es.aesan.rgseaa.model.dto.RgseaaActivityDto;
+import es.aesan.rgseaa.model.dto.RgseaaAuthorizationDto;
 import es.aesan.rgseaa.model.entity.*;
 import es.aesan.rgseaa.service.service.*;
 import lombok.RequiredArgsConstructor;
@@ -28,12 +30,14 @@ public class RgseaaActivityAddFacade extends AbstractFacade<
 
     private final RgseaaActivityService rgseaaActivityService;
     private final RgseaaService rgseaaService;
+    private final RgseaaAuthorizationService rgseaaAuthorizationService;
 
     private final RgseaaActivityConverter rgseaaActivityConverter;
     private final KeyConverter keyConverter;
     private final ActivityConverter activityConverter;
     private final CategoryConverter categoryConverter;
     private final SubActivityConverter subActivityConverter;
+    private final AuthorizationConverter authorizationConverter;
 
     private static final Logger logger = LoggerFactory.getLogger(RgseaaActivityAddFacade.class);
     private final SubActivityService subActivityService;
@@ -63,32 +67,11 @@ public class RgseaaActivityAddFacade extends AbstractFacade<
 
         rgseaa.setKey(key);
 
-        List<RgseaaActivity> list = new ArrayList<>();
-
-        dto.getRgseaaList().forEach(item->{
-
-            Activity activity = activityConverter.dtoToEntity(item.getActivity());
-            Category category = categoryConverter.dtoToEntity(item.getCategory());
-            SubActivity subActivity = null;
-
-            if(item.getSubActivity()==null)
-                subActivity = subActivityService.get(0L);
-            else
-                subActivity = subActivityConverter.dtoToEntity(item.getSubActivity());
-
-            RgseaaActivity rgseaaActivity = new RgseaaActivity();
-            rgseaaActivity.setRgseaa(rgseaa);
-            rgseaaActivity.setActivity(activity);
-            rgseaaActivity.setCategory(category);
-            rgseaaActivity.setSubActivity(subActivity);
-
-            list.add(rgseaaActivity);
-
-        });
-
         Rgseaa rgseaaSaved = rgseaaService.add(rgseaa);
 
-        list.forEach(rgseaaActivityService::add);
+        saveActivityList(dto,rgseaaSaved);
+
+        saveRgseaaAuthorization(dto.getRgseaaAuthorization(),rgseaaSaved);
 
     }
 
@@ -100,15 +83,12 @@ public class RgseaaActivityAddFacade extends AbstractFacade<
         Rgseaa rgseaa = rgseaaService.get(dto.getRgseaaId());
         rgseaa.setDateModification(LocalDate.now());
 
-        RgseaaActivityCriteria rgseaaActivityCriteria = new RgseaaActivityCriteria();
-        rgseaaActivityCriteria.setRgseaaId(rgseaa.getId());
+        deleteActivityList(rgseaa);
+        saveActivityList(dto,rgseaa);
 
-        Collection<RgseaaActivity> list = rgseaaActivityService.list(rgseaaActivityCriteria);
-        list.forEach(item->rgseaaActivityService.delete(item.getId()));
+        deleteRgseaaAuthorization(rgseaa);
+        saveRgseaaAuthorization(dto.getRgseaaAuthorization(),rgseaa);
 
-        List<RgseaaActivity> rgseaaActivityList = getActivityList(dto,rgseaa);
-
-        rgseaaActivityList.forEach(rgseaaActivityService::add);
     }
 
 
@@ -136,7 +116,17 @@ public class RgseaaActivityAddFacade extends AbstractFacade<
     }
 
 
-    private List<RgseaaActivity> getActivityList(RgseaaActivityAddDto dto, Rgseaa rgseaa){
+    private void deleteActivityList(Rgseaa rgseaa){
+
+        RgseaaActivityCriteria rgseaaActivityCriteria = new RgseaaActivityCriteria();
+        rgseaaActivityCriteria.setRgseaaId(rgseaa.getId());
+
+        Collection<RgseaaActivity> rgseaaActivityDeleteList = rgseaaActivityService.list(rgseaaActivityCriteria);
+        rgseaaActivityDeleteList.forEach(item->rgseaaActivityService.delete(item.getId()));
+    }
+
+
+    private void saveActivityList(RgseaaActivityAddDto dto, Rgseaa rgseaa){
 
         List<RgseaaActivity> list = new ArrayList<>();
 
@@ -161,7 +151,33 @@ public class RgseaaActivityAddFacade extends AbstractFacade<
 
         });
 
-        return list;
+        list.forEach(rgseaaActivityService::add);
+    }
+
+
+    public void deleteRgseaaAuthorization(Rgseaa rgseaa) {
+
+        RgseaaAuthorizationCriteria rgseaaAuthorizationCriteria = new RgseaaAuthorizationCriteria();
+        rgseaaAuthorizationCriteria.setRgseaaId(rgseaa.getId());
+
+        Collection<RgseaaAuthorization> collection = rgseaaAuthorizationService.list(rgseaaAuthorizationCriteria);
+        collection.forEach(item->rgseaaAuthorizationService.delete(item.getId()));
+
+    }
+
+    public void saveRgseaaAuthorization(List<RgseaaAuthorizationDto> rgseaaAuthorizationDtoList, Rgseaa rgseaa) {
+
+        rgseaaAuthorizationDtoList.forEach(item -> {
+
+            Authorization authorization = authorizationConverter.dtoToEntity(item.getAuthorization());
+
+            RgseaaAuthorization rgseaaAuthorization = new RgseaaAuthorization();
+
+            rgseaaAuthorization.setAuthorization(authorization);
+            rgseaaAuthorization.setRgseaa(rgseaa);
+
+            rgseaaAuthorizationService.add(rgseaaAuthorization);
+        });
     }
 
 

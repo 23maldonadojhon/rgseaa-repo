@@ -6,6 +6,7 @@ import es.aesan.rgseaa.model.criteria.*;
 import es.aesan.rgseaa.model.dto.*;
 import es.aesan.rgseaa.model.entity.*;
 import es.aesan.rgseaa.service.service.*;
+import es.aesan.rgseaa.service.util.Accion;
 import es.aesan.rgseaa.util.Actions;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -24,13 +25,12 @@ public class CompanyFacade extends AbstractFacade<
         CompanyDto,
         CompanyCriteria> {
 
-    private final CompanyActuationService companyActuationService;
+    private final ActuationService actuationService;
     private final CompanyService companyService;
     private final CountryService countryService;
     private final ProvinceService provinceService;
     private final LocationService locationService;
     private final AuthorizationService authorizationService;
-    private final ActionService actionService;
     private final DocumentService documentService;
     private final KeyService keyService;
     private final ActivityService activityService;
@@ -51,7 +51,6 @@ public class CompanyFacade extends AbstractFacade<
     private final ProvinceConverter provinceConverter;
     private final LocationConverter locationConverter;
     private final AuthorizationConverter authorizationConverter;
-    private final ActionConverter actionConverter;
     private final DocumentConverter documentConverter;
     private final KeyConverter keyConverter;
     private final CategoryConverter categoryConverter;
@@ -60,7 +59,8 @@ public class CompanyFacade extends AbstractFacade<
     private final EstablishmentConverter establishmentConverter;
     private final TypeActuationConverter typeActuationConverter;
     private final CcaaConverter ccaaConverter;
-
+    private final ActuationConverter actuationConverter;
+    private final TypeDocumentConverter typeDocumentConverter;
 
     private final FileUtilService fileUtilService;
 
@@ -76,19 +76,11 @@ public class CompanyFacade extends AbstractFacade<
         Company company = getValue(dto);
         Company companySaved = companyService.add(company);
 
-        Rgseaa rgseaa = getValueRgseaa(dto);
-        rgseaa.setCompany(companySaved);
+        Rgseaa rgseaaSaved = saveRgseaa(dto.getRgseaaList(),companySaved,Accion.ADD);
 
-        List<Actuation> actuationList = getCompanyActuation(dto,companySaved);
-        actuationList.forEach(companyActuationService::add);
+        saveActuation(dto.getActuationList(),companySaved,Accion.ADD);
 
-        Rgseaa rgseaaSaved = rgseaaService.add(rgseaa);
-
-        List<RgseaaAuthorization> rgseaaAuthorizationList = getValueAuthorization(dto,rgseaaSaved);
-        rgseaaAuthorizationList.forEach(rgseaaAuthorizationService::add);
-
-        List<RgseaaActivity> rgseaaActivityList = getValueRgseaaActivity(dto,rgseaaSaved);
-        rgseaaActivityList.forEach(rgseaaActivityService::add);
+        saveAuthorization(dto,rgseaaSaved);
 
     }
 
@@ -102,8 +94,9 @@ public class CompanyFacade extends AbstractFacade<
         Company company = getValue(dto);
         Company companyUpdated = companyService.update(company);
 
-        List<Actuation> actuationList = getCompanyActuationUpdate(dto,companyUpdated);
-        actuationList.forEach(companyActuationService::add);
+
+        //List<Actuation> actuationList = getCompanyActuationUpdate(dto,companyUpdated);
+        //actuationList.forEach(companyActuationService::add);
 
     }
 
@@ -121,7 +114,7 @@ public class CompanyFacade extends AbstractFacade<
         criteria.setCompanyId(id);
         Collection<Establishment> list = establishmentService.list(criteria);
         List<EstablishmentDto> dtoList = establishmentConverter.mapEntityToDtoList(new ArrayList<>(list));
-        //dto.setEstablishment(dtoList);
+
 
         return  dto;
     }
@@ -307,23 +300,75 @@ public class CompanyFacade extends AbstractFacade<
 
     }
 
+    private Rgseaa saveRgseaa(List<RgseaaActivityDto> rgseaaDtoList, Company companySaved, Accion accion) {
 
-    private void saveAction(List<ActionDto> actionDtoList,Company companySaved){
-        logger.info("==== FACADE-> saveAction ====");
+        logger.info("==== FACADE-> saveRgseaa ====");
 
-        for(ActionDto actionDto : actionDtoList){
+        Rgseaa rgseaaSaved = null;
 
-            if(actionDto.getId()==null){
-                Action action  = actionConverter.dtoToEntity(actionDto);
-                action.setCompany(companySaved);
-                Action actionSaved = actionService.add(action);
-                saveDocuments(actionDto.getDocumentList(),actionSaved);
+        if(Accion.ADD.equals(accion)) {
+
+            KeyDto keyDto = rgseaaDtoList.stream().map(RgseaaActivityDto::getKey).findFirst().get();
+
+            Rgseaa rgseaa = new Rgseaa();
+            Key key = keyConverter.dtoToEntity(keyDto);
+            rgseaa.setKey(key);
+            rgseaa.setCompany(companySaved);
+            rgseaaSaved = rgseaaService.add(rgseaa);
+
+            saveRgseaaActivity(keyDto.getId(),rgseaaDtoList,rgseaaSaved);
+
+        } else  if(Accion.UPDATE.equals(accion)) {
+
+        }
+
+        return rgseaaSaved;
+    }
+
+
+
+    private void  saveRgseaaActivity(Long keyId,  List<RgseaaActivityDto> rgseaaDtoList,  Rgseaa rgseaaSaved) {
+
+        rgseaaDtoList.stream()
+            .filter(item-> Objects.equals(item.getKey().getId(), keyId))
+            .forEach(item->{
+                Activity activity = activityConverter.dtoToEntity(item.getActivity());
+                Category category = categoryConverter.dtoToEntity(item.getCategory());
+                SubActivity subActivity = subActivityConverter.dtoToEntity(item.getSubActivity());
+
+                RgseaaActivity rgseaaActivity = new RgseaaActivity();
+                rgseaaActivity.setRgseaa(rgseaaSaved);
+                rgseaaActivity.setActivity(activity);
+                rgseaaActivity.setCategory(category);
+                rgseaaActivity.setSubActivity(subActivity);
+
+                rgseaaActivityService.add(rgseaaActivity);
+
+            });
+    }
+
+
+
+    private void saveActuation(List<ActuationDto> actuationDtoList, Company companySaved, Accion accion){
+        logger.info("==== FACADE-> saveActuation ====");
+
+        for(ActuationDto actuationDto : actuationDtoList){
+
+            if(actuationDto.getId()==null){
+
+                Actuation actuation  = actuationConverter.dtoToEntity(actuationDto);
+                TypeActuation typeActuation = typeActuationConverter.dtoToEntity(actuationDto.getTypeActuation());
+                actuation.setCompany(companySaved);
+                actuation.setTypeActuation(typeActuation);
+                Actuation actionSaved = actuationService.add(actuation);
+                saveDocuments(actuationDto.getDocumentList(),actionSaved);
             } else {
-                if(actionDto.getUpdate()!=null && actionDto.getUpdate()==1){
-                    actionService.delete(actionDto.getId());
+
+                if(actuationDto.getUpdate()!=null && actuationDto.getUpdate()==1){
+                    actuationService.delete(actuationDto.getId());
                 } else {
-                    Action action = actionService.get(actionDto.getId());
-                    saveDocuments(actionDto.getDocumentList(),action);
+                    Actuation actuation = actuationService.get(actuationDto.getId());
+                    saveDocuments(actuationDto.getDocumentList(),actuation);
                 }
             }
         }
@@ -331,7 +376,25 @@ public class CompanyFacade extends AbstractFacade<
     }
 
 
-    private void saveDocuments(List<DocumentDto> documentList, Action saved){
+    private void saveAuthorization(CompanyDto dto, Rgseaa rgseaa) {
+
+        List<RgseaaAuthorization> authorizationList = new ArrayList<>();
+
+        dto.getAuthorizationList().forEach(item->{
+            Authorization authorization = authorizationConverter.dtoToEntity(item);
+
+            RgseaaAuthorization rgseaaAuthorization = new RgseaaAuthorization();
+            rgseaaAuthorization.setRgseaa(rgseaa);
+            rgseaaAuthorization.setAuthorization(authorization);
+
+            authorizationList.add(rgseaaAuthorization);
+        });
+
+        authorizationList.forEach(rgseaaAuthorizationService::add);
+    }
+
+
+    private void saveDocuments(List<DocumentDto> documentList, Actuation saved){
         logger.info("==== FACADE-> saveDocuments ====");
 
         if(documentList!=null) {
@@ -339,7 +402,7 @@ public class CompanyFacade extends AbstractFacade<
 
                 if (documentDto.getId() == null) {
                     Document document = documentConverter.dtoToEntity(documentDto);
-                    document.setAction(saved);
+                    document.setActuation(saved);
                     document.setPathFile(fileUtilService.saveFile(documentDto, saved.getId()));
                     documentService.add(document);
                 }
@@ -352,26 +415,15 @@ public class CompanyFacade extends AbstractFacade<
     }
 
 
-    public List<ActionDto> getListAction(ActionCriteria criteria) {
+    public List<ActuationDto> getListActuation(ActuationCriteria criteria) {
         logger.info("==== FACADE-> getListAction ====");
 
-        List<Action> actionList =  actionService.all(criteria);
-
-        List<ActionDto> actionDtoList = actionConverter.mapEntityToDtoList(actionList);
-
-        return actionDtoList;
+        Collection<Actuation> actuationList =  actuationService.list(criteria);
+        List<ActuationDto> actuationDtoList = actuationConverter.mapEntityToDtoList(new ArrayList<>(actuationList));
+        return actuationDtoList;
     }
 
 
-    public List<DocumentDto> getDocumentList(DocumentCriteria criteria) {
-        logger.info("==== FACADE-> getDocumentList ====");
-
-        List<Document> documentList = documentService.all(criteria);
-
-        List<DocumentDto> documentDtoList = getDocumentDtoList(documentList);
-
-        return documentDtoList;
-    }
 
 
     public List<CompanyFindDto> getFind(CompanyCriteria criteria) {
@@ -388,45 +440,6 @@ public class CompanyFacade extends AbstractFacade<
         return response;
     }
 
-
-    private List<DocumentDto> getDocumentDtoList(List<Document> documentList){
-        logger.info("==== FACADE-> getDocumentDtoList ====");
-
-        List<DocumentDto> documentDtoList = new ArrayList<>();
-
-        for (Document document : documentList){
-            DocumentDto documentDto = documentConverter.entityToDto(document);
-            documentDto.setB64(getDocument(document));
-            documentDtoList.add(documentDto);
-        }
-
-        return documentDtoList;
-    }
-
-
-    private B64EncodedFileDto getDocument(Document document){
-        logger.info("==== FACADE-> getDocument ====");
-
-        B64EncodedFileDto b64EncodedFileDto = new B64EncodedFileDto();
-        b64EncodedFileDto.setData(fileUtilService.getFile(document.getPathFile()));
-        b64EncodedFileDto.setName(fileUtilService.getNameFile(document.getPathFile()));
-        return b64EncodedFileDto;
-    }
-
-
-    private List<TypeActuation> getValueTypeActuation(List<TypeActuationDto> dto) {
-
-        List<TypeActuation> list = new ArrayList<>();
-
-        dto.stream()
-            .filter(TypeActuationDto::isSaved)
-            .forEach(item -> {
-                TypeActuation typeActuation = typeActuationConverter.dtoToEntity(item);
-                list.add(typeActuation);
-            });
-
-        return list;
-    }
 
 
     private Company getValue(CompanyDto dto) {
@@ -457,90 +470,6 @@ public class CompanyFacade extends AbstractFacade<
 
 
 
-    private Rgseaa getValueRgseaa(CompanyDto dto) {
-
-        Rgseaa rgseaa = new Rgseaa();
-
-        Key key = keyConverter.dtoToEntity(dto.getRgseaaList().stream()
-                .map(RgseaaActivityDto::getKey)
-                .findFirst().get());
-
-        rgseaa.setKey(key);
-        rgseaa.setDateAnnotation(LocalDate.now());
-
-        return rgseaa;
-    }
-
-
-    private List<Actuation>  getCompanyActuationUpdate(CompanyDto dto, Company company) {
-
-        List<Actuation> actuationList = new ArrayList<>();
-
-        getValueTypeActuation(dto.getTypeActuationList()).forEach(item->{
-            Actuation actuation = new Actuation();
-            actuation.setActuation(item);
-            actuation.setCompany(company);
-            actuationList.add(actuation);
-        });
-
-        return actuationList;
-    }
-
-    private List<Actuation>  getCompanyActuation(CompanyDto dto, Company company) {
-
-        List<Actuation> actuationList = new ArrayList<>();
-
-        dto.getTypeActuationList().forEach(item->{
-            Actuation actuation = new Actuation();
-            TypeActuation typeActuation = typeActuationConverter.dtoToEntity(item);
-            actuation.setActuation(typeActuation);
-            actuation.setCompany(company);
-            actuationList.add(actuation);
-        });
-
-        return actuationList;
-    }
-
-
-    private List<RgseaaAuthorization>  getValueAuthorization(CompanyDto dto, Rgseaa rgseaa) {
-
-        List<RgseaaAuthorization> authorizationList = new ArrayList<>();
-
-        dto.getAuthorizationList().forEach(item->{
-            Authorization authorization = authorizationConverter.dtoToEntity(item);
-
-            RgseaaAuthorization rgseaaAuthorization = new RgseaaAuthorization();
-            rgseaaAuthorization.setRgseaa(rgseaa);
-            rgseaaAuthorization.setAuthorization(authorization);
-
-            authorizationList.add(rgseaaAuthorization);
-        });
-
-        return authorizationList;
-    }
-
-
-    private List<RgseaaActivity>  getValueRgseaaActivity(CompanyDto dto,  Rgseaa rgseaa) {
-
-        List<RgseaaActivity> list = new ArrayList<>();
-
-        dto.getRgseaaList().forEach(item->{
-
-            Activity activity = activityConverter.dtoToEntity(item.getActivity());
-            Category category = categoryConverter.dtoToEntity(item.getCategory());
-            SubActivity subActivity = subActivityConverter.dtoToEntity(item.getSubActivity());
-
-            RgseaaActivity rgseaaActivity = new RgseaaActivity();
-            rgseaaActivity.setRgseaa(rgseaa);
-            rgseaaActivity.setActivity(activity);
-            rgseaaActivity.setCategory(category);
-            rgseaaActivity.setSubActivity(subActivity);
-
-            list.add(rgseaaActivity);
-        });
-
-        return list;
-    }
 
 
 }

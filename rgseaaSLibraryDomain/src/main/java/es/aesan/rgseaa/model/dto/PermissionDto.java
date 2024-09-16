@@ -1,6 +1,5 @@
 package es.aesan.rgseaa.model.dto;
 
-import es.aesan.rgseaa.model.commom.constants.EntityState;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;

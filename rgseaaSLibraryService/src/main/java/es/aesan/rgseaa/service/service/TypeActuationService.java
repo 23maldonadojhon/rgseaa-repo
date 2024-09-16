@@ -1,6 +1,5 @@
 package es.aesan.rgseaa.service.service;
 
-import es.aesan.rgseaa.model.criteria.ActuationCriteria;
 import es.aesan.rgseaa.model.criteria.TypeActuationCriteria;
 import es.aesan.rgseaa.model.entity.TypeActuation;
 import es.aesan.rgseaa.service.repository.TypeActuationRepository;

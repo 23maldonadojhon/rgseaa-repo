@@ -31,6 +31,6 @@ public class Actuation extends AuditedBaseEntity {
     private Establishment establishment;
 
     @ManyToOne
-    @JoinColumn(name = "ACTUATION_ID", referencedColumnName = "ID")
-    private TypeActuation actuation;
+    @JoinColumn(name = "TYPE_ACTUATION_ID", referencedColumnName = "ID")
+    private TypeActuation typeActuation;
 }

@@ -1,6 +1,5 @@
 package es.aesan.rgseaa.service.repository;
 
-import es.aesan.rgseaa.model.criteria.ActuationCriteria;
 import es.aesan.rgseaa.model.criteria.TypeActuationCriteria;
 import es.aesan.rgseaa.model.entity.TypeActuation;
 import org.springframework.data.domain.Page;
