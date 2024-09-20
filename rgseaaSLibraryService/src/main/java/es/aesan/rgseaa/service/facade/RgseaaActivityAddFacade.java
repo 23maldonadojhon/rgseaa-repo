@@ -66,7 +66,7 @@ public class RgseaaActivityAddFacade extends AbstractFacade<
                 .findFirst().get());
 
         rgseaa.setKey(key);
-
+        rgseaa.setDateAnnotation(LocalDate.now());
         Rgseaa rgseaaSaved = rgseaaService.add(rgseaa);
 
         saveActivityList(dto,rgseaaSaved);

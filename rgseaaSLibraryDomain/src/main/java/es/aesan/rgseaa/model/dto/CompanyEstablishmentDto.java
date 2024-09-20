@@ -16,7 +16,7 @@ import java.util.List;
 public class CompanyEstablishmentDto implements Serializable {
     private CompanyDto company;
     private EstablishmentDto establishment;
-    private List<RgseaaActivityDto> rgseaaActivityList;
-    private List<AuthorizationDto> authorizationList;
-    private List<TypeActuationDto> typeActuationList;
+    private List<RgseaaAuthorizationDto> authorizationList;
+    private List<RgseaaActivityDto> rgseaaList;
+    private List<ActuationDto> actuationList;
 }
