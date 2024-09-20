@@ -1,7 +1,9 @@
 package es.aesan.rgseaa.service.facade;
 
+import es.aesan.rgseaa.model.converter.ProfileConverter;
 import es.aesan.rgseaa.model.converter.UserConverter;
 import es.aesan.rgseaa.model.criteria.UserCriteria;
+import es.aesan.rgseaa.model.dto.ProfileDto;
 import es.aesan.rgseaa.model.dto.UserDto;
 import es.aesan.rgseaa.model.entity.*;
 import es.aesan.rgseaa.service.service.*;
@@ -22,9 +24,7 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.*;
-import java.util.Optional;
-import java.util.Set;
-
+import java.util.*;
 
 
 @Component
@@ -49,6 +49,8 @@ public class UserFacade extends AbstractFacade<
     @Autowired
     private final UserEntitieService userEntitieService;
 
+    @Autowired
+    private final ProfileConverter profileConverter;
 
     @Autowired
     final private UserConverter userConverter;
@@ -69,22 +71,24 @@ public class UserFacade extends AbstractFacade<
 
         valid(dto,Accion.ADD);
 
-        User user = userConverter.dtoToEntity(dto);
+        User user=userConverter.dtoToEntity(dto);
+        userService.add(user);
 
-        Profile profile = profileService.get(dto.getProfile().getId());
-        Entitie entitie = entitieService.get(dto.getEntity().getId());
 
-        User userSaved = userService.add(user);
 
-        UserProfile userProfile = userProfileService.getProfile(userSaved,profile);
 
-        UserEntitie userEntitie = userEntitieService.getUserEntitie(userSaved,entitie);
 
-        UserProfile userProfileSaved = userProfileService.add(userProfile);
-        logger.info("userProfileSaved="+userProfileSaved.getId());
 
-        UserEntitie userEntitieSaved = userEntitieService.add(userEntitie);
-        logger.info("userEntitieSaved="+userEntitieSaved.getId());
+
+        // Profile profile = profileService.get(dto.getProfile().getId());
+//        Entitie entitie = entitieService.get(dto.getEntity().getId());
+
+
+
+
+
+
+
     }
 
 
@@ -115,18 +119,28 @@ public class UserFacade extends AbstractFacade<
 
     }
 
+
+
     @Override
     public UserDto get(final Long id){
         logger.info("==== FACADE-> FIND BY USER ====");
         logger.info("id :"+id);
 
         User user = userService.get(id);
-        user.setProfile(userProfileService.getByUserId(id));
+
         user.setEntitie(userEntitieService.getByIdUser(id));
 
         UserDto userDto = userConverter.entityToDto(user);
 
         return userDto;
+    }
+
+    @Override
+    public List<UserDto> list(UserCriteria criteria) {
+
+        Collection<User> list=userService.list(criteria);
+        List<UserDto> userDtos=userConverter.mapEntityToDtoList(new ArrayList<>(list));
+        return userDtos;
     }
 
 
@@ -137,10 +151,6 @@ public class UserFacade extends AbstractFacade<
         logger.info("criteria :"+criteria);
 
         Page<User> page = userService.page(criteria);
-
-        page.stream().forEach(item->{
-
-        });
 
         Page<UserDto> dtoPage = userConverter.mapEntityToDtoPage(page);
 
@@ -156,7 +166,7 @@ public class UserFacade extends AbstractFacade<
         UserDto userDto;
 
         if(userOptional.isPresent())
-          userDto  = userConverter.entityToDto(userOptional.get());
+            userDto  = userConverter.entityToDto(userOptional.get());
         else
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 

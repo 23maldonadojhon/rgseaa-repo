@@ -38,7 +38,7 @@ public interface UserRepository
     Optional<User> findByNif (String nif);
 
     @Override
-    List<User> findAll();
+    List<User> findAll(UserCriteria criteria);
 
 
     Page<User> findAll(@Param("pageable") Pageable pageable);

@@ -55,11 +55,8 @@ public class UserDto implements LongIdModel {
     @NotNull(message = "no puede ser nulo")
     private ProfileDto profile;
 
-    @NotNull(message = "no puede ser nulo")
-    private EntitieDto entity;
-    public String getFullName() {
-        String fullName = getName() + " " + getFirstSurname() + " " + getSecondSurname();
-        return fullName;
-    }
+
+
+
 }
 

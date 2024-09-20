@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
 import java.util.Optional;
 
 
@@ -24,6 +25,11 @@ public interface ProfileRepository extends BaseRepository<Profile,Long>, QueryBy
             + " OR UPPER(p.name) LIKE UPPER(:#{#criteria.search}) "
             + " )")
     Page<Profile> findAllByCriteria(@Param("criteria") GeneralCriteria criteria, Pageable pageable);
+
+    @Override
+    @Query(value = "SELECT p FROM Profile p ")
+    Collection<Profile> findAll(GeneralCriteria criteria);
+
 
     Optional<Profile> findByName(String name);
 }
