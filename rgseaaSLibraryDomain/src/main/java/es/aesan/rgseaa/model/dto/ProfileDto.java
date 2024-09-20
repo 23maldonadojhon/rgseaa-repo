@@ -14,15 +14,14 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProfileDto implements LongIdModel {
+public class ProfileDto  {
 
     private Long id;
 
-    private Integer state = EntityState.ON.getValue();
-
-    @NotNull
-    @NotBlank
     private String name;
 
     private List<PermissionDto> permissions;
+
+    private Integer state;
+
 }
