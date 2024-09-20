@@ -8,15 +8,10 @@ import java.io.Serializable;
 
 
 @Data
-public class PermissionDto implements Serializable {
+public class PermissionDto  {
 
-    private static final long serialVersionUID = 1L;
     private Long id;
-    @NotNull
-    @NotBlank
     private String code;
-    @NotNull
-    @NotBlank
     private String name;
     private String description;
 }
