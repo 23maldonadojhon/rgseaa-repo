@@ -24,7 +24,7 @@ public interface UserConverter {
     User dtoToEntity(UserDto dto);
 
     @Mapping(target = "profile",  expression  = "java(getProfile(entity))")
-    @Mapping(target = "entity", expression = "java(getEntitie(entity))")
+
     UserDto entityToDto(User entity);
 
 
@@ -51,9 +51,9 @@ public interface UserConverter {
         ProfileDto profileDto = new ProfileDto();
 
         if( entity.getProfile()!=null){
-            profileDto.setId(entity.getProfile().getProfile().getId());
-            profileDto.setName(entity.getProfile().getProfile().getName());
-            profileDto.setState(entity.getProfile().getProfile().getState());
+            profileDto.setId(entity.getProfile().getId());
+            profileDto.setName(entity.getProfile().getName());
+            profileDto.setState(entity.getProfile().getState());
         }
 
         return profileDto;

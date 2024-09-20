@@ -13,7 +13,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="rest" />
-        <module name="security" />
         <module name="util" />
         <module name="jwt" />
         <module name="service" />

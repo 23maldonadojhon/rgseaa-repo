@@ -21,6 +21,7 @@ import java.util.Set;
 public class User extends AuditedBaseEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
 
@@ -42,8 +43,9 @@ public class User extends AuditedBaseEntity {
     @Column(name = "PHONE")
     private String phone;
 
-    @Transient
-    private UserProfile profile;
+    @ManyToOne
+    @JoinColumn(name= "PROFILE_ID", referencedColumnName = "ID")
+    private Profile profile;
 
     @Transient
     private Set<UserModule> modules;

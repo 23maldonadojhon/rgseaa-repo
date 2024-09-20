@@ -22,10 +22,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
@@ -142,6 +139,13 @@ public class ProfileFacade extends AbstractFacade<ProfileDto,GeneralCriteria> {
 
     }
 
+    @Override
+    public List<ProfileDto> list(GeneralCriteria criteria) {
+        Collection<Profile> profileCollection = profileService.list(criteria);
+        List<ProfileDto> profileDtoList = profileConverter.mapEntityToDtoList(new ArrayList<>(profileCollection));
+        return profileDtoList;
+
+    }
 
     private List<ProfilePermission> convertToProfilePermission(List<Permission> permissionSet, Profile profile){
 
