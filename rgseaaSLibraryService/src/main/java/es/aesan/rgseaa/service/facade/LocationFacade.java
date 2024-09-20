@@ -36,6 +36,7 @@ public class LocationFacade extends AbstractFacade<
     public List<LocationDto> list(LocationCriteria criteria) {
         logger.info("==== FACADE-> LOCATION LIST ====");
 
+        Collection<Location>
         List<LocationDto> result = null;
 
         if(criteria.getProvinceId()!=null){
