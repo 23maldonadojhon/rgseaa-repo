@@ -33,10 +33,12 @@ public class ActuationFacade extends AbstractFacade<
         logger.info("==== FACADE-> LIST ACTIVITIES====");
 
         ActuationCriteria criteriaSearch = new ActuationCriteria();
-        criteriaSearch.setCompanyId(criteria.getCompanyId());
 
-        if(criteria.getEstablishmentId()>0)
+        if(criteria.getEstablishmentId()>0){
             criteriaSearch.setEstablishmentId(criteria.getEstablishmentId());
+        } else {
+            criteriaSearch.setCompanyId(criteria.getCompanyId());
+        }
 
         Collection<Actuation> actuationCollection =  actuationService.list(criteriaSearch);
         List<ActuationDto> actuationDtoList = actuationConverter.mapEntityToDtoList(new ArrayList<>(actuationCollection));

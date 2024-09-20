@@ -461,7 +461,7 @@ create table COMPANIES
         constraint PK_INDUSTRIES__ID
             primary key,
     NIF          VARCHAR2(20),
-    NAME         VARCHAR2(20),
+    NAME         VARCHAR2(200),
     EMAIL        VARCHAR2(50),
     PAGE_WEB     VARCHAR2(200),
     OBSERVATION  VARCHAR2(2000),

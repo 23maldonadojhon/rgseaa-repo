@@ -20,7 +20,7 @@ public class CompanyDto implements Serializable {
     private Long provinceId;
     private Long locationId;
     private Long situationId;
-    private List<AuthorizationDto> authorizationList;
+    private List<RgseaaAuthorizationDto> authorizationList;
     private List<RgseaaActivityDto> rgseaaList;
     private List<ActuationDto> actuationList;
 }

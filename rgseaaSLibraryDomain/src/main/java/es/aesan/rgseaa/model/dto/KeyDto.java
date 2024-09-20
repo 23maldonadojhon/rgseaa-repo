@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,8 +19,6 @@ public class KeyDto implements Serializable {
     private String code;
 
     private String name;
-
-
 
     private Long allowProduct;
 

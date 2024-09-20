@@ -1,12 +1,19 @@
 package es.aesan.rgseaa.model.dto;
 
 
-import es.aesan.rgseaa.model.commom.dto.LongIdModel;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.io.Serializable;
 
 
-@Data
-public class AuthorizationDto implements LongIdModel {
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+public class AuthorizationDto implements Serializable {
     private Long id;
     private String name;
     private Integer state;

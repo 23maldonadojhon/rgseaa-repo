@@ -37,7 +37,6 @@ public class CompanyFacade extends AbstractFacade<
     private final CategoryService categoryService;
     private final SubActivityService subActivityService;
     private final KeyActivityCategoryService keyActivityCategoryService;
-    private final ActivityKeyService activityKeyService;
     private final SituationService situationService;
     private final EstablishmentService establishmentService;
     private final RgseaaService rgseaaService;
@@ -46,11 +45,10 @@ public class CompanyFacade extends AbstractFacade<
     private final CcaaService ccaaService;
 
 
-    private final CountryConverter countryConverter;
+
     private final CompanyConverter companyConverter;
-    private final ProvinceConverter provinceConverter;
-    private final LocationConverter locationConverter;
     private final AuthorizationConverter authorizationConverter;
+    private final RgseaaAuthorizationConverter rgseaaAuthorizationConverter;
     private final DocumentConverter documentConverter;
     private final KeyConverter keyConverter;
     private final CategoryConverter categoryConverter;
@@ -58,10 +56,7 @@ public class CompanyFacade extends AbstractFacade<
     private final SubActivityConverter subActivityConverter;
     private final EstablishmentConverter establishmentConverter;
     private final TypeActuationConverter typeActuationConverter;
-    private final CcaaConverter ccaaConverter;
     private final ActuationConverter actuationConverter;
-    private final TypeDocumentConverter typeDocumentConverter;
-
     private final FileUtilService fileUtilService;
 
     private static final Logger logger = LoggerFactory.getLogger(CompanyFacade.class);
@@ -314,6 +309,7 @@ public class CompanyFacade extends AbstractFacade<
             Key key = keyConverter.dtoToEntity(keyDto);
             rgseaa.setKey(key);
             rgseaa.setCompany(companySaved);
+            rgseaa.setDateAnnotation(LocalDate.now());
             rgseaaSaved = rgseaaService.add(rgseaa);
 
             saveRgseaaActivity(keyDto.getId(),rgseaaDtoList,rgseaaSaved);
@@ -381,12 +377,8 @@ public class CompanyFacade extends AbstractFacade<
         List<RgseaaAuthorization> authorizationList = new ArrayList<>();
 
         dto.getAuthorizationList().forEach(item->{
-            Authorization authorization = authorizationConverter.dtoToEntity(item);
-
-            RgseaaAuthorization rgseaaAuthorization = new RgseaaAuthorization();
+            RgseaaAuthorization rgseaaAuthorization = rgseaaAuthorizationConverter.dtoToEntity(item);
             rgseaaAuthorization.setRgseaa(rgseaa);
-            rgseaaAuthorization.setAuthorization(authorization);
-
             authorizationList.add(rgseaaAuthorization);
         });
 

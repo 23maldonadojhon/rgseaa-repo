@@ -2,7 +2,6 @@ package es.aesan.rgseaa.service.facade;
 
 
 import es.aesan.rgseaa.model.converter.RgseaaAuthorizationConverter;
-import es.aesan.rgseaa.model.criteria.RgseaaActivityCriteria;
 import es.aesan.rgseaa.model.criteria.RgseaaAuthorizationCriteria;
 import es.aesan.rgseaa.model.dto.RgseaaAuthorizationDto;
 import es.aesan.rgseaa.model.entity.RgseaaAuthorization;
