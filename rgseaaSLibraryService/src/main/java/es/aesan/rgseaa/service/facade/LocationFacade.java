@@ -8,10 +8,13 @@ import es.aesan.rgseaa.model.entity.Location;
 import es.aesan.rgseaa.model.entity.Province;
 import es.aesan.rgseaa.service.service.LocationService;
 import es.aesan.rgseaa.service.service.ProvinceService;
+import es.aesan.rgseaa.service.util.Accion;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -33,24 +36,65 @@ public class LocationFacade extends AbstractFacade<
 
 
     @Override
+    @Transactional
+    public void add(LocationDto dto){
+        logger.info("-----Facade -> ADD LOCATION---");
+        logger.info("Location:"+dto);
+
+      //  valid(dto, Accion.ADD);
+
+        Location location=locationConverter.dtoToEntity(dto);
+        locationService.add(location);
+
+
+    }
+
+
+    @Override
     public List<LocationDto> list(LocationCriteria criteria) {
         logger.info("==== FACADE-> LOCATION LIST ====");
 
-        Collection<Location>
-        List<LocationDto> result = null;
+        Collection<Location> locationCollection = locationService.list(criteria);
+        List<LocationDto> locationDtos=locationConverter.mapEntityToDtoList(new ArrayList<>(locationCollection));
+        return  locationDtos;
 
-        if(criteria.getProvinceId()!=null){
 
-            Province province = provinceService.get(criteria.getProvinceId());
 
-            LocationCriteria locationCriteria = new LocationCriteria();
-            locationCriteria.setEnrollmentProvince(province.getEnrollment());
+//        List<LocationDto> result = null;
+//
+//        if(criteria.getProvinceId()!=null){
+//
+//            Province province = provinceService.get(criteria.getProvinceId());
+//
+//            LocationCriteria locationCriteria = new LocationCriteria();
+//            locationCriteria.setEnrollmentProvince(province.getEnrollment());
+//
+//            Collection<Location> entitieList = locationService.list(locationCriteria);
+//
+//            result = locationConverter.mapEntityToDtoList(new ArrayList<>(entitieList));
+//        }
+//
+//        return result;
+    }
 
-            Collection<Location> entitieList = locationService.list(locationCriteria);
+    @Override
+    public LocationDto get(final Long id ){
+        logger.info("---- Facade -> Find By Location");
+        logger.info("id :" +id);
 
-            result = locationConverter.mapEntityToDtoList(new ArrayList<>(entitieList));
-        }
+        Location location= locationService.get(id);
+        LocationDto locationDto= locationConverter.entityToDto(locationService.get(id));
+        return locationDto;
 
-        return result;
+
+    }
+    @Override
+    public Page<LocationDto> page(LocationCriteria criteria){
+        logger.info("----- FACADE -> LOCATION CRITERIA ----");
+        logger.info("critera: "+criteria);
+        Page<Location> locationPage=locationService.page(criteria);
+        Page<LocationDto> locationDtos=locationConverter.mapEntityToDtoPage(locationPage);
+        return  locationDtos;
+
     }
 }
