@@ -14,4 +14,6 @@ public class CategoryDto implements Serializable {
     private Long id;
     private String code;
     private String name;
+    private KeyDto key;
+    private ActivityDto activity;
 }

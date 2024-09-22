@@ -18,6 +18,7 @@ import java.util.List;
 public class ActivityKey extends AuditedBaseEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
 
@@ -29,18 +30,5 @@ public class ActivityKey extends AuditedBaseEntity {
     @JoinColumn(name = "ACTIVITY_ID", referencedColumnName = "ID")
     private Activity activity;
 
-
-    @ElementCollection
-    @CollectionTable(name = "ACTIVITIES_KEYS_CATEGORIES", joinColumns = @JoinColumn(name = "ACTIVITIES_KEYS_ID"))
-    @AttributeOverrides({
-            @AttributeOverride(name = "id", column = @Column(name = "CATEGORY_ID"))
-    })
-    private List<CategoryRef> categories;
-
-    /*
-    @ElementCollection
-    @CollectionTable(name = "ACTIVITIES_KEYS_SUB_CATEGORIES", joinColumns = @JoinColumn(name = "ACTIVITIES_KEYS_ID"))
-    private List<SubCategoryRef> subCategories;
-*/
 }
 

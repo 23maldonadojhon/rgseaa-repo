@@ -7,6 +7,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = "spring",
+        uses = {ProductConverter.class},
         unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface LocationConverter extends BaseConverter<Location, LocationDto> {
 

@@ -31,6 +31,7 @@ public class DenominationSaleFacade extends AbstractFacade<
 @Override
 public void add(DenominationSaleDto dto) {
     DenominationSale denominationSale=denominationSaleConverter.dtoToEntity(dto);
+    denominationSale.setState(1);
     denominationSaleService.add(denominationSale);
 }
 

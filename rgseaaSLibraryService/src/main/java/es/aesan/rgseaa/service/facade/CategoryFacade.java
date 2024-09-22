@@ -1,19 +1,20 @@
 package es.aesan.rgseaa.service.facade;
 
+import es.aesan.rgseaa.model.converter.ActivityConverter;
 import es.aesan.rgseaa.model.converter.CategoryConverter;
+import es.aesan.rgseaa.model.converter.KeyConverter;
 import es.aesan.rgseaa.model.criteria.ActivityKeyCategoryCriteria;
 import es.aesan.rgseaa.model.criteria.ActivityKeyCriteria;
 import es.aesan.rgseaa.model.criteria.CategoryCriteria;
 import es.aesan.rgseaa.model.dto.CategoryDto;
-import es.aesan.rgseaa.model.entity.ActivityKey;
-import es.aesan.rgseaa.model.entity.ActivityKeyCategory;
-import es.aesan.rgseaa.model.entity.Category;
+import es.aesan.rgseaa.model.entity.*;
 import es.aesan.rgseaa.service.service.ActivityKeyCategoryService;
 import es.aesan.rgseaa.service.service.ActivityKeyService;
 import es.aesan.rgseaa.service.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,17 +29,37 @@ public class CategoryFacade extends AbstractFacade<
         CategoryCriteria> {
 
     private final CategoryService categoryService;
-
     private final ActivityKeyService activityKeyService;
-
     private final ActivityKeyCategoryService activityKeyCategoryService;
 
     private final CategoryConverter categoryConverter;
+    private final KeyConverter keyConverter;
+    private final ActivityConverter activityConverter;
+
+
+
 
     @Override
+    @Transactional
     public void add(CategoryDto dto){
+
         Category category=categoryConverter.dtoToEntity(dto);
-        categoryService.update(category);
+        categoryService.add(category);
+
+        Key key = keyConverter.dtoToEntity(dto.getKey());
+        Activity activity = activityConverter.dtoToEntity(dto.getActivity());
+
+        ActivityKeyCriteria activityKeyCriteria = new ActivityKeyCriteria();
+        activityKeyCriteria.setKeyId(key.getId());
+        activityKeyCriteria.setActivityId(activity.getId());
+
+        ActivityKey activityKey = activityKeyService.find(activityKeyCriteria);
+
+        ActivityKeyCategory  activityKeyCategory = new ActivityKeyCategory();
+        activityKeyCategory.setCategory(category);
+        activityKeyCategory.setActivityKey(activityKey);
+
+        activityKeyCategoryService.add(activityKeyCategory);
     }
 
     @Override
@@ -57,8 +78,17 @@ public class CategoryFacade extends AbstractFacade<
 
     @Override
     public CategoryDto get(Long id){
+
         Category category= categoryService.get(id);
-        CategoryDto categoryDto=categoryConverter.entityToDto(categoryService.get(id));
+        CategoryDto categoryDto=categoryConverter.entityToDto(category);
+
+        ActivityKeyCategoryCriteria activityKeyCategoryCriteria = new ActivityKeyCategoryCriteria();
+        activityKeyCategoryCriteria.setCategoryId(category.getId());
+
+        ActivityKeyCategory activityKeyCategory = activityKeyCategoryService.find(activityKeyCategoryCriteria);
+        categoryDto.setKey(keyConverter.entityToDto(activityKeyCategory.getActivityKey().getKey()));
+        categoryDto.setActivity(activityConverter.entityToDto(activityKeyCategory.getActivityKey().getActivity()));
+
         return  categoryDto;
     }
 

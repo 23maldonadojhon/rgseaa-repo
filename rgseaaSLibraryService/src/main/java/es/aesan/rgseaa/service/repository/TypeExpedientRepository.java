@@ -7,6 +7,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
+
 @Repository
 public interface TypeExpedientRepository
         extends BaseRepository<TypeExpedient, Long>,
@@ -18,5 +20,8 @@ public interface TypeExpedientRepository
             " (:#{#criteria.id} IS NULL OR d.id = :#{#criteria.id} )")
     Page<TypeExpedient> findAllByCriteria(GeneralCriteria criteria, Pageable pageable);
 
+    @Override
+    @Query(value =  " SELECT d FROM TypeExpedient d ")
+    Collection<TypeExpedient> findAll(GeneralCriteria criteria);
 
 }

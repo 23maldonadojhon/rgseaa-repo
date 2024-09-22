@@ -21,11 +21,14 @@ public class TypeDocument extends AuditedBaseEntity {
     @Column(name = "ID")
     private Long id;
 
+    @Column(name = "NAME")
+    private String name;
+
     @Column(name = "TYPE")
     private String type;
 
-    @Column(name = "NAME")
-    private String name;
+    @Column(name = "TYPE_COMPANY_PRODUCT")
+    private Integer typeCompanyProduct;
 
     @Column(name = "VISIBLE_CCAA")
     private Integer visible;

@@ -12,6 +12,6 @@ import lombok.*;
 @EqualsAndHashCode(callSuper = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ActivityKeyCriteria extends FilterCriteria {
-    private long keyId;
-    private long activityId;
+    private Long keyId;
+    private Long activityId;
 }

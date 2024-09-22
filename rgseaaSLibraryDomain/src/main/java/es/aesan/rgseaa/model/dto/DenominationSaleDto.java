@@ -18,19 +18,13 @@ public class DenominationSaleDto {
 
     private String name;
 
-    private Long idKey;
+    private KeyDto key;
 
-    private String fileType;
+    private ActivityDto activity;
 
-    private String idActivity;
+    private TypeExpedientDto typeExpedient;
 
     private Integer isPublic;
-
-    private LocalDate dateRegister;
-
-    private LocalDate dateUnregister;
-
-    private Integer active;
 
     private Integer state;
 }

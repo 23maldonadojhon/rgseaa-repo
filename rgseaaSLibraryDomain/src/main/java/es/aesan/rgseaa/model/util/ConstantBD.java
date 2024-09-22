@@ -23,7 +23,7 @@ public class ConstantBD {
     public static final String TABLE_PROVINCES="PROVINCES";
     public static final String TABLE_COMPANIES="COMPANIES";
     public static final String TABLE_CCAA="CCAA";
-    public static final String TABLE_TYPE_EXPEDIENTS="TYPE_EXPEDIENTS";
+    public static final String TABLE_TYPES_EXPEDIENTS="TYPES_EXPEDIENTS";
     public static final String TABLE_TYPE_CHANGE_EXPEDIENTS="TYPE_CHANGE_EXPEDIENTS";
     public static final String TABLE_PERMISSIONS="PERMISSIONS";
     public static final String TABLE_PROFILES_PERMISSIONS="PROFILES_PERMISSIONS";

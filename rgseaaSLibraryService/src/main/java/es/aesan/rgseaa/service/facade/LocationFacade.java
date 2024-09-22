@@ -45,8 +45,6 @@ public class LocationFacade extends AbstractFacade<
 
         Location location=locationConverter.dtoToEntity(dto);
         locationService.add(location);
-
-
     }
 
 
@@ -57,24 +55,6 @@ public class LocationFacade extends AbstractFacade<
         Collection<Location> locationCollection = locationService.list(criteria);
         List<LocationDto> locationDtos=locationConverter.mapEntityToDtoList(new ArrayList<>(locationCollection));
         return  locationDtos;
-
-
-
-//        List<LocationDto> result = null;
-//
-//        if(criteria.getProvinceId()!=null){
-//
-//            Province province = provinceService.get(criteria.getProvinceId());
-//
-//            LocationCriteria locationCriteria = new LocationCriteria();
-//            locationCriteria.setEnrollmentProvince(province.getEnrollment());
-//
-//            Collection<Location> entitieList = locationService.list(locationCriteria);
-//
-//            result = locationConverter.mapEntityToDtoList(new ArrayList<>(entitieList));
-//        }
-//
-//        return result;
     }
 
     @Override
@@ -83,7 +63,7 @@ public class LocationFacade extends AbstractFacade<
         logger.info("id :" +id);
 
         Location location= locationService.get(id);
-        LocationDto locationDto= locationConverter.entityToDto(locationService.get(id));
+        LocationDto locationDto= locationConverter.entityToDto(location);
         return locationDto;
 
 

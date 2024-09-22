@@ -9,5 +9,5 @@ public class ActivityDto  implements Serializable {
     private Long id;
     private String code;
     private String name;
-    private String isPublic;
+    private KeyDto key;
 }

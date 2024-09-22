@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = ConstantBD.TABLE_TYPE_EXPEDIENTS)
+@Table(name = ConstantBD.TABLE_TYPES_EXPEDIENTS)
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

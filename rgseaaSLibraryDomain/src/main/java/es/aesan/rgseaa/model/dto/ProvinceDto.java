@@ -14,9 +14,4 @@ import java.io.Serializable;
 public class ProvinceDto implements Serializable {
     private Long id;
     private String name;
-    private String enrollment;
-    private String prePostalCode;
-    private String enrollmentCCAA;
-    private String address;
-    private String email;
 }

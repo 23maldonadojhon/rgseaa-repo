@@ -5,10 +5,7 @@ import es.aesan.rgseaa.model.commom.db.AuditedBaseEntity;
 import es.aesan.rgseaa.model.util.ConstantBD;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = ConstantBD.TABLE_ACTIVITIES)
@@ -20,6 +17,7 @@ import javax.persistence.Table;
 public class Activity extends AuditedBaseEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
 
@@ -30,5 +28,5 @@ public class Activity extends AuditedBaseEntity {
     private String name;
 
     @Column(name = "IS_PUBLIC")
-    private String isPublic;
+    private Integer isPublic;
 }

@@ -17,6 +17,7 @@ import javax.persistence.*;
 public class ActivityKeyCategory extends AuditedBaseEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     @Column(name = "ID")
     private Long id;

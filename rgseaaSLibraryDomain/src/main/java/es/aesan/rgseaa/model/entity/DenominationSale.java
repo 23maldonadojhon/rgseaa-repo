@@ -32,8 +32,9 @@ public class DenominationSale extends AuditedBaseEntity {
     @JoinColumn(name = "ACTIVITY_ID", referencedColumnName = "ID")
     private Activity activity;
 
-    @Column(name = "FILE_TYPE")
-    private String fileType;
+    @ManyToOne
+    @JoinColumn(name = "TYPE_EXPEDIENT_ID", referencedColumnName = "ID")
+    private TypeExpedient typeExpedient;
 
     @Column(name = "IS_PUBLIC")
     private Integer isPublic;
@@ -43,8 +44,5 @@ public class DenominationSale extends AuditedBaseEntity {
 
     @Column(name = "DATE_UNREGISTER")
     private LocalDate dateUnregister;
-
-    @Column(name = "ACTIVE")
-    private Integer active;
 
 }

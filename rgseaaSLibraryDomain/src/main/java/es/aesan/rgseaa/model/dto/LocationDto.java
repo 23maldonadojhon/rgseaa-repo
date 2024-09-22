@@ -9,8 +9,5 @@ public class LocationDto implements Serializable {
 
     private Long id;
     private String name;
-    private String enrollmentProvince;
-    private String descriptionPadre;
-    private Integer combo;
-    private String codeIne;
+    private ProvinceDto province;
 }
