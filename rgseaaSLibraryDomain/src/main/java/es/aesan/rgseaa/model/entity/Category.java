@@ -5,6 +5,7 @@ import es.aesan.rgseaa.model.util.ConstantBD;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = ConstantBD.TABLE_CATEGORIES)
@@ -25,5 +26,8 @@ public class Category extends AuditedBaseEntity {
 
     @Column(name = "NAME")
     private String name;
+
+    @Transient
+    List<ActivityKey> keyActivity;
 
 }

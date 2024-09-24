@@ -15,15 +15,16 @@ public interface ActivityKeyCategoryRepository
 
     @Override
     @Query(" SELECT akc FROM ActivityKeyCategory akc " +
-            " WHERE " +
-            " (:#{#criteria.activityKeyId} IS NULL OR akc.activityKey.id = :#{#criteria.activityKeyId}) ")
+            " WHERE :#{#criteria.state} = akc.state " +
+            " AND (:#{#criteria.categoryId} IS NULL OR akc.category.id = :#{#criteria.categoryId}) " +
+            " AND (:#{#criteria.activityKeyId} IS NULL OR akc.activityKey.id = :#{#criteria.activityKeyId}) ")
     Collection<ActivityKeyCategory> findAll(ActivityKeyCategoryCriteria criteria);
 
 
     @Override
     @Query(" SELECT ak FROM ActivityKeyCategory ak " +
-            " WHERE " +
-            " (:#{#criteria.activityKeyId} IS NULL OR ak.activityKey.id = :#{#criteria.activityKeyId} ) "+
+            " WHERE :#{#criteria.state} = ak.state " +
+            " AND (:#{#criteria.activityKeyId} IS NULL OR ak.activityKey.id = :#{#criteria.activityKeyId} ) "+
             " AND (:#{#criteria.categoryId} IS NULL OR ak.category.id = :#{#criteria.categoryId} ) ")
     Optional<ActivityKeyCategory> find(ActivityKeyCategoryCriteria criteria);
 }

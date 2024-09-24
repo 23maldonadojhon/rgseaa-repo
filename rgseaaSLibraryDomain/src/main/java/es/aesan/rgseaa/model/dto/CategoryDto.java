@@ -4,16 +4,12 @@ package es.aesan.rgseaa.model.dto;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
-/*@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter*/
 @Data
 public class CategoryDto implements Serializable {
     private Long id;
     private String code;
     private String name;
-    private KeyDto key;
-    private ActivityDto activity;
+    private List<KeyActivityDto> keyActivity;
 }

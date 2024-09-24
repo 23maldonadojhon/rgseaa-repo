@@ -27,7 +27,7 @@ public class Situation extends AuditedBaseEntity {
     @Column(name = "NAME")
     private String name;
 
-    @Column(name = "TYPE_INDUSTRY_PRODUCT")
+    @Column(name = "TYPE_COMPANY_PRODUCT")
     private Long typeIndustryProduct;
 
     @Column(name = "VISIBLE_RGSA")

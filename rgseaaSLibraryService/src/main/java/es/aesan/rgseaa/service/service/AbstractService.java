@@ -45,6 +45,9 @@ public abstract class AbstractService<
         logger.info("==== FIND_BY_CRITERIA :"+this.getClass().getSimpleName());
         logger.info("criteria="+criteria);
 
+        if(criteria.getState()==null)
+            criteria.setState(1);
+
         QueryByCriteria<E, FilterCriteria> filterRepository = (QueryByCriteria<E, FilterCriteria>) repository;
         Optional<E> optional = filterRepository.find(criteria);
         return optional.orElseThrow(NotFoundException::new);

@@ -3,6 +3,7 @@ package es.aesan.rgseaa.service.repository;
 import es.aesan.rgseaa.model.criteria.ActivityKeyCriteria;
 import es.aesan.rgseaa.model.entity.ActivityKey;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
@@ -15,16 +16,16 @@ public interface ActivityKeyRepository
 
     @Override
     @Query(" SELECT ak FROM ActivityKey ak " +
-            " WHERE " +
-            " (:#{#criteria.activityId} IS NULL OR ak.activity.id = :#{#criteria.activityId} ) "+
-            " OR (:#{#criteria.keyId} IS NULL OR ak.key.id = :#{#criteria.keyId} ) ")
+            "WHERE :#{#criteria.state} = ak.state " +
+            " AND (:#{#criteria.activityId} IS NULL OR ak.activity.id = :#{#criteria.activityId} ) "+
+            " AND (:#{#criteria.keyId} IS NULL OR ak.key.id = :#{#criteria.keyId} ) ")
     Collection<ActivityKey> findAll(ActivityKeyCriteria criteria);
 
 
     @Override
     @Query(" SELECT ak FROM ActivityKey ak " +
-            " WHERE " +
-            " (:#{#criteria.activityId} IS NULL OR ak.activity.id = :#{#criteria.activityId} ) "+
+            "WHERE :#{#criteria.state} = ak.state " +
+            " AND (:#{#criteria.activityId} IS NULL OR ak.activity.id = :#{#criteria.activityId} ) "+
             " AND (:#{#criteria.keyId} IS NULL OR ak.key.id = :#{#criteria.keyId} ) ")
-    Optional<ActivityKey> find(ActivityKeyCriteria criteria);
+    Optional<ActivityKey> find(@Param("criteria") ActivityKeyCriteria criteria);
 }
