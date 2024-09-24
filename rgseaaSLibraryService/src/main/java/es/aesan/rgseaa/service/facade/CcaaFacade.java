@@ -8,6 +8,7 @@ import es.aesan.rgseaa.service.service.CcaaService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -25,10 +26,15 @@ public class CcaaFacade extends AbstractFacade<
 
     private final CcaaConverter ccaaConverter;
 
-    private static final Logger logger = LoggerFactory.getLogger(CompanyFacade.class);
+   private static final Logger logger = LoggerFactory.getLogger(CcaaFacade.class);
 
 
 
+    @Override
+    public void add(CcaaDto dto){
+        Ccaa ccaa=ccaaConverter.dtoToEntity(dto);
+        ccaaService.add(ccaa);
+    }
     @Override
     public List<CcaaDto> list(GeneralCriteria criteria) {
         logger.info("==== FACADE-> PAGE LIST ====");
@@ -37,6 +43,20 @@ public class CcaaFacade extends AbstractFacade<
         List<CcaaDto> ccaaDtoList = ccaaConverter.mapEntityToDtoList(new ArrayList<>(ccaaList));
 
         return ccaaDtoList;
+    }
+
+    @Override
+    public Page<CcaaDto> page(GeneralCriteria criteria){
+        Page<Ccaa> ccaaPage=ccaaService.page(criteria);
+        Page<CcaaDto> ccaaDtoPage=ccaaConverter.mapEntityToDtoPage(ccaaPage);
+        return ccaaDtoPage;
+    }
+
+    @Override
+    public  CcaaDto get(Long id){
+        Ccaa ccaa=ccaaService.get(id);
+        CcaaDto ccaaDto=ccaaConverter.entityToDto(ccaaService.get(id));
+        return  ccaaDto;
     }
 
 }
