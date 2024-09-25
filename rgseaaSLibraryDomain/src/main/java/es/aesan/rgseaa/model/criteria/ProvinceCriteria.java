@@ -14,8 +14,7 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @EqualsAndHashCode(callSuper = true)
 public class ProvinceCriteria extends GeneralCriteria {
-    private Long id;
-    private String name;
+
     private String enrollment;
     private String address;
 }
