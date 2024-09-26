@@ -1,6 +1,7 @@
 package es.aesan.rgseaa.rest.controller;
 
 import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
+import es.aesan.rgseaa.model.criteria.ProvinceCriteria;
 import es.aesan.rgseaa.model.dto.ProvinceDto;
 import es.aesan.rgseaa.service.facade.ProvinceFacade;
 import es.aesan.rgseaa.util.Url;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProvinceController extends AbstractController<
         ProvinceDto,
         ProvinceFacade,
-        GeneralCriteria
+        ProvinceCriteria
         >{
     ProvinceController(ProvinceFacade facade) {
         super(facade);

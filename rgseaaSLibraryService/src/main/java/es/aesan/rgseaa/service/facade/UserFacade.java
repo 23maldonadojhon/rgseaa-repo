@@ -37,14 +37,6 @@ public class UserFacade extends AbstractFacade<
     @Autowired
     final private UserService userService;
 
-    @Autowired
-    final private UserProfileService userProfileService;
-
-    @Autowired
-    final private ProfileService profileService;
-
-    @Autowired
-    final private EntitieService entitieService;
 
     @Autowired
     private final UserEntitieService userEntitieService;
@@ -73,22 +65,6 @@ public class UserFacade extends AbstractFacade<
 
         User user=userConverter.dtoToEntity(dto);
         userService.add(user);
-
-
-
-
-
-
-
-        // Profile profile = profileService.get(dto.getProfile().getId());
-//        Entitie entitie = entitieService.get(dto.getEntity().getId());
-
-
-
-
-
-
-
     }
 
 

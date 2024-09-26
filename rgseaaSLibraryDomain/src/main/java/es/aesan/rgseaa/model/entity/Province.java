@@ -4,10 +4,7 @@ import es.aesan.rgseaa.model.commom.db.AuditedBaseEntity;
 import es.aesan.rgseaa.model.util.ConstantBD;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = ConstantBD.TABLE_PROVINCES)
@@ -19,6 +16,7 @@ import javax.persistence.Table;
 public class Province extends AuditedBaseEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
 
@@ -34,7 +32,8 @@ public class Province extends AuditedBaseEntity {
     @Column(name = "ADDRESS")
     private String address;
 
-    @Column(name = "CCAA_ID")
-    private Long ccaa;
+    @ManyToOne
+    @JoinColumn(name = "CCAA_ID", referencedColumnName = "ID")
+    private Ccaa ccaa;
 
 }
