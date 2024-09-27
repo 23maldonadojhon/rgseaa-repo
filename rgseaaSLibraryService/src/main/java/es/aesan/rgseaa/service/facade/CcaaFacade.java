@@ -35,6 +35,12 @@ public class CcaaFacade extends AbstractFacade<
         Ccaa ccaa=ccaaConverter.dtoToEntity(dto);
         ccaaService.add(ccaa);
     }
+
+    @Override
+    public void update(CcaaDto dto){
+        Ccaa ccaa=ccaaConverter.dtoToEntity(dto);
+        ccaaService.update(ccaa);
+    }
     @Override
     public List<CcaaDto> list(GeneralCriteria criteria) {
         logger.info("==== FACADE-> PAGE LIST ====");
