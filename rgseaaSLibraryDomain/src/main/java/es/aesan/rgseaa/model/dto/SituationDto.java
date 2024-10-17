@@ -14,8 +14,6 @@ public class SituationDto {
 
     private Long id;
 
-    private String code;
-
     private String name;
 
     private Long typeIndustryProduct;

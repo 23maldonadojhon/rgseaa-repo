@@ -1,6 +1,7 @@
 package es.aesan.rgseaa.rest.controller;
 
 import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
+import es.aesan.rgseaa.model.criteria.TypeDocumentCriteria;
 import es.aesan.rgseaa.model.dto.TypeDocumentDto;
 import es.aesan.rgseaa.service.facade.TypeDocumentFacade;
 import es.aesan.rgseaa.util.Url;
@@ -14,6 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class TypeDocumentController extends AbstractController<
         TypeDocumentDto,
         TypeDocumentFacade,
-        GeneralCriteria>{
+        TypeDocumentCriteria>{
     TypeDocumentController(TypeDocumentFacade facade){super(facade);}
 }

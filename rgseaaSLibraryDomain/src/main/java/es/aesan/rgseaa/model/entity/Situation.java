@@ -21,9 +21,6 @@ public class Situation extends AuditedBaseEntity {
     @Column(name = "ID")
     private Long id;
 
-    @Column(name = "CODE")
-    private String code;
-
     @Column(name = "NAME")
     private String name;
 
@@ -31,7 +28,7 @@ public class Situation extends AuditedBaseEntity {
     private Long typeIndustryProduct;
 
     @Column(name = "VISIBLE_RGSA")
-    private Integer visibleRgsa;
+    private Integer visibleRgseaa;
 
     @Column(name = "VISIBLE_UE")
     private Integer visibleUe;

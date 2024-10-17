@@ -2,6 +2,7 @@ package es.aesan.rgseaa.service.facade;
 
 import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
 import es.aesan.rgseaa.model.converter.TypeDocumentConverter;
+import es.aesan.rgseaa.model.criteria.TypeDocumentCriteria;
 import es.aesan.rgseaa.model.dto.TypeDocumentDto;
 import es.aesan.rgseaa.model.entity.TypeDocument;
 import es.aesan.rgseaa.service.service.TypeDocumentService;
@@ -17,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TypeDocumentFacade extends AbstractFacade<
         TypeDocumentDto,
-        GeneralCriteria> {
+        TypeDocumentCriteria> {
 
     private final TypeDocumentService typeDocumentService;
 
@@ -36,14 +37,14 @@ public class TypeDocumentFacade extends AbstractFacade<
     }
 
     @Override
-    public List<TypeDocumentDto> list(GeneralCriteria criteria) {
+    public List<TypeDocumentDto> list(TypeDocumentCriteria criteria) {
         Collection<TypeDocument> list = typeDocumentService.list(criteria);
         List<TypeDocumentDto> dtoList = converter.mapEntityToDtoList(new ArrayList<>(list));
         return dtoList;
     }
 
     @Override
-    public Page<TypeDocumentDto> page(GeneralCriteria criteria){
+    public Page<TypeDocumentDto> page(TypeDocumentCriteria criteria){
         Page<TypeDocument> page= typeDocumentService.page(criteria);
         Page<TypeDocumentDto> dtoPage=converter.mapEntityToDtoPage(page);
         return dtoPage;

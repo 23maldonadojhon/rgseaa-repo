@@ -12,6 +12,7 @@ public class ActuationDto implements Serializable {
     private String description;
     private TypeActuationDto typeActuation;
     private List<DocumentDto> documentList;
+    private Integer documentSize;
     private Long update;
     private boolean saved;
 
