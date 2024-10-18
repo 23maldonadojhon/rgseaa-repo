@@ -8,7 +8,6 @@ import java.util.Arrays;
 public enum EntityState {
     ON(1),
     OFF(2);
-
     private final Integer value;
 
     EntityState(Integer value) {

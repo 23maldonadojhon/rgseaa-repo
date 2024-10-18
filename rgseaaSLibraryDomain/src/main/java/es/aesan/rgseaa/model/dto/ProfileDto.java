@@ -22,6 +22,6 @@ public class ProfileDto  {
 
     private List<PermissionDto> permissions;
 
-    private Integer state;
+    private Integer state = EntityState.ON.getValue();
 
 }
