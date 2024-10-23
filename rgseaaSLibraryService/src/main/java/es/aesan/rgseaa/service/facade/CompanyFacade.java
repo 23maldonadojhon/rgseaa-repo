@@ -43,7 +43,8 @@ public class CompanyFacade extends AbstractFacade<
     private final RgseaaActivityService rgseaaActivityService;
     private final RgseaaAuthorizationService rgseaaAuthorizationService;
     private final CcaaService ccaaService;
-
+    private final FileUtilService fileUtilService;
+    private final CompanySituationService companySituationService;
 
 
     private final CompanyConverter companyConverter;
@@ -57,7 +58,7 @@ public class CompanyFacade extends AbstractFacade<
     private final EstablishmentConverter establishmentConverter;
     private final TypeActuationConverter typeActuationConverter;
     private final ActuationConverter actuationConverter;
-    private final FileUtilService fileUtilService;
+
 
     private static final Logger logger = LoggerFactory.getLogger(CompanyFacade.class);
 
@@ -69,9 +70,12 @@ public class CompanyFacade extends AbstractFacade<
         logger.info("==== FACADE-> ADD INDUSTRY====");
 
         Company company = getValue(dto);
+
         Company companySaved = companyService.add(company);
 
         Rgseaa rgseaaSaved = saveRgseaa(dto.getRgseaaList(),companySaved,Accion.ADD);
+
+        saveCompanySituation(companySaved,company.getSituation());
 
         saveActuation(dto.getActuationList(),companySaved,Accion.ADD);
 
@@ -343,6 +347,15 @@ public class CompanyFacade extends AbstractFacade<
             });
     }
 
+
+    private void saveCompanySituation(Company company, Situation situation) {
+        logger.info("==== FACADE-> saveCompanySituation ====");
+        CompanySituation companySituation = new CompanySituation();
+        companySituation.setCompany(company);
+        companySituation.setSituation(situation);
+
+        companySituationService.add(companySituation);
+    }
 
 
     private void saveActuation(List<ActuationDto> actuationDtoList, Company companySaved, Accion accion){

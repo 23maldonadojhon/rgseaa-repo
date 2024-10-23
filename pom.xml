@@ -22,7 +22,7 @@
     <module>rgseaaSLibraryDomain</module>
     <module>rgseaaSLibraryService</module>
     <module>rgseaaSLibraryUtil</module>
-<!--    <module>rgseaaSLibraryJwt</module>-->
+    <module>rgseaaSLibraryJwt</module>
     <module>rgseaaAppSearch</module>
     <module>rgseaaAppSoap</module>
     <module>rgseaaAppLn</module>

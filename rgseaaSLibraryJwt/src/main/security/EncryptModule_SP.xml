@@ -15,7 +15,7 @@
 
 
         <entry key="encryptionActivation">encryptionConf.xml</entry>
-        <entry key="keyStorePath">@path.repo@/config/keystore.jks</entry>
+        <entry key="keyStorePath">@path.repo@/config/clave.ks</entry>
         <entry key="keyStorePassword">storepass</entry>
         <entry key="keyPassword">keypass</entry>
         <entry key="responseDecryptionIssuer">CN=AC Representación,OU=CERES,O=FNMT-RCM,C=ES</entry>

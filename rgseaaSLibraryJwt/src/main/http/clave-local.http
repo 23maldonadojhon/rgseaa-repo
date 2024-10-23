@@ -8,6 +8,7 @@
 #  "docNum": "string",
 #  "processReturnUrl": "string"
 #}'
+
 POST http://localhost:8085/jwtrest/api/auth/user/request
 accept: */*
 Content-Type: application/json
