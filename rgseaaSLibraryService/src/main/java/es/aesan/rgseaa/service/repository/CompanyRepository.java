@@ -20,13 +20,15 @@ public interface CompanyRepository
 
     @Query(value = "SELECT i FROM Company i" +
             " WHERE " +
-            " (:#{#criteria.name} IS NULL OR i.name LIKE :#{#criteria.name}) "
+            "(:#{#criteria.state} IS NULL OR i.state = :#{#criteria.state}) " +
+            " AND (:#{#criteria.name} IS NULL OR i.name LIKE :#{#criteria.name}) "
         )
     Page<Company> findAllByCriteria(@Param("criteria") CompanyCriteria criteria, Pageable pageable);
 
     @Query(value = "SELECT i FROM Company i" +
             " WHERE " +
-            " (:#{#criteria.name} IS NULL OR UPPER(i.name) LIKE UPPER(:#{#criteria.name})) "
+            "(:#{#criteria.state} IS NULL OR i.state = :#{#criteria.state}) " +
+            " AND (:#{#criteria.name} IS NULL OR UPPER(i.name) LIKE UPPER(:#{#criteria.name})) "
     )
     List<Company> findAll(@Param("criteria") CompanyCriteria criteria);
 

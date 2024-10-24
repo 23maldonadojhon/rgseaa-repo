@@ -2,6 +2,7 @@ package es.aesan.rgseaa.service.service;
 
 
 import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
+import es.aesan.rgseaa.model.criteria.CompanyEstablishmentCriteria;
 import es.aesan.rgseaa.model.dto.CompanyEstablishmenInterface;
 import es.aesan.rgseaa.model.entity.CompanyEstablishmentView;
 import es.aesan.rgseaa.service.repository.CompanyEstablishmentViewRepository;
@@ -24,7 +25,7 @@ public class CompanyEstablishmentViewService extends AbstractService<
     }
 
 
-    public Page<CompanyEstablishmenInterface> pageCriteria(GeneralCriteria criteria){
+    public Page<CompanyEstablishmenInterface> pageCriteria(CompanyEstablishmentCriteria criteria){
 
         if(criteria.getState()==null)
             criteria.setState(1);

@@ -2,6 +2,7 @@ package es.aesan.rgseaa.rest.controller;
 
 
 import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
+import es.aesan.rgseaa.model.criteria.CompanyEstablishmentCriteria;
 import es.aesan.rgseaa.model.dto.CompanyEstablishmenInterface;
 import es.aesan.rgseaa.model.dto.CompanyEstablishmentViewDto;
 import es.aesan.rgseaa.service.facade.CompanyEstablishmentViewFacade;
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class CompanyEstablishmentViewController extends AbstractController<
         CompanyEstablishmentViewDto,
         CompanyEstablishmentViewFacade,
-        GeneralCriteria
+        CompanyEstablishmentCriteria
         > {
 
     CompanyEstablishmentViewController(CompanyEstablishmentViewFacade facade) {
@@ -29,7 +30,7 @@ public class CompanyEstablishmentViewController extends AbstractController<
 
 
     @GetMapping(Url.PAGE_CRITERIA)
-    public ResponseEntity<Page<CompanyEstablishmenInterface>> pageCriteria(GeneralCriteria criteria){
+    public ResponseEntity<Page<CompanyEstablishmenInterface>> pageCriteria(CompanyEstablishmentCriteria criteria){
         logger.info("==== CONTROLLER -> PAGE  :"+this.getClass().getSimpleName());
 
         Page<CompanyEstablishmenInterface> userPage = facade.pageCriteria(criteria);

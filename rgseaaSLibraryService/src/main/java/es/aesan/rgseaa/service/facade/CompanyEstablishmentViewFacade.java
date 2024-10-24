@@ -2,6 +2,7 @@ package es.aesan.rgseaa.service.facade;
 
 
 import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
+import es.aesan.rgseaa.model.criteria.CompanyEstablishmentCriteria;
 import es.aesan.rgseaa.model.dto.CompanyEstablishmenInterface;
 import es.aesan.rgseaa.model.dto.CompanyEstablishmentViewDto;
 import es.aesan.rgseaa.service.service.CompanyEstablishmentViewService;
@@ -17,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CompanyEstablishmentViewFacade extends AbstractFacade<
         CompanyEstablishmentViewDto,
-        GeneralCriteria
+        CompanyEstablishmentCriteria
     > {
 
     private final CompanyEstablishmentViewService companyEstablishmentViewService;
@@ -28,12 +29,12 @@ public class CompanyEstablishmentViewFacade extends AbstractFacade<
 
 
     @Override
-    public List<CompanyEstablishmentViewDto> list(GeneralCriteria criteria) {
+    public List<CompanyEstablishmentViewDto> list(CompanyEstablishmentCriteria criteria) {
         return super.list(criteria);
     }
 
 
-    public Page<CompanyEstablishmenInterface> pageCriteria(GeneralCriteria criteria) {
+    public Page<CompanyEstablishmenInterface> pageCriteria(CompanyEstablishmentCriteria criteria) {
 
         if(criteria.getSearch()!=null)
             criteria.setSearch("%"+criteria.getSearch()+"%");

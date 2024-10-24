@@ -2,6 +2,7 @@ package es.aesan.rgseaa.service.repository;
 
 
 import es.aesan.rgseaa.model.commom.criteria.GeneralCriteria;
+import es.aesan.rgseaa.model.criteria.CompanyEstablishmentCriteria;
 import es.aesan.rgseaa.model.dto.CompanyEstablishmenInterface;
 import es.aesan.rgseaa.model.entity.CompanyEstablishmentView;
 import org.springframework.data.jpa.repository.Query;
@@ -13,7 +14,7 @@ import java.util.List;
 @Repository
 public interface CompanyEstablishmentViewRepository
     extends BaseRepository<CompanyEstablishmentView, Long>,
-    QueryByCriteria<CompanyEstablishmentView, GeneralCriteria> {
+    QueryByCriteria<CompanyEstablishmentView, CompanyEstablishmentCriteria> {
 
 
     @Query( value = "SELECT COUNT(*) FROM ( " +
@@ -73,6 +74,7 @@ public interface CompanyEstablishmentViewRepository
             ") t " +
             " WHERE" +
             " (:#{#criteria.state} IS NULL OR t.COMPANY_STATE = :#{#criteria.state}) " +
+            " AND (:#{#criteria.situationId} IS NULL OR t.COMPANY_SITUATION_ID LIKE :#{#criteria.situationId}) " +
             " AND ( " +
             "   :#{#criteria.search} IS NULL "+
             "   OR (UPPER(t.COMPANY_NAME) LIKE(UPPER(:#{#criteria.search}))) " +
@@ -80,7 +82,7 @@ public interface CompanyEstablishmentViewRepository
             "   OR (UPPER(t.ESTABLISHMENT_ADDRESS) LIKE(UPPER(:#{#criteria.search}))) " +
             " ) ",
             nativeQuery = true)
-    Long findListCount(@Param("criteria") GeneralCriteria criteria);
+    Long findListCount(@Param("criteria") CompanyEstablishmentCriteria criteria);
 
     @Query( value = "SELECT\n" +
             "    T.TYPE,\n" +
@@ -168,6 +170,8 @@ public interface CompanyEstablishmentViewRepository
             " LEFT JOIN LOCATIONS EL ON EL.ID = T.ESTABLISHMENT_LOCATION_ID " +
             " WHERE" +
             " (:#{#criteria.state} IS NULL OR t.COMPANY_STATE = :#{#criteria.state}) " +
+            " AND (:#{#criteria.situationId} IS NULL OR t.COMPANY_SITUATION_ID LIKE :#{#criteria.situationId}) " +
+            " AND (:#{#criteria.situationId} IS NULL OR t.ESTABLISHMENT_SITUATION_ID LIKE :#{#criteria.situationId}) " +
             " AND ( " +
             "   :#{#criteria.search} IS NULL "+
             "   OR (UPPER(t.COMPANY_NAME) LIKE(UPPER(:#{#criteria.search}))) " +
@@ -177,5 +181,5 @@ public interface CompanyEstablishmentViewRepository
             " ORDER BY t.COMPANY_NAME " +
             " OFFSET (:#{#criteria.size}*:#{#criteria.page}) ROWS FETCH NEXT :#{#criteria.size} ROWS ONLY ",
             nativeQuery = true)
-    List<CompanyEstablishmenInterface> findList(@Param("criteria") GeneralCriteria criteria);
+    List<CompanyEstablishmenInterface> findList(@Param("criteria") CompanyEstablishmentCriteria criteria);
 }

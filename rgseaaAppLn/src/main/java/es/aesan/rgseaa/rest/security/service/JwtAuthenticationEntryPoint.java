@@ -1,4 +1,4 @@
-package es.aesan.rgseaa.security.service;
+package es.aesan.rgseaa.rest.security.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import es.aesan.rgseaa.model.commom.dto.ErrorDto;
